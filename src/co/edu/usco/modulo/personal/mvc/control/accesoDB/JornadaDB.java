@@ -4,62 +4,62 @@
 package co.edu.usco.modulo.personal.mvc.control.accesoDB;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
+import co.edu.usco.modulo.personal.mvc.control.accesoDB.rowMapper.InstitucionEducativaRowMapper;
+import co.edu.usco.modulo.personal.mvc.control.accesoDB.rowMapper.JornadaRowMapper;
 import co.edu.usco.modulo.personal.mvc.control.controlDB.Conexion;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
-import co.edu.usco.modulo.personal.mvc.modelo.publicacion_tipoOb;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
+import co.edu.usco.modulo.personal.mvc.modelo.InstitucionEducativa;
+import co.edu.usco.modulo.personal.mvc.modelo.Jornada;
+import co.edu.usco.modulo.personal.mvc.modelo.PublicacionTipo;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class JornadaDB implements conexion {
+public class JornadaDB implements ConexionDB {
 	private Logger imp ;
+	private String COLUMNAS = "jor_codigo,	jor_nombre,	coalesce(sippa_jor_codigo,0) as sippa_jor_codigo ";
+	private String SQL_SELECT = "SELECT " + COLUMNAS + " FROM jornada  with(nolock)";
 	/* (non-Javadoc)
 	 * @see co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion#getAll(java.lang.Object)
 	 */
 	@Override
 	public Object getAll(Object obj) {
-		Connection conn = null;
-		Statement sentencia=null;
-		ResultSet resul=null;
-		imp =Logger.getLogger(getClass().getName());
-		 LinkedList<publicacion_tipoOb> lista = new LinkedList<publicacion_tipoOb>();
+
+		 
+		 Connection conn = null;
+			PreparedStatement sentencia = null;
+			imp = Logger.getLogger(getClass().getName());
+			LinkedList<Jornada> lista = new LinkedList<Jornada>();
 			Conexion consegura = new Conexion();
-		 try {
-			 Object param[]=(Object[]) obj;
-//			 publicacion_tipoOb pu= (publicacion_tipoOb) param[0];
-//			 usuarioOb admin= (usuarioOb) param[1];
-			StringBuffer sql = new StringBuffer();
-			sql.append("select pt.put_codigo,pt.put_nombre,pt.sippa_tipcodigo  ");
-			sql.append("from publicacion_tipo as pt  with(nolock)  ");
-//			sql.append("where cert_estado=1  ");
+			try {
+				StringBuffer sql = new StringBuffer();
 
+				sql.append(SQL_SELECT);
+				
+				conn = consegura.conexionConsulta();
+				imp.info("jornadas " + sql.toString());
+				sentencia = conn.prepareStatement(sql.toString());
+				
+				lista = (LinkedList<Jornada>) JornadaRowMapper.mapRow(sentencia.executeQuery());
 
-			conn = consegura.conexion_segura();
-			imp.info("valida el usuario "+sql.toString());
-			sentencia = conn.createStatement();
-			resul = sentencia.executeQuery(sql.toString());
-			while(resul.next()){
-				publicacion_tipoOb elemento= new publicacion_tipoOb();
-				elemento.setPut_codigo(resul.getInt(1));
-				elemento.setPut_nombre(resul.getString(2));
-				elemento.setSippa_tipcodigo(resul.getString(3));
-				lista.add(elemento);
-				}
-			consegura.cerrarconn(conn, resul, sentencia);
-		 }catch (Exception e) {
-			// TODO Auto-generated catch block
-			 imp.error(""+e.toString() );
-			 consegura.cerrarconn(conn, resul, sentencia);
+				consegura.cerrarconn(conn, null, sentencia);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				imp.error("" + e.toString());
+				consegura.cerrarconn(conn, null, sentencia);
 
+			}finally {
+	        	consegura.cerrarconn(conn, null, sentencia);
 	        }
-		return lista;
+			return lista;
 	}
 
 	/* (non-Javadoc)

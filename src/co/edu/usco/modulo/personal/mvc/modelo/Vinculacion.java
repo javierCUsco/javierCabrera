@@ -3,111 +3,188 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author ING. JAVIER CABRERA LASSO
  *
  */
-public class Vinculacion implements Serializable {
-	private int vin_codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-	private String vin_nombre;//varchar](50) NOT NULL,
-	private int vin_horas_year;//int] NULL,
-	private int vin_clase;//int] NULL,
-	private int sippa_vincodigo;//char](3) NULL,
-	private String vin_contratacion;//varchar](1) NULL,
+public class Vinculacion {
+	private int codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	private String nombre;//varchar](50) NOT NULL,
+	private int horasYear;//int] NULL,
+	private int clase;//int] NULL,
+	private String sippaVinCodigo;//char](3) NULL,
+	private int vinContratacion;//char](3) NULL,
+	private String externa;//varchar](1) NULL,
 	
 	
 	
 	
+	/**
+	 * 
+	 */
 	public Vinculacion() {
 		
 	}
 	
 	
-	public Vinculacion(int vin_codigo, String vin_nombre, int vin_horas_year, int vin_clase, int sippa_vincodigo,
-			String vin_contratacion) {
-		this.vin_codigo = vin_codigo;
-		this.vin_nombre = vin_nombre;
-		this.vin_horas_year = vin_horas_year;
-		this.vin_clase = vin_clase;
-		this.sippa_vincodigo = sippa_vincodigo;
-		this.vin_contratacion = vin_contratacion;
+
+	/**
+	 * @param codigo
+	 */
+	public Vinculacion(int codigo) {
+		this.codigo = codigo;
+	}
+
+
+
+	/**
+	 * @param codigo
+	 * @param nombre
+	 * @param horasYear
+	 * @param clase
+	 * @param sippaVinCodigo
+	 * @param contratacion
+	 */
+	public Vinculacion(int codigo, String nombre, int horasYear, int clase, String sippaVinCodigo, int vinContratacion,
+			String externa) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.horasYear = horasYear;
+		this.clase = clase;
+		this.sippaVinCodigo = sippaVinCodigo;
+		this.vinContratacion=vinContratacion;
+		this.externa = externa;
 	}
 
 
 	/**
-	 * @return the vin_codigo
+	 * @return the codigo
 	 */
-	public int getVin_codigo() {
-		return vin_codigo;
+	public int getCodigo() {
+		return codigo;
 	}
+
+
 	/**
-	 * @param vin_codigo the vin_codigo to set
+	 * @param codigo the codigo to set
 	 */
-	public void setVin_codigo(int vin_codigo) {
-		this.vin_codigo = vin_codigo;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
+
+
 	/**
-	 * @return the vin_nombre
+	 * @return the nombre
 	 */
-	public String getVin_nombre() {
-		return vin_nombre;
+	public String getNombre() {
+		return nombre;
 	}
+
+
 	/**
-	 * @param vin_nombre the vin_nombre to set
+	 * @param nombre the nombre to set
 	 */
-	public void setVin_nombre(String vin_nombre) {
-		this.vin_nombre = vin_nombre;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
+
 	/**
-	 * @return the vin_horas_year
+	 * @return the horasYear
 	 */
-	public int getVin_horas_year() {
-		return vin_horas_year;
+	public int getHorasYear() {
+		return horasYear;
 	}
+
+
 	/**
-	 * @param vin_horas_year the vin_horas_year to set
+	 * @param horasYear the horasYear to set
 	 */
-	public void setVin_horas_year(int vin_horas_year) {
-		this.vin_horas_year = vin_horas_year;
+	public void setHorasYear(int horasYear) {
+		this.horasYear = horasYear;
 	}
+
+
 	/**
-	 * @return the vin_clase
+	 * @return the clase
 	 */
-	public int getVin_clase() {
-		return vin_clase;
+	public int getClase() {
+		return clase;
 	}
+
+
 	/**
-	 * @param vin_clase the vin_clase to set
+	 * @param clase the clase to set
 	 */
-	public void setVin_clase(int vin_clase) {
-		this.vin_clase = vin_clase;
+	public void setClase(int clase) {
+		this.clase = clase;
 	}
+
+
 	/**
-	 * @return the sippa_vincodigo
+	 * @return the sippaVinCodigo
 	 */
-	public int getSippa_vincodigo() {
-		return sippa_vincodigo;
+	public String getSippaVinCodigo() {
+		return sippaVinCodigo;
 	}
+
+
 	/**
-	 * @param sippa_vincodigo the sippa_vincodigo to set
+	 * @param sippaVinCodigo the sippaVinCodigo to set
 	 */
-	public void setSippa_vincodigo(int sippa_vincodigo) {
-		this.sippa_vincodigo = sippa_vincodigo;
+	public void setSippaVinCodigo(String sippaVinCodigo) {
+		this.sippaVinCodigo = sippaVinCodigo;
 	}
+
+
 	/**
-	 * @return the vin_contratacion
+	 * @return the contratacion
 	 */
-	public String getVin_contratacion() {
-		return vin_contratacion;
+	public String getExterna() {
+		return externa;
 	}
+
+
 	/**
-	 * @param vin_contratacion the vin_contratacion to set
+	 * @param contratacion the contratacion to set
 	 */
-	public void setVin_contratacion(String vin_contratacion) {
-		this.vin_contratacion = vin_contratacion;
+	public void setExterna(String externa) {
+		this.externa = externa;
+	}
+
+
+
+	/**
+	 * @return the vinContratacion
+	 */
+	public int getVinContratacion() {
+		return vinContratacion;
+	}
+
+
+
+	/**
+	 * @param vinContratacion the vinContratacion to set
+	 */
+	public void setVinContratacion(int vinContratacion) {
+		this.vinContratacion = vinContratacion;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Vinculacion [codigo=" + codigo + ", nombre=" + nombre + ", horasYear=" + horasYear + ", clase=" + clase
+				+ ", sippaVinCodigo=" + sippaVinCodigo + ", vinContratacion=" + vinContratacion + ", externa=" + externa
+				+ "]";
 	}
 	
+
+
+
 	
 }

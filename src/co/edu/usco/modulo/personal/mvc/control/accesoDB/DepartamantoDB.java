@@ -11,15 +11,15 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
 import co.edu.usco.modulo.personal.mvc.control.controlDB.Conexion;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
-import co.edu.usco.modulo.personal.mvc.modelo.DepartamentoOb;
-import co.edu.usco.modulo.personal.mvc.modelo.PaisOb;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
+import co.edu.usco.modulo.personal.mvc.modelo.Departamento;
+import co.edu.usco.modulo.personal.mvc.modelo.Pais;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class DepartamantoDB implements conexion {
+public class DepartamantoDB implements ConexionDB {
 
 	private Logger imp ;
 	/* (non-Javadoc)
@@ -31,29 +31,29 @@ public class DepartamantoDB implements conexion {
 		Statement sentencia=null;
 		ResultSet resul=null;
 		imp =Logger.getLogger(getClass().getName());
-		 LinkedList<DepartamentoOb> lista = new LinkedList<DepartamentoOb>();
+		 LinkedList<Departamento> lista = new LinkedList<Departamento>();
 			Conexion consegura = new Conexion();
 		 try {
 			 Object param[]=(Object[]) obj;
-			 PaisOb pais= (PaisOb) param[0];
+			 Pais pais= (Pais) param[0];
 //			 usuarioOb admin= (usuarioOb) param[1];
 			StringBuffer sql = new StringBuffer();
 			sql.append("select dep_codigo,dep_acronimo,dep_nombre,pai_codigo,sippa_dep_codigo,dane_codigo      ");
 			sql.append("FROM [departamento]  with(nolock)  ");
-			sql.append("where pai_codigo= "+pais.getPai_codigo()+" ");
+			sql.append("where pai_codigo= "+pais.getCodigo()+" ");
 			sql.append("order by  dep_nombre");
 
 
-			conn = consegura.conexion_segura();
+			conn = consegura.conexionConsulta();
 			imp.info("valida el usuario "+sql.toString());
 			sentencia = conn.createStatement();
 			resul = sentencia.executeQuery(sql.toString());
 			while(resul.next()){
-				DepartamentoOb elemento= new DepartamentoOb();
-				elemento.setDep_codigo(resul.getInt(1));
-				elemento.setDep_id(resul.getString(2));
-				elemento.setDep_nombre(resul.getString(3));
-				elemento.getPais().setPai_codigo(resul.getInt(4));
+				Departamento elemento= new Departamento();
+				elemento.setCodigo(resul.getInt(1));
+				elemento.setId(resul.getString(2));
+				elemento.setNombre(resul.getString(3));
+				elemento.getPais().setCodigo(resul.getInt(4));
 				lista.add(elemento);
 				}
 			consegura.cerrarconn(conn, resul, sentencia);

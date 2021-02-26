@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import co.edu.usco.modulo.personal.mvc.modelo.Persona;
-import co.edu.usco.modulo.personal.mvc.modelo.TipoProceso;
 import co.edu.usco.modulo.personal.mvc.modelo.UaaCargo;
 
 /**
@@ -18,111 +17,81 @@ import co.edu.usco.modulo.personal.mvc.modelo.UaaCargo;
  */
 public class CarreraAdministrativa implements Serializable {
 
-	private int caa_codigo;//int] IDENTITY(1,1) NOT NULL,
+	private int codigo;//int] IDENTITY(1,1) NOT NULL,
 	private Persona persona= new Persona();//int] NULL,
-	private TipoProceso tipoPorceso= new TipoProceso();//int] NULL,
-	private String caa_acto_adtivo;//varchar](50) NULL,
-	private Date caa_fecha_acto_adtivo;//date] NULL,
-	private UaaCargo uaa_cargo= new UaaCargo();//int] NULL,
-	private String caa_numero_convocatoria;//varchar](25) NULL,
-	private Date caa_fecha_convocatoria;//date] NULL,
-	private String caa_resolucion_elegibles;//varchar](50) NULL,
-	private Date caa_fecha_resolucion_elegibles;//date] NULL,
-	private String caa_numero_acta_posesion;//varchar](25) NULL,
-	private Date caa_fecha_acta_posesion;//date] NULL,
-	private int caa_estado;//int] NULL,
-	private String caa_observacion;
+	private TipoProceso tipoProceso= new TipoProceso();//int] NULL,
+	private String actoAdtivo;//varchar](50) NULL,
+	private Date fechaActoAdtivo;//date] NULL,
+	private UaaCargo uaaCargo= new UaaCargo();//int] NULL,
+	private String numeroConvocatoria;//varchar](25) NULL,
+	private Date fechaConvocatoria;//date] NULL,
+	private String resolucionElegibles;//varchar](50) NULL,
+	private Date fechaResolucionElegibles;//date] NULL,
+	private String numeroActaPosesion;//varchar](25) NULL,
+	private Date fechaActaPosesion;//date] NULL,
+	private int estado;//int] NULL,
+	private String observacion;
 	private List<CarreraAdministrativaActualizacion> CarreraAdministrativaActualizaciones ;
 	/**
 	 * 
 	 */
 	public CarreraAdministrativa() {
 	}
+	
+	
+	
 	/**
+	 * @param codigo
 	 * @param persona
 	 * @param tipoPorceso
-	 * @param caa_acto_adtivo
-	 * @param caa_fecha_acto_adtivo
-	 * @param uaa_cargo
-	 * @param caa_numero_convocatoria
-	 * @param caa_fecha_convocatoria
-	 * @param caa_resolucion_elegibles
-	 * @param caa_fecha_resolucion_elegibles
-	 * @param caa_numero_acta_posesion
-	 * @param caa_fecha_acta_posesion
-	 * @param caa_estado
-	 * @param caa_observacion
+	 * @param actoAdtivo
+	 * @param fechaActoAdtivo
+	 * @param uaaCargo
+	 * @param numeroConvocatoria
+	 * @param fechaConvocatoria
+	 * @param resolucionElegibles
+	 * @param fechaResolucionElegibles
+	 * @param numeroActaPosesion
+	 * @param fechaActaPosesion
+	 * @param estado
+	 * @param observacion
 	 * @param carreraAdministrativaActualizaciones
 	 */
-	public CarreraAdministrativa(Persona persona, TipoProceso tipoPorceso, String caa_acto_adtivo,
-			Date caa_fecha_acto_adtivo, UaaCargo uaa_cargo, String caa_numero_convocatoria, Date caa_fecha_convocatoria,
-			String caa_resolucion_elegibles, Date caa_fecha_resolucion_elegibles, String caa_numero_acta_posesion,
-			Date caa_fecha_acta_posesion, int caa_estado, String caa_observacion,
+	public CarreraAdministrativa(int codigo, Persona persona, TipoProceso tipoPorceso, String actoAdtivo,
+			Date fechaActoAdtivo, UaaCargo uaaCargo, String numeroConvocatoria, Date fechaConvocatoria,
+			String resolucionElegibles, Date fechaResolucionElegibles, String numeroActaPosesion,
+			Date fechaActaPosesion, int estado, String observacion,
 			List<CarreraAdministrativaActualizacion> carreraAdministrativaActualizaciones) {
+		this.codigo = codigo;
 		this.persona = persona;
-		this.tipoPorceso = tipoPorceso;
-		this.caa_acto_adtivo = caa_acto_adtivo;
-		this.caa_fecha_acto_adtivo = caa_fecha_acto_adtivo;
-		this.uaa_cargo = uaa_cargo;
-		this.caa_numero_convocatoria = caa_numero_convocatoria;
-		this.caa_fecha_convocatoria = caa_fecha_convocatoria;
-		this.caa_resolucion_elegibles = caa_resolucion_elegibles;
-		this.caa_fecha_resolucion_elegibles = caa_fecha_resolucion_elegibles;
-		this.caa_numero_acta_posesion = caa_numero_acta_posesion;
-		this.caa_fecha_acta_posesion = caa_fecha_acta_posesion;
-		this.caa_estado = caa_estado;
-		this.caa_observacion = caa_observacion;
+		this.tipoProceso = tipoPorceso;
+		this.actoAdtivo = actoAdtivo;
+		this.fechaActoAdtivo = fechaActoAdtivo;
+		this.uaaCargo = uaaCargo;
+		this.numeroConvocatoria = numeroConvocatoria;
+		this.fechaConvocatoria = fechaConvocatoria;
+		this.resolucionElegibles = resolucionElegibles;
+		this.fechaResolucionElegibles = fechaResolucionElegibles;
+		this.numeroActaPosesion = numeroActaPosesion;
+		this.fechaActaPosesion = fechaActaPosesion;
+		this.estado = estado;
+		this.observacion = observacion;
 		CarreraAdministrativaActualizaciones = carreraAdministrativaActualizaciones;
 	}
+
+
+
 	/**
-	 * @param caa_codigo
-	 * @param persona
-	 * @param tipoPorceso
-	 * @param caa_acto_adtivo
-	 * @param caa_fecha_acto_adtivo
-	 * @param uaa_cargo
-	 * @param caa_numero_convocatoria
-	 * @param caa_fecha_convocatoria
-	 * @param caa_resolucion_elegibles
-	 * @param caa_fecha_resolucion_elegibles
-	 * @param caa_numero_acta_posesion
-	 * @param caa_fecha_acta_posesion
-	 * @param caa_estado
-	 * @param caa_observacion
-	 * @param carreraAdministrativaActualizaciones
+	 * @return the codigo
 	 */
-	public CarreraAdministrativa(int caa_codigo, Persona persona, TipoProceso tipoPorceso, String caa_acto_adtivo,
-			Date caa_fecha_acto_adtivo, UaaCargo uaa_cargo, String caa_numero_convocatoria, Date caa_fecha_convocatoria,
-			String caa_resolucion_elegibles, Date caa_fecha_resolucion_elegibles, String caa_numero_acta_posesion,
-			Date caa_fecha_acta_posesion, int caa_estado, String caa_observacion,
-			List<CarreraAdministrativaActualizacion> carreraAdministrativaActualizaciones) {
-		this.caa_codigo = caa_codigo;
-		this.persona = persona;
-		this.tipoPorceso = tipoPorceso;
-		this.caa_acto_adtivo = caa_acto_adtivo;
-		this.caa_fecha_acto_adtivo = caa_fecha_acto_adtivo;
-		this.uaa_cargo = uaa_cargo;
-		this.caa_numero_convocatoria = caa_numero_convocatoria;
-		this.caa_fecha_convocatoria = caa_fecha_convocatoria;
-		this.caa_resolucion_elegibles = caa_resolucion_elegibles;
-		this.caa_fecha_resolucion_elegibles = caa_fecha_resolucion_elegibles;
-		this.caa_numero_acta_posesion = caa_numero_acta_posesion;
-		this.caa_fecha_acta_posesion = caa_fecha_acta_posesion;
-		this.caa_estado = caa_estado;
-		this.caa_observacion = caa_observacion;
-		CarreraAdministrativaActualizaciones = carreraAdministrativaActualizaciones;
+	public int getCodigo() {
+		return codigo;
 	}
 	/**
-	 * @return the caa_codigo
+	 * @param codigo the codigo to set
 	 */
-	public int getCaa_codigo() {
-		return caa_codigo;
-	}
-	/**
-	 * @param caa_codigo the caa_codigo to set
-	 */
-	public void setCaa_codigo(int caa_codigo) {
-		this.caa_codigo = caa_codigo;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	/**
 	 * @return the persona
@@ -139,146 +108,146 @@ public class CarreraAdministrativa implements Serializable {
 	/**
 	 * @return the tipoPorceso
 	 */
-	public TipoProceso getTipoPorceso() {
-		return tipoPorceso;
+	public TipoProceso getTipoProceso() {
+		return tipoProceso;
 	}
 	/**
 	 * @param tipoPorceso the tipoPorceso to set
 	 */
-	public void setTipoPorceso(TipoProceso tipoPorceso) {
-		this.tipoPorceso = tipoPorceso;
+	public void setTipoProceso(TipoProceso tipoProceso) {
+		this.tipoProceso = tipoProceso;
 	}
 	/**
-	 * @return the caa_acto_adtivo
+	 * @return the actoAdtivo
 	 */
-	public String getCaa_acto_adtivo() {
-		return caa_acto_adtivo;
+	public String getActoAdtivo() {
+		return actoAdtivo;
 	}
 	/**
-	 * @param caa_acto_adtivo the caa_acto_adtivo to set
+	 * @param actoAdtivo the actoAdtivo to set
 	 */
-	public void setCaa_acto_adtivo(String caa_acto_adtivo) {
-		this.caa_acto_adtivo = caa_acto_adtivo;
+	public void setActoAdtivo(String actoAdtivo) {
+		this.actoAdtivo = actoAdtivo;
 	}
 	/**
-	 * @return the caa_fecha_acto_adtivo
+	 * @return the fechaActoAdtivo
 	 */
-	public Date getCaa_fecha_acto_adtivo() {
-		return caa_fecha_acto_adtivo;
+	public Date getFechaActoAdtivo() {
+		return fechaActoAdtivo;
 	}
 	/**
-	 * @param caa_fecha_acto_adtivo the caa_fecha_acto_adtivo to set
+	 * @param fechaActoAdtivo the fechaActoAdtivo to set
 	 */
-	public void setCaa_fecha_acto_adtivo(Date caa_fecha_acto_adtivo) {
-		this.caa_fecha_acto_adtivo = caa_fecha_acto_adtivo;
+	public void setFechaActoAdtivo(Date fechaActoAdtivo) {
+		this.fechaActoAdtivo = fechaActoAdtivo;
 	}
 	/**
-	 * @return the uaa_cargo
+	 * @return the uaaCargo
 	 */
-	public UaaCargo getUaa_cargo() {
-		return uaa_cargo;
+	public UaaCargo getUaaCargo() {
+		return uaaCargo;
 	}
 	/**
-	 * @param uaa_cargo the uaa_cargo to set
+	 * @param uaaCargo the uaaCargo to set
 	 */
-	public void setUaa_cargo(UaaCargo uaa_cargo) {
-		this.uaa_cargo = uaa_cargo;
+	public void setUaaCargo(UaaCargo uaaCargo) {
+		this.uaaCargo = uaaCargo;
 	}
 	/**
-	 * @return the caa_numero_convocatoria
+	 * @return the numeroConvocatoria
 	 */
-	public String getCaa_numero_convocatoria() {
-		return caa_numero_convocatoria;
+	public String getNumeroConvocatoria() {
+		return numeroConvocatoria;
 	}
 	/**
-	 * @param caa_numero_convocatoria the caa_numero_convocatoria to set
+	 * @param numeroConvocatoria the numeroConvocatoria to set
 	 */
-	public void setCaa_numero_convocatoria(String caa_numero_convocatoria) {
-		this.caa_numero_convocatoria = caa_numero_convocatoria;
+	public void setNumeroConvocatoria(String numeroConvocatoria) {
+		this.numeroConvocatoria = numeroConvocatoria;
 	}
 	/**
-	 * @return the caa_fecha_convocatoria
+	 * @return the fechaConvocatoria
 	 */
-	public Date getCaa_fecha_convocatoria() {
-		return caa_fecha_convocatoria;
+	public Date getFechaConvocatoria() {
+		return fechaConvocatoria;
 	}
 	/**
-	 * @param caa_fecha_convocatoria the caa_fecha_convocatoria to set
+	 * @param fechaConvocatoria the fechaConvocatoria to set
 	 */
-	public void setCaa_fecha_convocatoria(Date caa_fecha_convocatoria) {
-		this.caa_fecha_convocatoria = caa_fecha_convocatoria;
+	public void setFechaConvocatoria(Date fechaConvocatoria) {
+		this.fechaConvocatoria = fechaConvocatoria;
 	}
 	/**
-	 * @return the caa_resolucion_elegibles
+	 * @return the resolucionElegibles
 	 */
-	public String getCaa_resolucion_elegibles() {
-		return caa_resolucion_elegibles;
+	public String getResolucionElegibles() {
+		return resolucionElegibles;
 	}
 	/**
-	 * @param caa_resolucion_elegibles the caa_resolucion_elegibles to set
+	 * @param resolucionElegibles the resolucionElegibles to set
 	 */
-	public void setCaa_resolucion_elegibles(String caa_resolucion_elegibles) {
-		this.caa_resolucion_elegibles = caa_resolucion_elegibles;
+	public void setResolucionElegibles(String resolucionElegibles) {
+		this.resolucionElegibles = resolucionElegibles;
 	}
 	/**
-	 * @return the caa_fecha_resolucion_elegibles
+	 * @return the fechaResolucionElegibles
 	 */
-	public Date getCaa_fecha_resolucion_elegibles() {
-		return caa_fecha_resolucion_elegibles;
+	public Date getFechaResolucionElegibles() {
+		return fechaResolucionElegibles;
 	}
 	/**
-	 * @param caa_fecha_resolucion_elegibles the caa_fecha_resolucion_elegibles to set
+	 * @param fechaResolucionElegibles the fechaResolucionElegibles to set
 	 */
-	public void setCaa_fecha_resolucion_elegibles(Date caa_fecha_resolucion_elegibles) {
-		this.caa_fecha_resolucion_elegibles = caa_fecha_resolucion_elegibles;
+	public void setFechaResolucionElegibles(Date fechaResolucionElegibles) {
+		this.fechaResolucionElegibles = fechaResolucionElegibles;
 	}
 	/**
-	 * @return the caa_numero_acta_posesion
+	 * @return the numeroActaPosesion
 	 */
-	public String getCaa_numero_acta_posesion() {
-		return caa_numero_acta_posesion;
+	public String getNumeroActaPosesion() {
+		return numeroActaPosesion;
 	}
 	/**
-	 * @param caa_numero_acta_posesion the caa_numero_acta_posesion to set
+	 * @param numeroActaPosesion the numeroActaPosesion to set
 	 */
-	public void setCaa_numero_acta_posesion(String caa_numero_acta_posesion) {
-		this.caa_numero_acta_posesion = caa_numero_acta_posesion;
+	public void setNumeroActaPosesion(String numeroActaPosesion) {
+		this.numeroActaPosesion = numeroActaPosesion;
 	}
 	/**
-	 * @return the caa_fecha_acta_posesion
+	 * @return the fechaActaPosesion
 	 */
-	public Date getCaa_fecha_acta_posesion() {
-		return caa_fecha_acta_posesion;
+	public Date getFechaActaPosesion() {
+		return fechaActaPosesion;
 	}
 	/**
-	 * @param caa_fecha_acta_posesion the caa_fecha_acta_posesion to set
+	 * @param fechaActaPosesion the fechaActaPosesion to set
 	 */
-	public void setCaa_fecha_acta_posesion(Date caa_fecha_acta_posesion) {
-		this.caa_fecha_acta_posesion = caa_fecha_acta_posesion;
+	public void setFechaActaPosesion(Date fechaActaPosesion) {
+		this.fechaActaPosesion = fechaActaPosesion;
 	}
 	/**
-	 * @return the caa_estado
+	 * @return the estado
 	 */
-	public int getCaa_estado() {
-		return caa_estado;
+	public int getEstado() {
+		return estado;
 	}
 	/**
-	 * @param caa_estado the caa_estado to set
+	 * @param estado the estado to set
 	 */
-	public void setCaa_estado(int caa_estado) {
-		this.caa_estado = caa_estado;
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	/**
-	 * @return the caa_observacion
+	 * @return the observacion
 	 */
-	public String getCaa_observacion() {
-		return caa_observacion;
+	public String getObservacion() {
+		return observacion;
 	}
 	/**
-	 * @param caa_observacion the caa_observacion to set
+	 * @param observacion the observacion to set
 	 */
-	public void setCaa_observacion(String caa_observacion) {
-		this.caa_observacion = caa_observacion;
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 	/**
 	 * @return the carreraAdministrativaActualizaciones
@@ -298,21 +267,14 @@ public class CarreraAdministrativa implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "CarreraAdministrativa [caa_codigo=" + caa_codigo + ", persona=" + persona + ", tipoPorceso="
-				+ tipoPorceso + ", caa_acto_adtivo=" + caa_acto_adtivo + ", caa_fecha_acto_adtivo="
-				+ caa_fecha_acto_adtivo + ", uaa_cargo=" + uaa_cargo + ", caa_numero_convocatoria="
-				+ caa_numero_convocatoria + ", caa_fecha_convocatoria=" + caa_fecha_convocatoria
-				+ ", caa_resolucion_elegibles=" + caa_resolucion_elegibles + ", caa_fecha_resolucion_elegibles="
-				+ caa_fecha_resolucion_elegibles + ", caa_numero_acta_posesion=" + caa_numero_acta_posesion
-				+ ", caa_fecha_acta_posesion=" + caa_fecha_acta_posesion + ", caa_estado=" + caa_estado
-				+ ", caa_observacion=" + caa_observacion + ", CarreraAdministrativaActualizaciones="
-				+ CarreraAdministrativaActualizaciones + "]";
+		return "CarreraAdministrativa [codigo=" + codigo + ", persona=" + persona + ", tipoPorceso=" + tipoProceso
+				+ ", actoAdtivo=" + actoAdtivo + ", fechaActoAdtivo=" + fechaActoAdtivo + ", uaaCargo=" + uaaCargo
+				+ ", numeroConvocatoria=" + numeroConvocatoria + ", fechaConvocatoria=" + fechaConvocatoria
+				+ ", resolucionElegibles=" + resolucionElegibles + ", fechaResolucionElegibles="
+				+ fechaResolucionElegibles + ", numeroActaPosesion=" + numeroActaPosesion + ", fechaActaPosesion="
+				+ fechaActaPosesion + ", estado=" + estado + ", observacion=" + observacion
+				+ ", CarreraAdministrativaActualizaciones=" + CarreraAdministrativaActualizaciones + "]";
 	}
-	
-	
-	
-		
-
 	
 	
 }

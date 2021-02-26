@@ -3,60 +3,77 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author ING_JAVIER
  *
  */
-@SuppressWarnings("serial")
-public class Grupo implements Serializable{
+public class Grupo {
 
-	private int gru_codigo;//] [int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-	private String gru_nombre;//] [varchar](100) NOT NULL,
-	private String gru_id;// [varchar;//](100) NULL,
+	private int codigo;//] [int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	private String nombre;//] [varchar](100) NOT NULL,
+	private String id;// [varchar;//](100) NULL,
+	
+	
+	
 	/**
 	 * 
 	 */
 	public Grupo() {
-		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @return the gru_codigo
+	 * @param codigo
+	 * @param nombre
+	 * @param id
 	 */
-	public int getGru_codigo() {
-		return gru_codigo;
+	public Grupo(int codigo, String nombre, String id) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.id = id;
 	}
 	/**
-	 * @param gru_codigo the gru_codigo to set
+	 * @return the codigo
 	 */
-	public void setGru_codigo(int gru_codigo) {
-		this.gru_codigo = gru_codigo;
+	public int getCodigo() {
+		return codigo;
 	}
 	/**
-	 * @return the gru_nombre
+	 * @param codigo the codigo to set
 	 */
-	public String getGru_nombre() {
-		return gru_nombre;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	/**
-	 * @param gru_nombre the gru_nombre to set
+	 * @return the nombre
 	 */
-	public void setGru_nombre(String gru_nombre) {
-		this.gru_nombre = gru_nombre;
+	public String getNombre() {
+		return nombre;
 	}
 	/**
-	 * @return the gru_id
+	 * @param nombre the nombre to set
 	 */
-	public String getGru_id() {
-		return gru_id;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	/**
-	 * @param gru_id the gru_id to set
+	 * @return the id
 	 */
-	public void setGru_id(String gru_id) {
-		this.gru_id = gru_id;
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Grupo [codigo=" + codigo + ", nombre=" + nombre + ", id=" + id + "]";
 	}
 	
-
+	
 }

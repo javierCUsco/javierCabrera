@@ -3,8 +3,8 @@
  */
 package co.edu.usco.modulo.personal.mvc.control.logica.carreraAdministrativa;
 
-import co.edu.usco.modulo.personal.mvc.control.accesoDB.carreraAdministrativa.Tipo_terminacionDB;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
+import co.edu.usco.modulo.personal.mvc.control.accesoDB.carreraAdministrativa.TipoTerminacionDB;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
 
 /**
  * @author INGENIERO JAVIER CABRERA
@@ -13,7 +13,7 @@ import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
 public class TipoTerminacionLog {
 	public static Object getLista(Object obj) {
 		// TODO Auto-generated method stub
-		conexion db=new Tipo_terminacionDB();
+		ConexionDB db=new TipoTerminacionDB();
 		return db.getAll(obj);
 	}
 }

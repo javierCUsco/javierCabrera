@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import co.edu.usco.modulo.personal.mvc.control.accesoDB.FechaDB;
 import co.edu.usco.modulo.personal.mvc.control.herramientas.Fecha;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
 import co.edu.usco.modulo.personal.mvc.modelo.Mensaje;
 import co.edu.usco.modulo.personal.mvc.modelo.UaaPersonal;
 import co.edu.usco.modulo.personal.mvc.modelo.pensionado.Pensionado;
@@ -22,7 +22,7 @@ public class FechaLog {
 	 * @return
 	 */
 	public static Object getFechaServidor() {
-		conexion db = new FechaDB();
+		ConexionDB db = new FechaDB();
 		return db.getObject(null);
 	}
 
@@ -31,10 +31,9 @@ public class FechaLog {
 	 * @return
 	 */
 	public static Object getFechaServidorLetras(String fecha) {
-
-		int dia = Integer.parseInt(fecha.substring(3, 5));
-		int mes = Integer.parseInt(fecha.substring(0, 2));
-		int annio = Integer.parseInt(fecha.substring(6, 10));
+		int dia = Integer.parseInt(fecha.substring(8,10));
+		int mes = Integer.parseInt(fecha.substring(5,7));
+		int annio = Integer.parseInt(fecha.substring(0,4));
 
 		StringBuffer letras = new StringBuffer();
 		letras.append("a "+getDia(dia)+" ");
@@ -49,97 +48,97 @@ public class FechaLog {
 	protected static String getDia(int dia) {
 		//String diaLetras = "";
 		if (dia == 1) {
-			return "un dia";
+			return "un día";
 		}
 		if (dia == 2) {
-			return "los dos dias";
+			return "los dos ("+dia+") días";
 		}
 		if (dia == 3) {
-			return "los tres dias";
+			return "los tres ("+dia+") días";
 		}
 		if (dia == 4) {
-			return "los cuarto dias";
+			return "los cuarto ("+dia+") días";
 		}
 		if (dia == 5) {
-			return "los cinco dias";
+			return "los cinco ("+dia+") días";
 		}
 		if (dia == 6) {
-			return "los seis dias";
+			return "los seis ("+dia+") días";
 		}
 		if (dia == 7) {
-			return "los siete dias";
+			return "los siete ("+dia+") días";
 		}
 		if (dia == 8) {
-			return "los ocho dias";
+			return "los ocho ("+dia+") días";
 		}
 		if (dia == 9) {
-			return "los nueve dias";
+			return "los nueve ("+dia+") días";
 		}
 		if (dia == 10) {
-			return "los diez dias";
+			return "los diez ("+dia+") días";
 		}
 		if (dia == 11) {
-			return "los once dias";
+			return "los once ("+dia+") días";
 		}
 		if (dia == 12) {
-			return "los doce dias";
+			return "los doce ("+dia+") días";
 		}
 		if (dia == 13) {
-			return "los trece dias";
+			return "los trece ("+dia+") días";
 		}
 		if (dia == 14) {
-			return "los catorce dias";
+			return "los catorce ("+dia+") días";
 		}
 		if (dia == 15) {
-			return "los quince dias";
+			return "los quince ("+dia+") días";
 		}
 		if (dia == 16) {
-			return "los dieciseis y dias";
+			return "los dieciseis ("+dia+") días";
 		}
 		if (dia == 17) {
-			return "los diecisiete y dias";
+			return "los diecisiete ("+dia+") días";
 		}
 		if (dia == 18) {
-			return "los dieciocho y dias";
+			return "los dieciocho ("+dia+") días";
 		}
 		if (dia == 19) {
-			return "los diecinueve y dias";
+			return "los diecinueve ("+dia+") días";
 		}
 		if (dia == 20) {
-			return "los veinte dias";
+			return "los veinte ("+dia+") días";
 		}
 		if (dia == 21) {
-			return "los veintiuno dias";
+			return "los veintiuno ("+dia+") días";
 		}
 		if (dia == 22) {
-			return "los veintidos dias";
+			return "los veintidos ("+dia+") días";
 		}
 		if (dia == 23) {
-			return "los veintitres dias";
+			return "los veintitres ("+dia+") días";
 		}
 		if (dia == 24) {
-			return "los veinticuatro dias";
+			return "los veinticuatro ("+dia+") días";
 		}
 		if (dia == 25) {
-			return "los veinticinco dias";
+			return "los veinticinco ("+dia+") días";
 		}
 		if (dia == 26) {
-			return "los veintiseis dias";
+			return "los veintiseis ("+dia+") días";
 		}
 		if (dia == 27) {
-			return "los veintisiete dias";
+			return "los veintisiete ("+dia+") días";
 		}
 		if (dia == 28) {
-			return "los veintiocho dias";
+			return "los veintiocho ("+dia+") días";
 		}
 		if (dia == 29) {
-			return "los veintinueve dias";
+			return "los veintinueve ("+dia+") días";
 		}
 		if (dia == 30) {
-			return "los treinta dias";
+			return "los treinta ("+dia+") días";
 		}
 		if (dia == 31) {
-			return "los treinta y un dia";
+			return "los treinta y un ("+dia+") día";
 		}
 		return "";
 
@@ -193,7 +192,7 @@ public class FechaLog {
 	public static Object tiempoLaborado(HttpServletRequest request) {
 		Pensionado pensionado = new Pensionado();
 		pensionado.setPen_fecha(Fecha.getDate(String.valueOf(request.getParameter("pen_fecha"))));
-		pensionado.getUaa_personal().setUap_fecha_inicio(Fecha.getDate(String.valueOf(request.getParameter("uap_fecha_inicio"))));
+		pensionado.getUaa_personal().setFechaInicio(Fecha.getDate(String.valueOf(request.getParameter("uap_fecha_inicio"))));
 		String fecha_servidor=String.valueOf(FechaLog.getFechaServidor());
 		Mensaje tem=Fecha.isValido( request.getParameter("uap_fecha_inicio"),fecha_servidor, "la fecha de pension \n");
 		if(tem.isValido()){
@@ -201,7 +200,7 @@ public class FechaLog {
 			if(tem.isValido()){
 				tem=Fecha.isValido( request.getParameter("uap_fecha_inicio"),request.getParameter("pen_fecha"), "la fecha de pension \n");
 				if(tem.isValido()){
-					tem.setMsm(String.valueOf(Fecha.restarFecha(pensionado.getUaa_personal().getUap_fecha_inicio(), pensionado.getPen_fecha())));
+					tem.setMsm(String.valueOf(Fecha.restarFecha(pensionado.getUaa_personal().getFechaInicio(), pensionado.getPen_fecha())));
 				}
 			}
 		}

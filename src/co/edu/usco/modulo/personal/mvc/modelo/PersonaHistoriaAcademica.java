@@ -6,330 +6,492 @@ package co.edu.usco.modulo.personal.mvc.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+import co.edu.usco.modulo.personal.mvc.modelo.sgd.Documento;
+
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
 public class PersonaHistoriaAcademica implements Serializable {
-	private int pha_codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-//	private per_codigo;//int] NOT NULL,
-	private Persona persona = new Persona();
-	private Date pha_fecha_inicio;//datetime] NULL,
-	private Date pha_fecha_fin;//datetime] NULL,
-//	private ine_codigo;//int] NOT NULL,
-	private Institucion_educativaOb institucion= new Institucion_educativaOb();
-	//private pha_ciudad;//int] NULL,
-	private MunicipioOb municipio= new MunicipioOb();
-	private String pha_titulo;//varchar](120) NULL,
-//	private nia_codigo;//int] NOT NULL,
-	private nivel_academicoOb nivel_academico= new nivel_academicoOb();
-	private char pha_horas;//char](10) NULL,
-	private float pha_puntos;//float] NULL,
-	private String pha_documento;//varchar](150) NULL,
-	private int pha_estado;//int] NULL,
-	private char sippa_doccedula;//char](11) NULL,
-	private char sippa_nivcodigo;//char](3) NULL,
-	private char sippa_arecodigo;//char](3) NULL,
-	private Date sippa_titfecha;//datetime] NULL,
-	private Date pha_marca_migracion;//datetime] NULL,
-	private Date pha_puntos_fecha;//datetime] NULL,
-	private float pha_puntos_ajuste;//float] NULL,
-	private String pha_puntos_descripcion;//varchar](2000) NULL,
-	private int pha_duracion_anos;//tinyint] NULL,
-	private Date pha_fecha_titulo;//datetime] NULL,
-	private int pha_convalidado;//int] NULL,
-//	private pha_mod_codigo;//int] NULL,
-	private ModalidadOb modalidad= new ModalidadOb();
+	private int codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	//private Persona persona = new Persona();
+	private Date fechaInicio;//datetime] NULL,
+	private Date fechaFin;//datetime] NULL,
+	private InstitucionEducativa institucionEducativa= new InstitucionEducativa();
+	private String otraInstitucionEducativa;
+	private Municipio municipio= new Municipio();
+	private String otroMunicipio;
+	private String titulo;//varchar](120) NULL,
+	private NivelAcademico nivelAcademico= new NivelAcademico();
+	private String horas;//char](10) NULL,
+	private float puntos;//float] NULL,
+	private String documento;//varchar](150) NULL,
+	private boolean estado;//int] NULL,
+	private String sippaDoccedula;//char](11) NULL,
+	private String sippaNivcodigo;//char](3) NULL,
+	private String sippaArecodigo;//char](3) NULL,
+	private Date sippaTitfecha;//datetime] NULL,
+	private Date marcaMigracion;//datetime] NULL,
+//	private Date puntosFecha;//datetime] NULL,
+	private float puntosAjuste;//float] NULL,
+	private String puntosDescripcion;//varchar](2000) NULL,
+	private int duracionAnos;//tinyint] NULL,
+	private Date fechaTitulo;//datetime] NULL,
+	private boolean convalidado;//int] NULL,
+	private Modalidad modalidad= new Modalidad();
+	private boolean valido;
+	private boolean documentoValido;
+	private boolean documentoRechazado;
+	private Documento documentosgd = new Documento();
+	private String observacion;
+	
 	
 	/**
-	 * @return the pha_codigo
+	 * 
 	 */
-	public int getPha_codigo() {
-		return pha_codigo;
+	public PersonaHistoriaAcademica() {
 	}
 	/**
-	 * @param pha_codigo the pha_codigo to set
+	 * @param codigo
+	 * @param persona
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @param institucion
+	 * @param otraInstitucionEducativa
+	 * @param municipio
+	 * @param otroMunicipio
+	 * @param titulo
+	 * @param nivelAcademico
+	 * @param horas
+	 * @param puntos
+	 * @param documento
+	 * @param estado
+	 * @param sippaDoccedula
+	 * @param sippaNivcodigo
+	 * @param sippaArecodigo
+	 * @param sippaTitfecha
+	 * @param marcaMigracion
+	 * @param puntosAjuste
+	 * @param puntosDescripcion
+	 * @param duracionAnos
+	 * @param fechaTitulo
+	 * @param convalidado
+	 * @param modalidad
+	 * @param valido
+	 * @param documentosgd
 	 */
-	public void setPha_codigo(int pha_codigo) {
-		this.pha_codigo = pha_codigo;
+	public PersonaHistoriaAcademica(int codigo,  Date fechaInicio, Date fechaFin,
+			InstitucionEducativa institucion, Municipio municipio,
+			 String titulo, NivelAcademico nivelAcademico, String horas, float puntos,
+			String documento, boolean estado, String sippaDoccedula, String sippaNivcodigo, String sippaArecodigo,
+			Date sippaTitfecha, Date marcaMigracion, float puntosAjuste, String puntosDescripcion, int duracionAnos,
+			Date fechaTitulo, boolean convalidado, Modalidad modalidad, boolean valido, Documento documentosgd,boolean documentoValido,boolean documentoRechazado) {
+		this.codigo = codigo;
+		//this.persona = persona;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.institucionEducativa = institucion;
+		this.municipio = municipio;
+		this.titulo = titulo;
+		this.nivelAcademico = nivelAcademico;
+		this.horas = horas;
+		this.puntos = puntos;
+		this.documento = documento;
+		this.estado = estado;
+		this.sippaDoccedula = sippaDoccedula;
+		this.sippaNivcodigo = sippaNivcodigo;
+		this.sippaArecodigo = sippaArecodigo;
+		this.sippaTitfecha = sippaTitfecha;
+		this.marcaMigracion = marcaMigracion;
+		this.puntosAjuste = puntosAjuste;
+		this.puntosDescripcion = puntosDescripcion;
+		this.duracionAnos = duracionAnos;
+		this.fechaTitulo = fechaTitulo;
+		this.convalidado = convalidado;
+		this.modalidad = modalidad;
+		this.valido = valido;
+		this.documentosgd = documentosgd;
+		this.documentoValido=documentoValido;
+		this.documentoRechazado=documentoRechazado;
 	}
 	/**
-	 * @return the persona
+	 * @return the codigo
 	 */
-	public Persona getPersona() {
-		return persona;
+	public int getCodigo() {
+		return codigo;
 	}
 	/**
-	 * @param persona the persona to set
+	 * @param codigo the codigo to set
 	 */
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+//	/**
+//	 * @return the persona
+//	 */
+//	public Persona getPersona() {
+//		return persona;
+//	}
+//	/**
+//	 * @param persona the persona to set
+//	 */
+//	public void setPersona(Persona persona) {
+//		this.persona = persona;
+//	}
+	/**
+	 * @return the fechaInicio
+	 */
+	public Date getFechaInicio() {
+		return fechaInicio;
 	}
 	/**
-	 * @return the pha_fecha_inicio
+	 * @param fechaInicio the fechaInicio to set
 	 */
-	public Date getPha_fecha_inicio() {
-		return pha_fecha_inicio;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 	/**
-	 * @param pha_fecha_inicio the pha_fecha_inicio to set
+	 * @return the fechaFin
 	 */
-	public void setPha_fecha_inicio(Date pha_fecha_inicio) {
-		this.pha_fecha_inicio = pha_fecha_inicio;
+	public Date getFechaFin() {
+		return fechaFin;
 	}
 	/**
-	 * @return the pha_fecha_fin
+	 * @param fechaFin the fechaFin to set
 	 */
-	public Date getPha_fecha_fin() {
-		return pha_fecha_fin;
-	}
-	/**
-	 * @param pha_fecha_fin the pha_fecha_fin to set
-	 */
-	public void setPha_fecha_fin(Date pha_fecha_fin) {
-		this.pha_fecha_fin =pha_fecha_fin;
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 	/**
 	 * @return the institucion
 	 */
-	public Institucion_educativaOb getInstitucion() {
-		return institucion;
+	public InstitucionEducativa getInstitucionEducativa() {
+		return institucionEducativa;
 	}
 	/**
 	 * @param institucion the institucion to set
 	 */
-	public void setInstitucion(Institucion_educativaOb institucion) {
-		this.institucion = institucion;
+	public void setInstitucionEducativa(InstitucionEducativa institucion) {
+		this.institucionEducativa = institucion;
+	}
+	/**
+	 * @return the otraInstitucionEducativa
+	 */
+	public String getOtraInstitucionEducativa() {
+		return otraInstitucionEducativa;
+	}
+	/**
+	 * @param otraInstitucionEducativa the otraInstitucionEducativa to set
+	 */
+	public void setOtraInstitucionEducativa(String otraInstitucionEducativa) {
+		this.otraInstitucionEducativa = otraInstitucionEducativa;
 	}
 	/**
 	 * @return the municipio
 	 */
-	public MunicipioOb getMunicipio() {
+	public Municipio getMunicipio() {
 		return municipio;
 	}
 	/**
 	 * @param municipio the municipio to set
 	 */
-	public void setMunicipio(MunicipioOb municipio) {
+	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
 	/**
-	 * @return the pha_titulo
+	 * @return the otroMunicipio
 	 */
-	public String getPha_titulo() {
-		return pha_titulo;
+	public String getOtroMunicipio() {
+		return otroMunicipio;
 	}
 	/**
-	 * @param pha_titulo the pha_titulo to set
+	 * @param otroMunicipio the otroMunicipio to set
 	 */
-	public void setPha_titulo(String pha_titulo) {
-		this.pha_titulo = pha_titulo;
+	public void setOtroMunicipio(String otroMunicipio) {
+		this.otroMunicipio = otroMunicipio;
 	}
 	/**
-	 * @return the nivel_academico
+	 * @return the titulo
 	 */
-	public nivel_academicoOb getNivel_academico() {
-		return nivel_academico;
+	public String getTitulo() {
+		return titulo;
 	}
 	/**
-	 * @param nivel_academico the nivel_academico to set
+	 * @param titulo the titulo to set
 	 */
-	public void setNivel_academico(nivel_academicoOb nivel_academico) {
-		this.nivel_academico = nivel_academico;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 	/**
-	 * @return the pha_horas
+	 * @return the nivelAcademico
 	 */
-	public char getPha_horas() {
-		return pha_horas;
+	public NivelAcademico getNivelAcademico() {
+		return nivelAcademico;
 	}
 	/**
-	 * @param pha_horas the pha_horas to set
+	 * @param nivelAcademico the nivelAcademico to set
 	 */
-	public void setPha_horas(char pha_horas) {
-		this.pha_horas = pha_horas;
+	public void setNivelAcademico(NivelAcademico nivelAcademico) {
+		this.nivelAcademico = nivelAcademico;
 	}
 	/**
-	 * @return the pha_puntos
+	 * @return the horas
 	 */
-	public float getPha_puntos() {
-		return pha_puntos;
+	public String getHoras() {
+		return horas;
 	}
 	/**
-	 * @param pha_puntos the pha_puntos to set
+	 * @param horas the horas to set
 	 */
-	public void setPha_puntos(float pha_puntos) {
-		this.pha_puntos = pha_puntos;
+	public void setHoras(String horas) {
+		this.horas = horas;
 	}
 	/**
-	 * @return the pha_documento
+	 * @return the puntos
 	 */
-	public String getPha_documento() {
-		return pha_documento;
+	public float getPuntos() {
+		return puntos;
 	}
 	/**
-	 * @param pha_documento the pha_documento to set
+	 * @param puntos the puntos to set
 	 */
-	public void setPha_documento(String pha_documento) {
-		this.pha_documento = pha_documento;
+	public void setPuntos(float puntos) {
+		this.puntos = puntos;
 	}
 	/**
-	 * @return the pha_estado
+	 * @return the documento
 	 */
-	public int getPha_estado() {
-		return pha_estado;
+	public String getDocumento() {
+		return documento;
 	}
 	/**
-	 * @param pha_estado the pha_estado to set
+	 * @param documento the documento to set
 	 */
-	public void setPha_estado(int pha_estado) {
-		this.pha_estado = pha_estado;
+	public void setDocumento(String documento) {
+		this.documento = documento;
 	}
 	/**
-	 * @return the sippa_doccedula
+	 * @return the estado
 	 */
-	public char getSippa_doccedula() {
-		return sippa_doccedula;
+	public boolean isEstado() {
+		return estado;
 	}
 	/**
-	 * @param sippa_doccedula the sippa_doccedula to set
+	 * @param estado the estado to set
 	 */
-	public void setSippa_doccedula(char sippa_doccedula) {
-		this.sippa_doccedula = sippa_doccedula;
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 	/**
-	 * @return the sippa_nivcodigo
+	 * @return the sippaDoccedula
 	 */
-	public char getSippa_nivcodigo() {
-		return sippa_nivcodigo;
+	public String getSippaDoccedula() {
+		return sippaDoccedula;
 	}
 	/**
-	 * @param sippa_nivcodigo the sippa_nivcodigo to set
+	 * @param sippaDoccedula the sippaDoccedula to set
 	 */
-	public void setSippa_nivcodigo(char sippa_nivcodigo) {
-		this.sippa_nivcodigo = sippa_nivcodigo;
+	public void setSippaDoccedula(String sippaDoccedula) {
+		this.sippaDoccedula = sippaDoccedula;
 	}
 	/**
-	 * @return the sippa_arecodigo
+	 * @return the sippaNivcodigo
 	 */
-	public char getSippa_arecodigo() {
-		return sippa_arecodigo;
+	public String getSippaNivcodigo() {
+		return sippaNivcodigo;
 	}
 	/**
-	 * @param sippa_arecodigo the sippa_arecodigo to set
+	 * @param sippaNivcodigo the sippaNivcodigo to set
 	 */
-	public void setSippa_arecodigo(char sippa_arecodigo) {
-		this.sippa_arecodigo = sippa_arecodigo;
+	public void setSippaNivcodigo(String sippaNivcodigo) {
+		this.sippaNivcodigo = sippaNivcodigo;
 	}
 	/**
-	 * @return the sippa_titfecha
+	 * @return the sippaArecodigo
 	 */
-	public Date getSippa_titfecha() {
-		return sippa_titfecha;
+	public String getSippaArecodigo() {
+		return sippaArecodigo;
 	}
 	/**
-	 * @param sippa_titfecha the sippa_titfecha to set
+	 * @param sippaArecodigo the sippaArecodigo to set
 	 */
-	public void setSippa_titfecha(Date sippa_titfecha) {
-		this.sippa_titfecha = sippa_titfecha;
+	public void setSippaArecodigo(String sippaArecodigo) {
+		this.sippaArecodigo = sippaArecodigo;
 	}
 	/**
-	 * @return the pha_marca_migracion
+	 * @return the sippaTitfecha
 	 */
-	public Date getPha_marca_migracion() {
-		return pha_marca_migracion;
+	public Date getSippaTitfecha() {
+		return sippaTitfecha;
 	}
 	/**
-	 * @param pha_marca_migracion the pha_marca_migracion to set
+	 * @param sippaTitfecha the sippaTitfecha to set
 	 */
-	public void setPha_marca_migracion(Date pha_marca_migracion) {
-		this.pha_marca_migracion = pha_marca_migracion;
+	public void setSippaTitfecha(Date sippaTitfecha) {
+		this.sippaTitfecha = sippaTitfecha;
 	}
 	/**
-	 * @return the pha_puntos_fecha
+	 * @return the marcaMigracion
 	 */
-	public Date getPha_puntos_fecha() {
-		return pha_puntos_fecha;
+	public Date getMarcaMigracion() {
+		return marcaMigracion;
 	}
 	/**
-	 * @param pha_puntos_fecha the pha_puntos_fecha to set
+	 * @param marcaMigracion the marcaMigracion to set
 	 */
-	public void setPha_puntos_fecha(Date pha_puntos_fecha) {
-		this.pha_puntos_fecha = pha_puntos_fecha;
+	public void setMarcaMigracion(Date marcaMigracion) {
+		this.marcaMigracion = marcaMigracion;
 	}
 	/**
-	 * @return the pha_puntos_ajuste
+	 * @return the puntosAjuste
 	 */
-	public float getPha_puntos_ajuste() {
-		return pha_puntos_ajuste;
+	public float getPuntosAjuste() {
+		return puntosAjuste;
 	}
 	/**
-	 * @param pha_puntos_ajuste the pha_puntos_ajuste to set
+	 * @param puntosAjuste the puntosAjuste to set
 	 */
-	public void setPha_puntos_ajuste(float pha_puntos_ajuste) {
-		this.pha_puntos_ajuste = pha_puntos_ajuste;
+	public void setPuntosAjuste(float puntosAjuste) {
+		this.puntosAjuste = puntosAjuste;
 	}
 	/**
-	 * @return the pha_puntos_descripcion
+	 * @return the puntosDescripcion
 	 */
-	public String getPha_puntos_descripcion() {
-		return pha_puntos_descripcion;
+	public String getPuntosDescripcion() {
+		return puntosDescripcion;
 	}
 	/**
-	 * @param pha_puntos_descripcion the pha_puntos_descripcion to set
+	 * @param puntosDescripcion the puntosDescripcion to set
 	 */
-	public void setPha_puntos_descripcion(String pha_puntos_descripcion) {
-		this.pha_puntos_descripcion = pha_puntos_descripcion;
+	public void setPuntosDescripcion(String puntosDescripcion) {
+		this.puntosDescripcion = puntosDescripcion;
 	}
 	/**
-	 * @return the pha_duracion_anos
+	 * @return the duracionAnos
 	 */
-	public int getPha_duracion_anos() {
-		return pha_duracion_anos;
+	public int getDuracionAnos() {
+		return duracionAnos;
 	}
 	/**
-	 * @param pha_duracion_anos the pha_duracion_anos to set
+	 * @param duracionAnos the duracionAnos to set
 	 */
-	public void setPha_duracion_anos(int pha_duracion_anos) {
-		this.pha_duracion_anos = pha_duracion_anos;
+	public void setDuracionAnos(int duracionAnos) {
+		this.duracionAnos = duracionAnos;
 	}
 	/**
-	 * @return the pha_fecha_titulo
+	 * @return the fechaTitulo
 	 */
-	public Date getPha_fecha_titulo() {
-		return pha_fecha_titulo;
+	public Date getFechaTitulo() {
+		return fechaTitulo;
 	}
 	/**
-	 * @param pha_fecha_titulo the pha_fecha_titulo to set
+	 * @param fechaTitulo the fechaTitulo to set
 	 */
-	public void setPha_fecha_titulo(Date pha_fecha_titulo) {
-		this.pha_fecha_titulo = pha_fecha_titulo;
+	public void setFechaTitulo(Date fechaTitulo) {
+		this.fechaTitulo = fechaTitulo;
 	}
 	/**
-	 * @return the pha_convalidado
+	 * @return the convalidado
 	 */
-	public int getPha_convalidado() {
-		return pha_convalidado;
+	public boolean isConvalidado() {
+		return convalidado;
 	}
 	/**
-	 * @param pha_convalidado the pha_convalidado to set
+	 * @param convalidado the convalidado to set
 	 */
-	public void setPha_convalidado(int pha_convalidado) {
-		this.pha_convalidado = pha_convalidado;
+	public void setConvalidado(boolean convalidado) {
+		this.convalidado = convalidado;
 	}
 	/**
 	 * @return the modalidad
 	 */
-	public ModalidadOb getModalidad() {
+	public Modalidad getModalidad() {
 		return modalidad;
 	}
 	/**
 	 * @param modalidad the modalidad to set
 	 */
-	public void setModalidad(ModalidadOb modalidad) {
+	public void setModalidad(Modalidad modalidad) {
 		this.modalidad = modalidad;
 	}
+	/**
+	 * @return the valido
+	 */
+	public boolean isValido() {
+		return valido;
+	}
+	/**
+	 * @param valido the valido to set
+	 */
+	public void setValido(boolean valido) {
+		this.valido = valido;
+	}
+	/**
+	 * @return the documentosgd
+	 */
+	public Documento getDocumentosgd() {
+		return documentosgd;
+	}
+	/**
+	 * @param documentosgd the documentosgd to set
+	 */
+	public void setDocumentosgd(Documento documentosgd) {
+		this.documentosgd = documentosgd;
+	}
 	
+	/**
+	 * @return the documentoValido
+	 */
+	public boolean isDocumentoValido() {
+		return documentoValido;
+	}
+	/**
+	 * @param documentoValido the documentoValido to set
+	 */
+	public void setDocumentoValido(boolean documentoValido) {
+		this.documentoValido = documentoValido;
+	}
+	/**
+	 * @return the observacion
+	 */
+	public String getObservacion() {
+		return observacion;
+	}
+	/**
+	 * @param observacion the observacion to set
+	 */
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+	/**
+	 * @return the documentoRechazado
+	 */
+	public boolean isDocumentoRechazado() {
+		return documentoRechazado;
+	}
+	/**
+	 * @param documentoRechazado the documentoRechazado to set
+	 */
+	public void setDocumentoRechazado(boolean documentoRechazado) {
+		this.documentoRechazado = documentoRechazado;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "PersonaHistoriaAcademica [codigo=" + codigo + ", persona="  + ", fechaInicio=" + fechaInicio
+				+ ", fechaFin=" + fechaFin + ", institucionEducativa=" + institucionEducativa
+				+ ", otraInstitucionEducativa=" + otraInstitucionEducativa + ", municipio=" + municipio
+				+ ", otroMunicipio=" + otroMunicipio + ", titulo=" + titulo + ", nivelAcademico=" + nivelAcademico
+				+ ", horas=" + horas + ", puntos=" + puntos + ", documento=" + documento + ", estado=" + estado
+				+ ", sippaDoccedula=" + sippaDoccedula + ", sippaNivcodigo=" + sippaNivcodigo + ", sippaArecodigo="
+				+ sippaArecodigo + ", sippaTitfecha=" + sippaTitfecha + ", marcaMigracion=" + marcaMigracion
+				+ ", puntosAjuste=" + puntosAjuste + ", puntosDescripcion=" + puntosDescripcion + ", duracionAnos="
+				+ duracionAnos + ", fechaTitulo=" + fechaTitulo + ", convalidado=" + convalidado + ", modalidad="
+				+ modalidad + ", valido=" + valido + ", documentoValido=" + documentoValido + ", documentoRechazado="
+				+ documentoRechazado + ", documentosgd=" + documentosgd + ", observacion=" + observacion + "]";
+	}
 	
 	
 	

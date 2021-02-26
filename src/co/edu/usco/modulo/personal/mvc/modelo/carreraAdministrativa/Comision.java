@@ -6,7 +6,6 @@ package co.edu.usco.modulo.personal.mvc.modelo.carreraAdministrativa;
 import java.io.Serializable;
 
 import co.edu.usco.modulo.personal.mvc.modelo.Persona;
-import co.edu.usco.modulo.personal.mvc.modelo.Tipo_comisionOb;
 import co.edu.usco.modulo.personal.mvc.modelo.UaaCargo;
 
 /**
@@ -17,7 +16,7 @@ public class Comision implements Serializable {
 	
 	private int com_codigo;//int] IDENTITY(1,1) NOT NULL,
 	private Persona persona;//int] NULL,
-	private Tipo_comisionOb tipoContrato;//int] NULL,
+	private TipoComision tipoComision;//int] NULL,
 	private String com_acto_adtivo;//varchar](50) NULL,
 	private String com_fecha_inicio_acto_adtivo;//date] NULL,
 	private String com_fecha_fin_acto_adtivo;//date] NULL,
@@ -52,14 +51,14 @@ public class Comision implements Serializable {
 	/**
 	 * @return the tipoContrato
 	 */
-	public Tipo_comisionOb getTipoContrato() {
-		return tipoContrato;
+	public TipoComision getTipoComision() {
+		return tipoComision;
 	}
 	/**
 	 * @param tipoContrato the tipoContrato to set
 	 */
-	public void setTipoContrato(Tipo_comisionOb tipoContrato) {
-		this.tipoContrato = tipoContrato;
+	public void setTipoComision(TipoComision tipoContrato) {
+		this.tipoComision = tipoContrato;
 	}
 	/**
 	 * @return the com_acto_adtivo

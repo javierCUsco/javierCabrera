@@ -3,9 +3,9 @@
  */
 package co.edu.usco.modulo.personal.mvc.control.logica;
 
-import java.util.LinkedList;
-
-import co.edu.usco.modulo.personal.mvc.modelo.GeneroOb;
+import co.edu.usco.modulo.personal.mvc.control.accesoDB.GeneroDB;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
+import co.edu.usco.modulo.personal.mvc.modelo.Mensaje;
 
 /**
  * @author INGENIERO JAVIER CABRERA
@@ -13,18 +13,16 @@ import co.edu.usco.modulo.personal.mvc.modelo.GeneroOb;
  */
 public class GeneroLog {
 
-	public static Object getLista(Object combo) {
+	/**
+	 * @param combo
+	 * @return
+	 */
+	public static Object getLista(Object obj) {
 		// TODO Auto-generated method stub
-		 LinkedList<GeneroOb> lista = new LinkedList<GeneroOb>();
-		 GeneroOb elemento= new GeneroOb();
-		 elemento.setGen_codigo('M');
-		 elemento.setGen_nombre("MASCULINO");
-		 lista.add(elemento);
-		 elemento= new GeneroOb();
-		 elemento.setGen_codigo('F');
-		 elemento.setGen_nombre("FEMENINO");
-		 lista.add(elemento);
-		 return lista;
+		ConexionDB db=new GeneroDB();
+		Mensaje mensaje= new Mensaje();
+		mensaje.setResultado(db.getAll(obj));
+		return mensaje;
 	}
 
 }

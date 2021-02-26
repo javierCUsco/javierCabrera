@@ -12,15 +12,15 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
 import co.edu.usco.modulo.personal.mvc.control.controlDB.Conexion;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
-import co.edu.usco.modulo.personal.mvc.modelo.publicacion_tipoOb;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
+import co.edu.usco.modulo.personal.mvc.modelo.PublicacionTipo;
 import co.edu.usco.modulo.personal.mvc.modelo.Usuario;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class PublicacionDB implements conexion {
+public class PublicacionDB implements ConexionDB {
 	private Logger imp ;
 	/* (non-Javadoc)
 	 * @see co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion#getAll(java.lang.Object)
@@ -31,7 +31,7 @@ public class PublicacionDB implements conexion {
 		Statement sentencia=null;
 		ResultSet resul=null;
 		imp =Logger.getLogger(getClass().getName());
-		 LinkedList<publicacion_tipoOb> lista = new LinkedList<publicacion_tipoOb>();
+		 LinkedList<PublicacionTipo> lista = new LinkedList<PublicacionTipo>();
 			Conexion consegura = new Conexion();
 		 try {
 			 Object param[]=(Object[]) obj;
@@ -43,12 +43,12 @@ public class PublicacionDB implements conexion {
 //			sql.append("where cert_estado=1  ");
 
 
-			conn = consegura.conexion_segura();
+			conn = consegura.conexionConsulta();
 			imp.info("valida el usuario "+sql.toString());
 			sentencia = conn.createStatement();
 			resul = sentencia.executeQuery(sql.toString());
 			while(resul.next()){
-				publicacion_tipoOb elemento= new publicacion_tipoOb();
+				PublicacionTipo elemento= new PublicacionTipo();
 				elemento.setPut_codigo(resul.getInt(1));
 				elemento.setPut_nombre(resul.getString(2));
 				elemento.setSippa_tipcodigo(resul.getString(3));

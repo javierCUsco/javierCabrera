@@ -3,28 +3,35 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author Maritza
  *
  */
-public class Mensaje implements Serializable {
+public class Mensaje {
 
 	private boolean valido;
-	private String msm;
+	private String msm="";
 	private Object resultado;
 	
 	
 	
-	
-	public Mensaje(boolean valido, String msm, Object resultado) {
+	/**
+	 * 
+	 */
+	public Mensaje() {
+	}
+	/**
+	 * @param valido
+	 * @param msm
+	 * @param resultado
+	 * @param usuario
+	 */
+	public Mensaje(boolean valido, String msm, Object resultado, Object usuario) {
 		this.valido = valido;
 		this.msm = msm;
 		this.resultado = resultado;
-	}
-	public Mensaje() {
-		// TODO Auto-generated constructor stub
+//		this.usuario = (Usuario) usuario;
 	}
 	/**
 	 * @return the valido
@@ -62,13 +69,26 @@ public class Mensaje implements Serializable {
 	public void setResultado(Object resultado) {
 		this.resultado = resultado;
 	}
+	/**
+	 * @return the usuario
+	 */
+//	public Usuario getUsuario() {
+//		return usuario;
+//	}
+	/**
+	 * @param usuario the usuario to set
+	 */
+//	public void setUsuario(Usuario usuario) {
+//		this.usuario = usuario;
+//	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Mensaje [valido=" + valido + ", msm=" + msm + ", resultado=" + resultado + "]";
+		return "Mensaje [valido=" + valido + ", msm=" + msm + ", resultado=" + resultado + ", usuario=" +1 + "]";
 	}
-
+	
+	
 	
 }

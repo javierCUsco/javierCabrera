@@ -3,52 +3,111 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class Eps implements Serializable {
-	private int eps_codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-	private String eps_nombre;//varchar](150) NOT NULL,
-	private String per_numero_afiliacion_eps;
+public class Eps {
+	private int codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	private String nombre;//varchar](150) NOT NULL,
+	private String numeroAfiliacionEps;
+	private boolean estado;
+	
+	
+	
 	/**
-	 * @return the eps_codigo
+	 * 
 	 */
-	public int getEps_codigo() {
-		return eps_codigo;
+	public Eps() {
 	}
 	/**
-	 * @param eps_codigo the eps_codigo to set
+	 * @param codigo
+	 * @param nombre
+	 * @param numeroAfiliacionEps
 	 */
-	public void setEps_codigo(int eps_codigo) {
-		this.eps_codigo = eps_codigo;
+	public Eps(int codigo, String nombre, String numeroAfiliacionEps) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.numeroAfiliacionEps = numeroAfiliacionEps;
+	}
+	
+	
+	
+	/**
+	 * @param codigo
+	 * @param nombre
+	 * @param numeroAfiliacionEps
+	 * @param estado
+	 */
+	public Eps(int codigo, String nombre, String numeroAfiliacionEps, boolean estado) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.numeroAfiliacionEps = numeroAfiliacionEps;
+		this.estado = estado;
 	}
 	/**
-	 * @return the eps_nombre
+	 * @return the codigo
 	 */
-	public String getEps_nombre() {
-		return eps_nombre;
+	public int getCodigo() {
+		return codigo;
 	}
 	/**
-	 * @param eps_nombre the eps_nombre to set
+	 * @param codigo the codigo to set
 	 */
-	public void setEps_nombre(String eps_nombre) {
-		this.eps_nombre = eps_nombre;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	/**
-	 * @return the per_numero_afiliacion_eps
+	 * @return the nombre
 	 */
-	public String getPer_numero_afiliacion_eps() {
-		return per_numero_afiliacion_eps;
+	public String getNombre() {
+		return nombre;
 	}
 	/**
-	 * @param per_numero_afiliacion_eps the per_numero_afiliacion_eps to set
+	 * @param nombre the nombre to set
 	 */
-	public void setPer_numero_afiliacion_eps(String per_numero_afiliacion_eps) {
-		this.per_numero_afiliacion_eps = per_numero_afiliacion_eps;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+	/**
+	 * @return the numeroAfiliacionEps
+	 */
+	public String getNumeroAfiliacionEps() {
+		return numeroAfiliacionEps;
+	}
+	/**
+	 * @param numeroAfiliacionEps the numeroAfiliacionEps to set
+	 */
+	public void setNumeroAfiliacionEps(String numeroAfiliacionEps) {
+		this.numeroAfiliacionEps = numeroAfiliacionEps;
+	}
+	/**
+	 * @return the estado
+	 */
+	public boolean isEstado() {
+		return estado;
+	}
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Eps [codigo=" + codigo + ", nombre=" + nombre + ", numeroAfiliacionEps=" + numeroAfiliacionEps
+				+ ", estado=" + estado + "]";
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

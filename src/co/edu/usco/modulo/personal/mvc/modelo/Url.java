@@ -3,7 +3,6 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 import co.edu.usco.modulo.personal.mvc.control.herramientas.Transformacion;
 
@@ -12,8 +11,7 @@ import co.edu.usco.modulo.personal.mvc.control.herramientas.Transformacion;
  * @author ING_JAVIER
  *
  */
-@SuppressWarnings("serial")
-public class Url implements Serializable{
+public class Url {
 	private String url ;
 	private String basedato;
 	/**
@@ -22,6 +20,19 @@ public class Url implements Serializable{
 	public Url() {
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+	/**
+	 * @param url
+	 * @param basedato
+	 */
+	public Url(String url, String basedato) {
+		this.url = url;
+		this.basedato = basedato;
+	}
+
+
 
 	/**
 	 * @return the url
@@ -51,5 +62,14 @@ public class Url implements Serializable{
 		Transformacion hex = new Transformacion();
 		this.basedato = hex.transHexa(basedato,1);
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Url [url=" + url + ", basedato=" + basedato + "]";
+	}
+	
 
 }

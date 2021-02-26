@@ -3,91 +3,93 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author ING. JAVIER CABRERA LASSO
  *
  */
-public class Cargo implements Serializable {
-	private int car_codigo;//int] IDENTITY(0,1) NOT FOR REPLICATION NOT NULL,
-	private String car_nombre;//varchar](50) NOT NULL,
-	private String car_id;//varchar](4) NULL,
-	private int  car_tmp;//int] NULL,
+public class Cargo {
+	private int codigo;//int] IDENTITY(0,1) NOT FOR REPLICATION NOT NULL,
+	private String nombre;//varchar](50) NOT NULL,
+	private String id;//varchar](4) NULL,
+	private int  tmp;//int] NULL,
 	
 	
 	
-	
+	/**
+	 * 
+	 */
 	public Cargo() {
-		
-	}
-	
-	
-	public Cargo(int car_codigo, String car_nombre, String car_id, int car_tmp) {
-		this.car_codigo = car_codigo;
-		this.car_nombre = car_nombre;
-		this.car_id = car_id;
-		this.car_tmp = car_tmp;
-	}
-
-
-	/**
-	 * @return the car_codigo
-	 */
-	public int getCar_codigo() {
-		return car_codigo;
 	}
 	/**
-	 * @param car_codigo the car_codigo to set
+	 * @param codigo
+	 * @param nombre
+	 * @param id
+	 * @param tmp
 	 */
-	public void setCar_codigo(int car_codigo) {
-		this.car_codigo = car_codigo;
+	public Cargo(int codigo, String nombre, String id, int tmp) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.id = id;
+		this.tmp = tmp;
 	}
 	/**
-	 * @return the car_nombre
+	 * @return the codigo
 	 */
-	public String getCar_nombre() {
-		return car_nombre;
+	public int getCodigo() {
+		return codigo;
 	}
 	/**
-	 * @param car_nombre the car_nombre to set
+	 * @param codigo the codigo to set
 	 */
-	public void setCar_nombre(String car_nombre) {
-		this.car_nombre = car_nombre;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	/**
-	 * @return the car_id
+	 * @return the nombre
 	 */
-	public String getCar_id() {
-		return car_id;
+	public String getNombre() {
+		return nombre;
 	}
 	/**
-	 * @param car_id the car_id to set
+	 * @param nombre the nombre to set
 	 */
-	public void setCar_id(String car_id) {
-		this.car_id = car_id;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	/**
-	 * @return the car_tmp
+	 * @return the id
 	 */
-	public int getCar_tmp() {
-		return car_tmp;
+	public String getId() {
+		return id;
 	}
 	/**
-	 * @param car_tmp the car_tmp to set
+	 * @param id the id to set
 	 */
-	public void setCar_tmp(int car_tmp) {
-		this.car_tmp = car_tmp;
+	public void setId(String id) {
+		this.id = id;
 	}
-
-
+	/**
+	 * @return the tmp
+	 */
+	public int getTmp() {
+		return tmp;
+	}
+	/**
+	 * @param tmp the tmp to set
+	 */
+	public void setTmp(int tmp) {
+		this.tmp = tmp;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Cargo [car_codigo=" + car_codigo + ", car_nombre=" + car_nombre + ", car_id=" + car_id + ", car_tmp="
-				+ car_tmp + "]";
+		return "Cargo [codigo=" + codigo + ", nombre=" + nombre + ", id=" + id + ", tmp=" + tmp + "]";
 	}
+	
+	
+	
 	
 }

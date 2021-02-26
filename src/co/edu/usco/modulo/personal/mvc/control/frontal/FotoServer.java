@@ -16,8 +16,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-
-
 import co.edu.usco.modulo.personal.mvc.control.herramientas.Session;
 import co.edu.usco.modulo.personal.mvc.modelo.Persona;
 
@@ -26,64 +24,64 @@ import co.edu.usco.modulo.personal.mvc.modelo.Persona;
  */
 public class FotoServer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		processRequest(request, response);
 	}
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		if(Session.esSession(request)){
-		Persona persona= null;
-		if(request.getParameter("per_codigo")!=null){
-			persona= new Persona();
-			persona.setPer_codigo(Integer.parseInt(request.getParameter("per_codigo")));
-		}
 
-		if (persona == null) {
-		response.sendError(401);
-		} else {
-		response.setContentType("image/png;image/jpg");
-		try {
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpGet get = new HttpGet("https://gaitana.usco.edu.co/porteria_movil/Show?image=" + persona.getPer_codigo());
-		get.setHeader("Authorization", "Basic MktqaDlDNGNzbV4/a1ZaQlM0JVM6SEh3UkZjNXU2Q21TMHdtP0c2Qns=");
+		//if (Session.esSession(request)) {
+			Persona persona = null;
+			if (request.getParameter("codigo") != null) {
+				persona = new Persona();
+				persona.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+			}
 
-		CloseableHttpResponse respo = httpclient.execute(get);
-		try {
-		               HttpEntity entity = respo.getEntity();
-		               
-		               BufferedImage bi = ImageIO.read(entity.getContent());
-		OutputStream out = response.getOutputStream();
+			if (persona == null) {
+				response.sendError(401);
+			} else {
+				response.setContentType("image/png;image/jpg");
+				try {
+					CloseableHttpClient httpclient = HttpClients.createDefault();
+					HttpGet get = new HttpGet(
+							"https://gaitana.usco.edu.co/porteria_movil/Show?image=" + persona.getCodigo());
+					get.setHeader("Authorization", "Basic MktqaDlDNGNzbV4/a1ZaQlM0JVM6SEh3UkZjNXU2Q21TMHdtP0c2Qns=");
 
-		ImageIO.write(bi, "png", out);
-		out.close();
-		               
-		               EntityUtils.consume(entity);
-		           } finally {
-		               respo.close();
-		           }	
-		} catch (IOException e) {
-		e.printStackTrace();
-		}
-		}
-		}
-		else{
-			response.sendError(401);
-		}
+					CloseableHttpResponse respo = httpclient.execute(get);
+					try {
+						HttpEntity entity = respo.getEntity();
+						BufferedImage bi = ImageIO.read(entity.getContent());
+						OutputStream out = response.getOutputStream();
+						ImageIO.write(bi, "png", out);
+						out.close();
+						EntityUtils.consume(entity);
+					} finally {
+						respo.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+//		} else {
+//			response.sendError(401);
+//		}
 
 	}
 }

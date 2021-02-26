@@ -4,22 +4,28 @@
 package co.edu.usco.modulo.personal.mvc.control.accesoDB;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
+import co.edu.usco.modulo.personal.mvc.control.accesoDB.rowMapper.DedicacionRowMapper;
+import co.edu.usco.modulo.personal.mvc.control.accesoDB.rowMapper.HistoriaLaboralTipoRowMapper;
 import co.edu.usco.modulo.personal.mvc.control.controlDB.Conexion;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
 import co.edu.usco.modulo.personal.mvc.modelo.Dedicacion;
+import co.edu.usco.modulo.personal.mvc.modelo.HistoriaLaboralTipo;
+import co.edu.usco.modulo.personal.mvc.modelo.Usuario;
 
 /**
  * @author ING. JAVIER CABRERA LASSO
  *
  */
-public class DedicacionDB implements conexion{
-
+public class DedicacionDB implements ConexionDB{
+	private String COLUMNAS=" de.ded_codigo, de.ded_nombre, de.ded_orden_snies, de.sippa_dedcodigo, de.ded_codigo_hecaa ";
+	private String SQL_SELECT="select "+COLUMNAS+" from dedicacion de with(nolock)  ";
 	private Logger imp ;
 	/* (non-Javadoc)
 	 * @see co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion#getAll(java.lang.Object)
@@ -27,41 +33,35 @@ public class DedicacionDB implements conexion{
 	@Override
 	public Object getAll(Object obj) {
 		Connection conn = null;
-		Statement sentencia=null;
-		ResultSet resul=null;
-		imp =Logger.getLogger(getClass().getName());
-		 LinkedList<Dedicacion> lista = new LinkedList<Dedicacion>();
-			Conexion consegura = new Conexion();
-		 try {
-//			 Object param[]=(Object[]) obj;
-//			 Persona_historia_laboralOb pha= (Persona_historia_laboralOb) param[0];
-////			 usuarioOb admin= (usuarioOb) param[1];
-			StringBuffer sql = new StringBuffer();
-//			sql.append("select top 10  pha.pha_codigo,pha.per_codigo,coalesce(CONVERT(VARCHAR(10),pha.pha_fecha_inicio,111),(SELECT CONVERT(VARCHAR(10),GETDATE(), 111))),coalesce(CONVERT(VARCHAR(10),pha.pha_fecha_fin,111),(SELECT CONVERT(VARCHAR(10),GETDATE(), 111))),pha.ine_codigo,ine.ine_nombre,pha.pha_ciudad,mun.mun_nombre,dep.dep_codigo,dep.dep_nombre,pa.pai_codigo,pa.pai_nombre,pha.pha_titulo,pha.nia_codigo,nia.nia_nombre,pha.pha_documento,pha.pha_estado,coalesce(CONVERT(VARCHAR(10),pha.pha_fecha_titulo,111),(SELECT CONVERT(VARCHAR(10),GETDATE(), 111))),pha.pha_convalidado,pha.pha_mod_codigo,mo.mod_nombre   ");
-			sql.append("SELECT ded_codigo,ded_nombre,ded_orden_snies,sippa_dedcodigo,ded_codigo_hecaa ");
-			sql.append("from dedicacion  with(nolock)  ");
+		PreparedStatement sentencia = null;
+		LinkedList<Dedicacion> lista=null;
+		imp = Logger.getLogger(getClass().getName());
+		Conexion consegura = new Conexion();
+		StringBuffer sql = new StringBuffer();
+		imp.info("select getAll  " );
+		try {
+			Object param[] = (Object[]) obj;
+//			 Usuario admin= (Usuario) param[1];	 
+			sql = new StringBuffer();
+			sql.append(SQL_SELECT);
 			
-			sql.append(" ");
-			sql.append(" ");
-			sql.append(" ");
-
-
-			conn = consegura.conexion_segura();
-			imp.info("valida el usuario "+sql.toString());
-			sentencia = conn.createStatement();
-			resul = sentencia.executeQuery(sql.toString());
-//			SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+//			conn = consegura.getconn_admin (admin);
+			conn=consegura.conexionConsulta();
+			conn.setAutoCommit(false);
+			sentencia = conn.prepareStatement(sql.toString());
+//			
+			imp.info("select getAll " + sql.toString());
+//			rs=sentencia.executeQuery();
+			conn.commit();
+			lista  =(LinkedList<Dedicacion>) DedicacionRowMapper.mapRow(sentencia.executeQuery());
 			
-			while(resul.next()){
-				lista.add(new Dedicacion(resul.getInt(1), resul.getString(2)));
-			}
-			consegura.cerrarconn(conn, resul, sentencia);
-		 }catch (Exception e) {
+			consegura.cerrarconn(conn, null, sentencia);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			 imp.error(""+e.toString() );
-			 consegura.cerrarconn(conn, resul, sentencia);
+			imp.error("" + e.toString());
+			consegura.cerrarconn(conn, null, sentencia);
 
-	        }
+		}
 		return lista;
 	}
 

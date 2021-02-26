@@ -6,7 +6,6 @@ package co.edu.usco.modulo.personal.mvc.modelo.carreraAdministrativa;
 import java.io.Serializable;
 import java.util.Date;
 
-import co.edu.usco.modulo.personal.mvc.modelo.Tipo_actualizacionOb;
 import co.edu.usco.modulo.personal.mvc.modelo.UaaCargo;
 
 
@@ -16,16 +15,19 @@ import co.edu.usco.modulo.personal.mvc.modelo.UaaCargo;
  */
 public class CarreraAdministrativaActualizacion implements Serializable {
 
-	private int caaa_codigo;// int IDENTITY(1,1) NOT NULL,
+	private int codigo;// int IDENTITY(1,1) NOT NULL,
 	private CarreraAdministrativa caa =new CarreraAdministrativa();// NULL,
-	private Tipo_actualizacionOb tipoActualizacion= new Tipo_actualizacionOb();// int NULL,
-	private String caaa_acto_administrativo;// varchar(50) NULL,
-	private Date caaa_fecha_acto_administrativo;// date NULL,
-	private String caaa_observacion;
-	private UaaCargo uaa_cargo= new UaaCargo();// uac_codigo int NULL,
+	private TipoActualizacion tipoActualizacion=new TipoActualizacion();// int NULL,
+	private String actoAdministrativo;// varchar(50) NULL,
+	private Date fechaActoAdministrativo;// date NULL,
+	private String observacion;
+	private UaaCargo uaaCargo= new UaaCargo();// uac_codigo int NULL,
 	
 	
 	
+	/**
+	 * 
+	 */
 	public CarreraAdministrativaActualizacion() {
 
 	}
@@ -33,63 +35,42 @@ public class CarreraAdministrativaActualizacion implements Serializable {
 
 
 	/**
+	 * @param codigo
 	 * @param caa
 	 * @param tipoActualizacion
-	 * @param caaa_acto_administrativo
-	 * @param caaa_fecha_acto_administrativo
-	 * @param caaa_observacion
-	 * @param uaa_cargo
+	 * @param actoAdministrativo
+	 * @param fechaActoAdministrativo
+	 * @param observacion
+	 * @param uaaCargo
 	 */
-	public CarreraAdministrativaActualizacion(CarreraAdministrativa caa, Tipo_actualizacionOb tipoActualizacion,
-			String caaa_acto_administrativo, Date caaa_fecha_acto_administrativo, String caaa_observacion,
-			UaaCargo uaa_cargo) {
+	public CarreraAdministrativaActualizacion(int codigo, CarreraAdministrativa caa,
+			TipoActualizacion tipoActualizacion, String actoAdministrativo, Date fechaActoAdministrativo,
+			String observacion, UaaCargo uaaCargo) {
+		this.codigo = codigo;
 		this.caa = caa;
 		this.tipoActualizacion = tipoActualizacion;
-		this.caaa_acto_administrativo = caaa_acto_administrativo;
-		this.caaa_fecha_acto_administrativo = caaa_fecha_acto_administrativo;
-		this.caaa_observacion = caaa_observacion;
-		this.uaa_cargo = uaa_cargo;
+		this.actoAdministrativo = actoAdministrativo;
+		this.fechaActoAdministrativo = fechaActoAdministrativo;
+		this.observacion = observacion;
+		this.uaaCargo = uaaCargo;
 	}
 
 
 
 	/**
-	 * @param caaa_codigo
-	 * @param caa
-	 * @param tipoActualizacion
-	 * @param caaa_acto_administrativo
-	 * @param caaa_fecha_acto_administrativo
-	 * @param caaa_observacion
-	 * @param uaa_cargo
+	 * @return the codigo
 	 */
-	public CarreraAdministrativaActualizacion(int caaa_codigo, CarreraAdministrativa caa,
-			Tipo_actualizacionOb tipoActualizacion, String caaa_acto_administrativo,
-			Date caaa_fecha_acto_administrativo, String caaa_observacion, UaaCargo uaa_cargo) {
-		this.caaa_codigo = caaa_codigo;
-		this.caa = caa;
-		this.tipoActualizacion = tipoActualizacion;
-		this.caaa_acto_administrativo = caaa_acto_administrativo;
-		this.caaa_fecha_acto_administrativo = caaa_fecha_acto_administrativo;
-		this.caaa_observacion = caaa_observacion;
-		this.uaa_cargo = uaa_cargo;
+	public int getCodigo() {
+		return codigo;
 	}
 
 
 
 	/**
-	 * @return the caaa_codigo
+	 * @param codigo the codigo to set
 	 */
-	public int getCaaa_codigo() {
-		return caaa_codigo;
-	}
-
-
-
-	/**
-	 * @param caaa_codigo the caaa_codigo to set
-	 */
-	public void setCaaa_codigo(int caaa_codigo) {
-		this.caaa_codigo = caaa_codigo;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 
@@ -115,7 +96,7 @@ public class CarreraAdministrativaActualizacion implements Serializable {
 	/**
 	 * @return the tipoActualizacion
 	 */
-	public Tipo_actualizacionOb getTipoActualizacion() {
+	public TipoActualizacion getTipoActualizacion() {
 		return tipoActualizacion;
 	}
 
@@ -124,80 +105,80 @@ public class CarreraAdministrativaActualizacion implements Serializable {
 	/**
 	 * @param tipoActualizacion the tipoActualizacion to set
 	 */
-	public void setTipoActualizacion(Tipo_actualizacionOb tipoActualizacion) {
+	public void setTipoActualizacion(TipoActualizacion tipoActualizacion) {
 		this.tipoActualizacion = tipoActualizacion;
 	}
 
 
 
 	/**
-	 * @return the caaa_acto_administrativo
+	 * @return the actoAdministrativo
 	 */
-	public String getCaaa_acto_administrativo() {
-		return caaa_acto_administrativo;
+	public String getActoAdministrativo() {
+		return actoAdministrativo;
 	}
 
 
 
 	/**
-	 * @param caaa_acto_administrativo the caaa_acto_administrativo to set
+	 * @param actoAdministrativo the actoAdministrativo to set
 	 */
-	public void setCaaa_acto_administrativo(String caaa_acto_administrativo) {
-		this.caaa_acto_administrativo = caaa_acto_administrativo;
+	public void setActoAdministrativo(String actoAdministrativo) {
+		this.actoAdministrativo = actoAdministrativo;
 	}
 
 
 
 	/**
-	 * @return the caaa_fecha_acto_administrativo
+	 * @return the fechaActoAdministrativo
 	 */
-	public Date getCaaa_fecha_acto_administrativo() {
-		return caaa_fecha_acto_administrativo;
+	public Date getFechaActoAdministrativo() {
+		return fechaActoAdministrativo;
 	}
 
 
 
 	/**
-	 * @param caaa_fecha_acto_administrativo the caaa_fecha_acto_administrativo to set
+	 * @param fechaActoAdministrativo the fechaActoAdministrativo to set
 	 */
-	public void setCaaa_fecha_acto_administrativo(Date caaa_fecha_acto_administrativo) {
-		this.caaa_fecha_acto_administrativo = caaa_fecha_acto_administrativo;
+	public void setFechaActoAdministrativo(Date fechaActoAdministrativo) {
+		this.fechaActoAdministrativo = fechaActoAdministrativo;
 	}
 
 
 
 	/**
-	 * @return the caaa_observacion
+	 * @return the observacion
 	 */
-	public String getCaaa_observacion() {
-		return caaa_observacion;
+	public String getObservacion() {
+		return observacion;
 	}
 
 
 
 	/**
-	 * @param caaa_observacion the caaa_observacion to set
+	 * @param observacion the observacion to set
 	 */
-	public void setCaaa_observacion(String caaa_observacion) {
-		this.caaa_observacion = caaa_observacion;
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 
 
 
 	/**
-	 * @return the uaa_cargo
+	 * @return the uaaCargo
 	 */
-	public UaaCargo getUaa_cargo() {
-		return uaa_cargo;
+	public UaaCargo getUaaCargo() {
+		return uaaCargo;
 	}
 
 
 
 	/**
-	 * @param uaa_cargo the uaa_cargo to set
+	 * @param uaaCargo the uaaCargo to set
 	 */
-	public void setUaa_cargo(UaaCargo uaa_cargo) {
-		this.uaa_cargo = uaa_cargo;
+	public void setUaaCargo(UaaCargo uaaCargo) {
+		this.uaaCargo = uaaCargo;
 	}
 
 
@@ -207,11 +188,13 @@ public class CarreraAdministrativaActualizacion implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "CarreraAdministrativaActualizacion [caaa_codigo=" + caaa_codigo + ", caa=" + caa
-				+ ", tipoActualizacion=" + tipoActualizacion + ", caaa_acto_administrativo=" + caaa_acto_administrativo
-				+ ", caaa_fecha_acto_administrativo=" + caaa_fecha_acto_administrativo + ", caaa_observacion="
-				+ caaa_observacion + ", uaa_cargo=" + uaa_cargo + "]";
+		return "CarreraAdministrativaActualizacion [codigo=" + codigo + ", caa=" + caa + ", tipoActualizacion="
+				+ tipoActualizacion + ", actoAdministrativo=" + actoAdministrativo + ", fechaActoAdministrativo="
+				+ fechaActoAdministrativo + ", observacion=" + observacion + ", uaaCargo=" + uaaCargo + "]";
 	}
+
+
 	
+
 	
 }

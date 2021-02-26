@@ -3,11 +3,18 @@
  */
 package co.edu.usco.modulo.personal.mvc.control.logica.carreraAdministrativa;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Date;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import co.edu.usco.modulo.personal.mvc.control.accesoDB.carreraAdministrativa.Carrera_administrativaDB;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import co.edu.usco.modulo.personal.mvc.control.accesoDB.carreraAdministrativa.CarreraAdministrativaDB;
 import co.edu.usco.modulo.personal.mvc.control.herramientas.Fecha;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
 import co.edu.usco.modulo.personal.mvc.control.logica.FechaLog;
 import co.edu.usco.modulo.personal.mvc.modelo.Mensaje;
 import co.edu.usco.modulo.personal.mvc.modelo.Usuario;
@@ -23,7 +30,7 @@ public class CarreraAdministrativaLog {
 	 * @return {@link Object}
 	 */
 	public static Object getLista(Object obj) {
-		conexion db = new Carrera_administrativaDB();
+		ConexionDB db = new CarreraAdministrativaDB();
 		return db.getAll(obj);
 	}
 
@@ -31,12 +38,12 @@ public class CarreraAdministrativaLog {
 	 * @param request
 	 * @return {@link Object}
 	 */
-	public static Object newObject(HttpServletRequest request) {
+	public static Object newObject(HttpServletRequest request)throws ServletException, IOException {
 
 		Mensaje msm= new Mensaje();
 		msm=validaDatos(request);
 		if(msm.isValido()){
-			conexion db= new Carrera_administrativaDB();
+			ConexionDB db= new CarreraAdministrativaDB();
 			Usuario usuadmin = (Usuario) request.getSession().getAttribute("usuario");
 			CarreraAdministrativa caa=(CarreraAdministrativa) msm.getResultado();
 			Object [] param= {msm.getResultado(),usuadmin,0};
@@ -49,11 +56,11 @@ public class CarreraAdministrativaLog {
 					int resultado=Integer.parseInt(String.valueOf(db.setObject(param)));
 					if(resultado==1){
 						msm.setValido(false);
-						msm.setMsm(" el usuario con nombre "+caa.getPersona().getPer_nombre()+" "+caa.getPersona().getPer_apellido()+" ha sido registrado con exito\n ");
+						msm.setMsm(" El servidor(a) p&uacute;blico(a) "+caa.getPersona().getNombre()+" "+caa.getPersona().getApellido()+" se ha inscrito exitosamente \n ");
 					}
 				}else{
 					msm.setValido(false);
-					msm.setMsm("Error el usuario con nombre "+caa.getPersona().getPer_nombre()+" "+caa.getPersona().getPer_apellido()+" ya se encuentra registrado\n");
+					msm.setMsm("Error el servidor(a) p&uacute;blico(a) "+caa.getPersona().getNombre()+" "+caa.getPersona().getApellido()+" ya se encuentra inscrito \n");
 				}
 			}
 			if(request.getParameter("update").equals("2")){
@@ -64,215 +71,228 @@ public class CarreraAdministrativaLog {
 //					param[2]=1;
 					param[0]=caa;
 					int resultado=Integer.parseInt(String.valueOf(db.setObject(param)));
+					System.out.println(resultado);
 					if(resultado==1){
 						msm.setValido(false);
-						msm.setMsm(" el usuario con nombre "+caa.getPersona().getPer_nombre()+" "+caa.getPersona().getPer_apellido()+" ha sido actualizado con exito \n");
+						msm.setMsm(" El servidor(a) p&uacute;blico(a) "+caa.getPersona().getNombre()+" "+caa.getPersona().getApellido()+" ha sido actualizado inscripción exitosamente \n");
 					}
 				}
 				else{
 					msm.setValido(false);
-					msm.setMsm("Error el usuario con nombre "+caa.getPersona().getPer_nombre()+" "+caa.getPersona().getPer_apellido()+" no encuentra registrado\n");
+					msm.setMsm("Error el servidor(a) p&uacute;blico(a) "+caa.getPersona().getNombre()+" "+caa.getPersona().getApellido()+" no encuentra inscrito \n");
 				}
 			}
 		}
 			return msm;
 	}
 
-	private static Mensaje validaDatos(HttpServletRequest request) {
-		Mensaje msm = new Mensaje(true,"",null); 
+
+	private static Mensaje validaDatos(HttpServletRequest request) throws ServletException, IOException  {
+		Mensaje msm = new Mensaje(true,"",null,null); 
 		String fecha_servidor=String.valueOf(FechaLog.getFechaServidor());
-		CarreraAdministrativa caa = new CarreraAdministrativa();
-		if(request.getParameter("update").equals("2")){
-			if (request.getParameter("caa_codigo") == null) {
-				msm.setMsm(msm.getMsm()+" ");
+		
+
+		 StringBuffer jb = new StringBuffer();
+		  String line = null;
+		  try {
+		    BufferedReader reader = request.getReader();
+		    while ((line = reader.readLine()) != null)
+		      jb.append(line);
+		  } catch (Exception e) {
+			  e.printStackTrace();
+			  
+		  	}
+
+		  ObjectMapper mapper = new ObjectMapper();
+		  
+		  CarreraAdministrativa caa= mapper.readValue(jb.toString(), CarreraAdministrativa.class);
+		  
+		  System.out.println(" --> "+caa);
+		  
+		  if(request.getParameter("update").equals("2")){
+				if (caa.getCodigo() == 0) {
+					msm.setMsm(msm.getMsm()+"* Para modificar un registro primero debe seleccionarlo \n ");
+					msm.setValido(false);
+				}
+			}
+		  
+		  if (caa.getPersona() == null || caa.getPersona().getCodigo()==0 ) {
+				msm.setMsm(msm.getMsm()+"* Debe seleccionar la persona \n");
+				msm.setValido(false);
+			}
+		  if (caa.getTipoProceso() == null || caa.getTipoProceso().getCodigo()==0) {
+				msm.setMsm(msm.getMsm()+"* Debe seleccionar el tipo de proceso \n");
+				msm.setValido(false);
+			}
+		  if (caa.getActoAdtivo() == null) {
+				msm.setMsm(msm.getMsm()+"* Debe ingresar el acto administrativo \n");
+				msm.setValido(false);
+			}
+		 
+		  if (caa.getFechaActoAdtivo() == null) {
+				msm.setMsm(msm.getMsm()+"* Debe agregar la fecha del acto administrativo \n");
 				msm.setValido(false);
 			}else{
-				caa.setCaa_codigo(Integer.parseInt(request.getParameter("caa_codigo")));
-			}
-		}
-		if (request.getParameter("per_codigo") == null) {
-			msm.setMsm(msm.getMsm()+" debe seleccionar la persona");
-			msm.setValido(false);
-		}else{
-			caa.getPersona().setPer_codigo(Integer.parseInt(request.getParameter("per_codigo")));
-			caa.getPersona().setPer_apellido(request.getParameter("per_apellido"));
-			caa.getPersona().setPer_nombre(request.getParameter("per_nombre"));
-		}
-		if (request.getParameter("tip_codigo") == null) {
-			msm.setMsm(msm.getMsm()+" debe seleccionar el tipo de proceso ");
-			msm.setValido(false);
-		}else{
-			caa.getTipoPorceso().setTip_codigo(Integer.parseInt(request.getParameter("tip_codigo")));
-		}
-		if (request.getParameter("caa_acto_adtivo") == null) {
-			msm.setMsm(msm.getMsm()+" debe ingresar el acto administrativo ");
-			msm.setValido(false);
-		}else{
-			caa.setCaa_acto_adtivo(request.getParameter("caa_acto_adtivo"));
-
-		}
-		
-		if (request.getParameter("caa_fecha_acto_adtivo") == null) {
-			msm.setMsm(msm.getMsm()+" debe agrregar la fecha del acto administrativo ");
-			msm.setValido(false);
-		}else{
-			Mensaje tem=Fecha.isValido( request.getParameter("caa_fecha_acto_adtivo"),fecha_servidor, "la fecha del acto administrativo no puede ser superior a la fecha actual\n");
-			if(tem.isValido()){
-				caa.setCaa_fecha_acto_adtivo(Fecha.getDate(String.valueOf(request.getParameter("caa_fecha_acto_adtivo"))));
-			}else{
-				msm.setMsm(msm.getMsm()+tem.getMsm());
-				msm.setValido(tem.isValido());
-			}
-		}
-		
-		if (request.getParameter("caa_fecha_convocatoria") == null) {
-			msm.setMsm(msm.getMsm()+" debe agregar la fecha de la convocatoria ");
-			msm.setValido(false);
-		}else{			
-			Mensaje tem=Fecha.isValido( request.getParameter("caa_fecha_convocatoria"), fecha_servidor, "la fecha de la convocatoria no puede ser superior a la fecha actual\n");
-			if(tem.isValido()){
-				 tem=Fecha.isValido(request.getParameter("caa_fecha_acto_adtivo"), request.getParameter("caa_fecha_convocatoria"),  "la fecha del convocatoria no puede ser superior a la fecha del acto adminstrativo\n");
-//				JOptionPane.showMessageDialog(null, tem.isValido()+" "+tem.getMsm());
-				if(tem.isValido()){
-				caa.setCaa_fecha_convocatoria(Fecha.getDate(String.valueOf(request.getParameter("caa_fecha_convocatoria"))));
-				}else{
+				Mensaje tem=Fecha.getValidaFechas(caa.getFechaActoAdtivo(),new Date("1968/12/17"), "* La fecha del acto administrativo no puede ser inferior a la fecha de la creaci&oacute;n el Instituto T&eacute;cnico Universitario Surcolombiano \n");
+				if(!tem.isValido()){
 					msm.setMsm(msm.getMsm()+tem.getMsm());
 					msm.setValido(tem.isValido());
+				}else {
+				 tem=Fecha.getValidaFechas(new Date(fecha_servidor),caa.getFechaActoAdtivo(), "* La fecha del acto administrativo no puede ser superior a la fecha actual \n");
+					if(!tem.isValido()){
+						msm.setMsm(msm.getMsm()+tem.getMsm());
+						msm.setValido(tem.isValido());
+					}
 				}
-			}else{
-				msm.setMsm(msm.getMsm()+tem.getMsm());
-				msm.setValido(tem.isValido());
 			}
-		}
-		//fecha de caa_fecha_resolucion_elegibles
-		if (request.getParameter("caa_fecha_resolucion_elegibles") == null) {
-			msm.setMsm(msm.getMsm()+" debe agregar la fecha de la resolucion de elegibles ");
-			msm.setValido(false);
-		}else{
-			Mensaje tem=Fecha.isValido( request.getParameter("caa_fecha_resolucion_elegibles"),fecha_servidor, "la fecha del resolucion elegibles no puede ser superior a la fecha actual\n");
-			if(tem.isValido()){
-				tem=Fecha.isValido(request.getParameter("caa_fecha_acto_adtivo"), request.getParameter("caa_fecha_resolucion_elegibles"), "la fecha del resolucion elegibles no puede ser superior a la fecha de la convocatoria\n");
-				if(tem.isValido()){
-				
-				tem=Fecha.isValido( request.getParameter("caa_fecha_convocatoria"),request.getParameter("caa_fecha_resolucion_elegibles"), "la fecha del resolucion elegibles no puede ser superior a la fecha de la convocatoria\n");
-				if(tem.isValido()){
-					caa.setCaa_fecha_resolucion_elegibles(Fecha.getDate(String.valueOf(request.getParameter("caa_fecha_resolucion_elegibles"))));
-				}else{
-					msm.setMsm(msm.getMsm()+tem.getMsm());
-					msm.setValido(tem.isValido());
-				}
-				}else{
-					msm.setMsm(msm.getMsm()+tem.getMsm());
-					msm.setValido(tem.isValido());
-				}
-				
-
-			}else{
-				msm.setMsm(msm.getMsm()+tem.getMsm());
-				msm.setValido(tem.isValido());
+		  
+		  if (caa.getUaaCargo() == null) {
+				msm.setMsm(msm.getMsm()+"* Debe seleccionar el cargo \n");
+				msm.setValido(false);
 			}
-		}
-		//caa_fecha_acta_posesion
-		if (request.getParameter("caa_fecha_acta_posesion") == null) {
-			msm.setMsm(msm.getMsm()+" debe agregar la fecha del acta de posecion \n");
-			msm.setValido(false);
-		}else{
-			Mensaje tem=Fecha.isValido(request.getParameter("caa_fecha_acta_posesion"),fecha_servidor, "la fecha del acta de posesion no puede ser superior a la fecha actual\n");
-			if(tem.isValido()){
-				 tem=Fecha.isValido(request.getParameter("caa_fecha_acto_adtivo"), request.getParameter("caa_fecha_acta_posesion"),"la fecha del acta de posesion no puede ser superior a la fecha actual\n");
-				if(tem.isValido()){
-					tem=Fecha.isValido(request.getParameter("caa_fecha_convocatoria"),request.getParameter("caa_fecha_acta_posesion"), "la fecha del acta de posesion no puede ser superior a la fecha actual\n");
+		 
+		  if(caa.getTipoProceso().getCodigo()==1){ //si es Proceso Selección adelantado por la Universidad Surcolombiana se solicita todo
+				if (caa.getFechaConvocatoria() == null ) {
+					msm.setMsm(msm.getMsm()+"* Debe agregar la fecha de la convocatoria \n");
+					msm.setValido(false);
+				}else{	
+					Mensaje tem=Fecha.getValidaFechas(caa.getFechaConvocatoria(),new Date("1968/12/17"), "* La fecha del convocatoria no puede ser inferior a la fecha de la creaci&oacute;n el Instituto T&eacute;cnico Universitario Surcolombiano \n");
+					if(!tem.isValido()){
+						msm.setMsm(msm.getMsm()+tem.getMsm());
+						msm.setValido(tem.isValido());
+					}else {
+					 tem=Fecha.isValido( request.getParameter("caa_fecha_convocatoria"), fecha_servidor, "* La fecha de la convocatoria no puede ser superior a la fecha actual \n");
+					if(!tem.isValido()){
+						msm.setMsm(msm.getMsm()+tem.getMsm());
+						msm.setValido(tem.isValido());
+					}
+				}
+				}
+				//fecha de caa_fecha_resolucion_elegibles
+				if (caa.getFechaResolucionElegibles()== null) {
+					msm.setMsm(msm.getMsm()+"* Debe agregar la fecha de la resoluci&oacute;n de elegibles \n");
+					msm.setValido(false);
+				}else{
+					
+					Mensaje tem=Fecha.isValido( request.getParameter("caa_fecha_resolucion_elegibles"),fecha_servidor, "* La fecha del resoluci&oacute;n elegibles no puede ser superior a la fecha actual \n");
 					if(tem.isValido()){
-						tem=Fecha.isValido(request.getParameter("caa_fecha_resolucion_elegibles"),request.getParameter("caa_fecha_acta_posesion"), "la fecha del acta de posesion no puede ser superior a la fecha actual\n");
-						if(tem.isValido()){
-							caa.setCaa_fecha_acta_posesion(Fecha.getDate(String.valueOf(request.getParameter("caa_fecha_acta_posesion"))));
-							System.out.println("  caa.setCaa_fecha_acta_posesion(   "+caa.getCaa_fecha_acta_posesion());
-						}else{
+						tem=Fecha.isValido( request.getParameter("caa_fecha_convocatoria"),request.getParameter("caa_fecha_resolucion_elegibles"), "* La fecha del resoluci&oacute;n elegibles no puede ser superior a la fecha de la convocatoria \n");
+						if(!tem.isValido()){
 							msm.setMsm(msm.getMsm()+tem.getMsm());
 							msm.setValido(tem.isValido());
-						}
+						}				
 					}else{
 						msm.setMsm(msm.getMsm()+tem.getMsm());
 						msm.setValido(tem.isValido());
 					}
-				}else{
-					msm.setMsm(msm.getMsm()+tem.getMsm());
-					msm.setValido(tem.isValido());
 				}
-			}else{
-				
-				msm.setMsm(msm.getMsm()+tem.getMsm());
-				msm.setValido(tem.isValido());
-			}
+				//caa_fecha_acta_posesion
+				if (caa.getFechaActaPosesion()== null) {
+					msm.setMsm(msm.getMsm()+"* Debe agregar la fecha del acta de posesi&oacute;n \n");
+					msm.setValido(false);
+				}else{
+					Mensaje tem=Fecha.isValido(request.getParameter("caa_fecha_acta_posesion"),fecha_servidor, "* La fecha del acta de posesi&oacute;n no puede ser superior a la fecha actual \n");
+					if(tem.isValido()){
+							tem=Fecha.isValido(request.getParameter("caa_fecha_convocatoria"),request.getParameter("caa_fecha_acta_posesion"), "* La fecha del acta de posesi&oacute;n no puede ser superior a la fecha actual \n");
+							if(tem.isValido()){
+								tem=Fecha.isValido(request.getParameter("caa_fecha_resolucion_elegibles"),request.getParameter("caa_fecha_acta_posesion"), "* La fecha del acta de posesi&oacute;n no puede ser superior a la fecha actual \n");
+								if(tem.isValido()){
+									msm.setMsm(msm.getMsm()+tem.getMsm());
+									msm.setValido(tem.isValido());
+								}
+							}else{
+								msm.setMsm(msm.getMsm()+tem.getMsm());
+								msm.setValido(tem.isValido());
+							}
+//						}else{
+//							msm.setMsm(msm.getMsm()+tem.getMsm());
+//							msm.setValido(tem.isValido());
+//						}
+					}else{
+						
+						msm.setMsm(msm.getMsm()+tem.getMsm());
+						msm.setValido(tem.isValido());
+					}
 
-		}
-		
-		
-		if (request.getParameter("uac_codigo") == null) {
-			msm.setMsm(msm.getMsm()+" debe seleccionar el cargo ");
-			msm.setValido(false);
-		}else{
-			caa.getUaa_cargo().setUac_codigo(Integer.parseInt(request.getParameter("uac_codigo")));
+				}
+				if (request.getParameter("caa_fecha_acto_adtivo") == null) {
+					
+					System.out.println(request.getParameter("caa_fecha_acto_adtivo"));
+					msm.setMsm(msm.getMsm()+"* Debe agregar la fecha del acto administrativo \n");
+					msm.setValido(false);
+				
+				}
+				else{
+					Mensaje tem=Fecha.isValido( request.getParameter("caa_fecha_acto_adtivo"),fecha_servidor, "* La fecha del acto administrativo no puede ser superior a la fecha actual \n");
+					if(tem.isValido()){
+						
+						
+						tem=Fecha.isValido(request.getParameter("caa_fecha_convocatoria"),request.getParameter("caa_fecha_acto_adtivo"), "* La fecha del acta de posesi&oacute;n no puede ser superior a la fecha actual \n");
+						if(tem.isValido()){
+							tem=Fecha.isValido(request.getParameter("caa_fecha_resolucion_elegibles"),request.getParameter("caa_fecha_acto_adtivo"), "La fecha del acta de posesi&oacute;n no puede ser superior a la fecha actual \n");
+							if(tem.isValido()){
+								msm.setMsm(msm.getMsm()+tem.getMsm());
+								msm.setValido(tem.isValido());
+							}
+						}else{
+							msm.setMsm(msm.getMsm()+tem.getMsm());
+							msm.setValido(tem.isValido());
+						}
+						
+						
+						
+						
+					}else{
+						msm.setMsm(msm.getMsm()+tem.getMsm());
+						msm.setValido(tem.isValido());
+					}
+				}
+				
+				
+				
+				
+				if (caa.getResolucionElegibles() == null) {
+					msm.setMsm(msm.getMsm()+"* Debe agregar la resoluci&oacute;n de elegibles \n");
+					msm.setValido(false);
+				}
+
 			
-
-		}
-		
-		if (request.getParameter("caa_resolucion_elegibles") == null) {
-			msm.setMsm(msm.getMsm()+"debe agregar la resolucion de elegibles ");
-			msm.setValido(false);
-		}else{
-			caa.setCaa_resolucion_elegibles(request.getParameter("caa_resolucion_elegibles"));
-
-		}
-
-	
-		
-		if (request.getParameter("caa_numero_convocatoria") == null) {
-			msm.setMsm(msm.getMsm()+" debe agregar el numero de la convocatoria ");
-			msm.setValido(false);
-		}else{
-			caa.setCaa_numero_convocatoria(request.getParameter("caa_numero_convocatoria"));
-
-		}
-
-		
-		if (request.getParameter("caa_numero_acta_posesion") == null) {
-			msm.setMsm(msm.getMsm()+" debe agregar el acta de posecion ");
-			msm.setValido(false);
-		}else{
-			caa.setCaa_numero_acta_posesion(request.getParameter("caa_numero_acta_posesion"));
-
-		}
-		if (request.getParameter("caa_fecha_acta_posesion") == null) {
-			msm.setMsm(msm.getMsm()+" debe agregar la fecha del acta de posecion \n");
-			msm.setValido(false);
-		}else{
-			Mensaje tem=Fecha.isValido(request.getParameter("caa_fecha_acta_posesion"),fecha_servidor, "la fecha del acta de posesion no puede ser superior a la fecha actual\n");
-			if(tem.isValido()){
-				caa.setCaa_fecha_acta_posesion(Fecha.getDate(String.valueOf(request.getParameter("caa_fecha_acta_posesion"))));
-
-			}else{
 				
-				msm.setMsm(msm.getMsm()+tem.getMsm());
-				msm.setValido(tem.isValido());
-			}
+				if (caa.getNumeroConvocatoria()== null) {
+					msm.setMsm(msm.getMsm()+"* Debe agregar el n&uacute;mero de la convocatoria \n");
+					msm.setValido(false);
+				}
 
-		}
-		caa.setCaa_observacion(request.getParameter("caa_observacion"));
-//		if (request.getParameter("") != null) {
-//			caa.setCaa_numero_convocatoria(request.getParameter(""));
-//
-//		}
-//		if (request.getParameter("") != null) {
-//			caa.setCaa_numero_convocatoria(request.getParameter(""));
-//
-//		}
+				
+				if (caa.getNumeroActaPosesion() == null) {
+					msm.setMsm(msm.getMsm()+"* Debe agregar el acta de posesi&oacute;n \n");
+					msm.setValido(false);
+				}
+				if (caa.getFechaActaPosesion() == null) {
+					msm.setMsm(msm.getMsm()+"* Debe agregar la fecha del acta de posesi&oacute;n \n");
+					msm.setValido(false);
+				}else{
+					Mensaje tem=Fecha.isValido(request.getParameter("caa_fecha_acta_posesion."),fecha_servidor, "* La fecha del acta de posesi&oacute;n no puede ser superior a la fecha actual \n");
+					if(tem.isValido()){
+						msm.setMsm(msm.getMsm()+tem.getMsm());
+						msm.setValido(tem.isValido());
+					}
+
+				}
+				}
+		  
+		  
+		  
+		  
+		  
+		 
+		msm.setMsm(msm.getMsm());
 		msm.setResultado(caa);	
 		return msm;
 	}
 
 	public static Object getObject(Object param) {
-		conexion db = new Carrera_administrativaDB();
+		ConexionDB db = new CarreraAdministrativaDB();
 		return db.getObject(param);
 	}
 }

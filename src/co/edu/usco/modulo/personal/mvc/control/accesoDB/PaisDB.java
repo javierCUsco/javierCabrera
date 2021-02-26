@@ -11,14 +11,14 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
 import co.edu.usco.modulo.personal.mvc.control.controlDB.Conexion;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
-import co.edu.usco.modulo.personal.mvc.modelo.PaisOb;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
+import co.edu.usco.modulo.personal.mvc.modelo.Pais;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class PaisDB implements conexion {
+public class PaisDB implements ConexionDB {
 	private Logger imp ;
 	/* (non-Javadoc)
 	 * @see co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion#getAll(java.lang.Object)
@@ -29,7 +29,7 @@ public class PaisDB implements conexion {
 		Statement sentencia=null;
 		ResultSet resul=null;
 		imp =Logger.getLogger(getClass().getName());
-		 LinkedList<PaisOb> lista = new LinkedList<PaisOb>();
+		 LinkedList<Pais> lista = new LinkedList<Pais>();
 			Conexion consegura = new Conexion();
 		 try {
 //			 Object param[]=(Object[]) obj;
@@ -41,15 +41,15 @@ public class PaisDB implements conexion {
 //			sql.append("where cert_estado=1  ");
 
 
-			conn = consegura.conexion_segura();
+			conn = consegura.conexionConsulta();
 			imp.info("valida el usuario "+sql.toString());
 			sentencia = conn.createStatement();
 			resul = sentencia.executeQuery(sql.toString());
 			while(resul.next()){
-				PaisOb elemento= new PaisOb();
-				elemento.setPai_codigo(resul.getInt(1));
-				elemento.setPai_acronimo(resul.getString(2));
-				elemento.setPai_nombre(resul.getString(3));
+				Pais elemento= new Pais();
+				elemento.setCodigo(resul.getInt(1));
+				elemento.setAcronimo(resul.getString(2));
+				elemento.setNombre(resul.getString(3));
 //				elemento.setTii_nombre_corto(resul.getString(3));
 				lista.add(elemento);
 				}
@@ -59,6 +59,8 @@ public class PaisDB implements conexion {
 			 imp.error(""+e.toString() );
 			 consegura.cerrarconn(conn, resul, sentencia);
 
+	        }finally {
+	        	consegura.cerrarconn(conn, resul, sentencia);
 	        }
 		return lista;
 	}

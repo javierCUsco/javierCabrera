@@ -3,157 +3,208 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import co.edu.usco.modulo.personal.mvc.control.logica.Historia_laboral_tipoLog;
+import co.edu.usco.modulo.personal.mvc.modelo.sgd.Documento;
+
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class PersonaHistoriaLaboral implements Serializable {
-	private int phl_codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-	private Persona persona = new Persona();//int] NULL,
-	private Date phl_fecha_inicio;//datetime] NULL,
-	private Date phl_fecha_fin;//datetime] NULL,
-	private String phl_empresa;//varchar](200) NULL,
-	private String phl_empresa_direccion;//nchar](10) NULL,
-	private String phl_empresa_telefono;//nchar](10) NULL,
-	private MunicipioOb municipio= new MunicipioOb();//int] NULL,
-	private String ocupacion_cargo;//char](10) NULL,
-	private Historia_laboral_tipoOb tipo= new Historia_laboral_tipoOb();//int] NOT NULL,
+public class PersonaHistoriaLaboral  {
+	private int codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	private Date fechaInicio;//datetime] NULL,
+	private Date fechaFin;//datetime] NULL,
+	private String empresa;//varchar](200) NULL,
+	private String empresaDireccion;//nchar](10) NULL,
+	private String empresaTelefono;//nchar](10) NULL,
+	private Municipio municipio= new Municipio();//int] NULL,
+	private HistoriaLaboralTipo historiaLaboralTipo= new HistoriaLaboralTipo();//int] NOT NULL,
 	private Dedicacion dedicacion= new Dedicacion();//int] NOT NULL,
 	private Vinculacion vinculacion= new Vinculacion();//int] NOT NULL,
-	private String phl_cargo;//nvarchar](100) NULL,
-	private String phl_descripcion;//nvarchar](250) NULL,
-	private String phl_puntos;//float] NULL,
-	private String phl_puntos_fecha;//datetime] NULL,
-	private Archivo archivo = new Archivo();
-	/**
-	 * @return the phl_codigo
-	 */
-	public int getPhl_codigo() {
-		return phl_codigo;
-	}
-	/**
-	 * @param phl_codigo the phl_codigo to set
-	 */
-	public void setPhl_codigo(int phl_codigo) {
-		this.phl_codigo = phl_codigo;
-	}
-	/**
-	 * @return the persona
-	 */
-	public Persona getPersona() {
-		return persona;
-	}
-	/**
-	 * @param persona the persona to set
-	 */
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-	/**
-	 * @return the phl_fecha_inicio
-	 */
-	public Date getPhl_fecha_inicio() {
-		return phl_fecha_inicio;
-	}
-	/**
-	 * @param phl_fecha_inicio the phl_fecha_inicio to set
-	 */
-	public void setPhl_fecha_inicio(Date phl_fecha_inicio) {
-		this.phl_fecha_inicio = phl_fecha_inicio;
-	}
-	/**
-	 * @return the phl_fecha_fin
-	 */
-	public Date getPhl_fecha_fin() {
-		return phl_fecha_fin;
-	}
-	/**
-	 * @param phl_fecha_fin the phl_fecha_fin to set
-	 */
-	public void setPhl_fecha_fin(Date phl_fecha_fin) {
-		this.phl_fecha_fin = phl_fecha_fin;
-	}
-	/**
-	 * @return the phl_empresa
-	 */
-	public String getPhl_empresa() {
-		return phl_empresa;
-	}
-	/**
-	 * @param phl_empresa the phl_empresa to set
-	 */
-	public void setPhl_empresa(String phl_empresa) {
-		this.phl_empresa = phl_empresa;
-	}
-	/**
-	 * @return the phl_empresa_direccion
-	 */
-	public String getPhl_empresa_direccion() {
-		return phl_empresa_direccion;
-	}
-	/**
-	 * @param phl_empresa_direccion the phl_empresa_direccion to set
-	 */
-	public void setPhl_empresa_direccion(String phl_empresa_direccion) {
-		this.phl_empresa_direccion = phl_empresa_direccion;
-	}
-	/**
-	 * @return the phl_empresa_telefono
-	 */
-	public String getPhl_empresa_telefono() {
-		return phl_empresa_telefono;
-	}
-	/**
-	 * @param phl_empresa_telefono the phl_empresa_telefono to set
-	 */
-	public void setPhl_empresa_telefono(String phl_empresa_telefono) {
-		this.phl_empresa_telefono = phl_empresa_telefono;
-	}
+	private String cargo;//nvarchar](100) NULL,
+	private String descripcion;//nvarchar](250) NULL,
+	private float puntos;//float] NULL,
+	//private String documento;
+	private Date puntosFecha;//datetime] NULL,
+	private boolean valido;//] [int] NULL,
+	private String grupo;//] [varchar](255) NULL,
+	private String CvLac;//] [varchar](255) NULL,
+	private String GrupLac;//] [varchar](255) NULL,
+	private Documento documento= new Documento();
+	private boolean documentoValido;
+	private boolean documentoRechazado;
+	private String observacion;
 	
+	
+	
+	/**
+	 * 
+	 */
+	public PersonaHistoriaLaboral() {
+	}
+	/**
+	 * @param codigo
+	 * @param persona
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @param empresa
+	 * @param empresaDireccion
+	 * @param empresaTelefono
+	 * @param municipio
+	 * @param historiaLaboralTipo
+	 * @param dedicacion
+	 * @param vinculacion
+	 * @param cargo
+	 * @param descripcion
+	 * @param puntos
+	 * @param documento
+	 * @param puntosFecha
+	 * @param archivo
+	 * @param doc_codigo
+	 * @param valido
+	 * @param grupo
+	 * @param cvLac
+	 * @param grupLac
+	 * @param documentoSgd
+	 */
+	public PersonaHistoriaLaboral(int codigo,  Date fechaInicio, Date fechaFin, String empresa,
+			String empresaDireccion, String empresaTelefono, Municipio municipio,
+			HistoriaLaboralTipo historiaLaboralTipo, Dedicacion dedicacion, Vinculacion vinculacion, String cargo,
+			String descripcion, float puntos, Date puntosFecha, 
+			boolean valido, String grupo, String cvLac, String grupLac,Documento documento,boolean documentoValido,boolean documentoRechazado) {//, Documento documentoSgd) {
+		this.codigo = codigo;
+		
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.empresa = empresa;
+		this.empresaDireccion = empresaDireccion;
+		this.empresaTelefono = empresaTelefono;
+		this.municipio = municipio;
+		this.historiaLaboralTipo = historiaLaboralTipo;
+		this.dedicacion = dedicacion;
+		this.vinculacion = vinculacion;
+		this.cargo = cargo;
+		this.descripcion = descripcion;
+		this.puntos = puntos;
+		this.puntosFecha = puntosFecha;
+		this.valido = valido;
+		this.grupo = grupo;
+		CvLac = cvLac;
+		GrupLac = grupLac;
+		this.documento = documento;
+		this.documentoValido=documentoValido;
+		this.documentoRechazado=documentoRechazado;
+	}
+	/**
+	 * @return the codigo
+	 */
+	public int getCodigo() {
+		return codigo;
+	}
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+//	/**
+//	 * @return the persona
+//	 */
+//	public Persona getPersona() {
+//		return persona;
+//	}
+//	/**
+//	 * @param persona the persona to set
+//	 */
+//	public void setPersona(Persona persona) {
+//		this.persona = persona;
+//	}
+	/**
+	 * @return the fechaInicio
+	 */
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+	/**
+	 * @param fechaInicio the fechaInicio to set
+	 */
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+	/**
+	 * @return the fechaFin
+	 */
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+	/**
+	 * @param fechaFin the fechaFin to set
+	 */
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+	/**
+	 * @return the empresa
+	 */
+	public String getEmpresa() {
+		return empresa;
+	}
+	/**
+	 * @param empresa the empresa to set
+	 */
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+	/**
+	 * @return the empresaDireccion
+	 */
+	public String getEmpresaDireccion() {
+		return empresaDireccion;
+	}
+	/**
+	 * @param empresaDireccion the empresaDireccion to set
+	 */
+	public void setEmpresaDireccion(String empresaDireccion) {
+		this.empresaDireccion = empresaDireccion;
+	}
+	/**
+	 * @return the empresaTelefono
+	 */
+	public String getEmpresaTelefono() {
+		return empresaTelefono;
+	}
+	/**
+	 * @param empresaTelefono the empresaTelefono to set
+	 */
+	public void setEmpresaTelefono(String empresaTelefono) {
+		this.empresaTelefono = empresaTelefono;
+	}
 	/**
 	 * @return the municipio
 	 */
-	public MunicipioOb getMunicipio() {
+	public Municipio getMunicipio() {
 		return municipio;
 	}
 	/**
 	 * @param municipio the municipio to set
 	 */
-	public void setMunicipio(MunicipioOb municipio) {
+	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
 	/**
-	 * @return the ocupacion_cargo
+	 * @return the historiaLaboralTipo
 	 */
-	public String getOcupacion_cargo() {
-		return ocupacion_cargo;
+	public HistoriaLaboralTipo getHistoriaLaboralTipo() {
+		return historiaLaboralTipo;
 	}
 	/**
-	 * @param ocupacion_cargo the ocupacion_cargo to set
+	 * @param historiaLaboralTipo the historiaLaboralTipo to set
 	 */
-	public void setOcupacion_cargo(String ocupacion_cargo) {
-		this.ocupacion_cargo = ocupacion_cargo;
+	public void setHistoriaLaboralTipo(HistoriaLaboralTipo historiaLaboralTipo) {
+		this.historiaLaboralTipo = historiaLaboralTipo;
 	}
-	
-	/**
-	 * @return the tipo
-	 */
-	public Historia_laboral_tipoOb getTipo() {
-		return tipo;
-	}
-	/**
-	 * @param tipo the tipo to set
-	 */
-	public void setTipo(Historia_laboral_tipoOb tipo) {
-		this.tipo = tipo;
-	}
-	
-	
 	/**
 	 * @return the dedicacion
 	 */
@@ -179,65 +230,167 @@ public class PersonaHistoriaLaboral implements Serializable {
 		this.vinculacion = vinculacion;
 	}
 	/**
-	 * @return the phl_cargo
+	 * @return the cargo
 	 */
-	public String getPhl_cargo() {
-		return phl_cargo;
+	public String getCargo() {
+		return cargo;
 	}
 	/**
-	 * @param phl_cargo the phl_cargo to set
+	 * @param cargo the cargo to set
 	 */
-	public void setPhl_cargo(String phl_cargo) {
-		this.phl_cargo = phl_cargo;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 	/**
-	 * @return the phl_descripcion
+	 * @return the descripcion
 	 */
-	public String getPhl_descripcion() {
-		return phl_descripcion;
+	public String getDescripcion() {
+		return descripcion;
 	}
 	/**
-	 * @param phl_descripcion the phl_descripcion to set
+	 * @param descripcion the descripcion to set
 	 */
-	public void setPhl_descripcion(String phl_descripcion) {
-		this.phl_descripcion = phl_descripcion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	/**
-	 * @return the phl_puntos
+	 * @return the puntos
 	 */
-	public String getPhl_puntos() {
-		return phl_puntos;
+	public float getPuntos() {
+		return puntos;
 	}
 	/**
-	 * @param phl_puntos the phl_puntos to set
+	 * @param puntos the puntos to set
 	 */
-	public void setPhl_puntos(String phl_puntos) {
-		this.phl_puntos = phl_puntos;
+	public void setPuntos(float puntos) {
+		this.puntos = puntos;
 	}
 	/**
-	 * @return the phl_puntos_fecha
+	 * @return the documento
 	 */
-	public String getPhl_puntos_fecha() {
-		return phl_puntos_fecha;
+	public Documento getDocumento() {
+		return documento;
 	}
 	/**
-	 * @param phl_puntos_fecha the phl_puntos_fecha to set
+	 * @param documento the documento to set
 	 */
-	public void setPhl_puntos_fecha(String phl_puntos_fecha) {
-		this.phl_puntos_fecha = phl_puntos_fecha;
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
 	}
 	/**
-	 * @return the archivo
+	 * @return the puntosFecha
 	 */
-	public Archivo getArchivo() {
-		return archivo;
+	public Date getPuntosFecha() {
+		return puntosFecha;
 	}
 	/**
-	 * @param archivo the archivo to set
+	 * @param puntosFecha the puntosFecha to set
 	 */
-	public void setArchivo(Archivo archivo) {
-		this.archivo = archivo;
+	public void setPuntosFecha(Date puntosFecha) {
+		this.puntosFecha = puntosFecha;
 	}
+	/**
+	 * @return the valido
+	 */
+	public boolean getValido() {
+		return valido;
+	}
+	/**
+	 * @param valido the valido to set
+	 */
+	public void setValido(boolean valido) {
+		this.valido = valido;
+	}
+	/**
+	 * @return the grupo
+	 */
+	public String getGrupo() {
+		return grupo;
+	}
+	/**
+	 * @param grupo the grupo to set
+	 */
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
+	/**
+	 * @return the cvLac
+	 */
+	public String getCvLac() {
+		return CvLac;
+	}
+	/**
+	 * @param cvLac the cvLac to set
+	 */
+	public void setCvLac(String cvLac) {
+		CvLac = cvLac;
+	}
+	/**
+	 * @return the grupLac
+	 */
+	public String getGrupLac() {
+		return GrupLac;
+	}
+	/**
+	 * @param grupLac the grupLac to set
+	 */
+	public void setGrupLac(String grupLac) {
+		GrupLac = grupLac;
+	}
+	
+	/**
+	 * @return the documentoValido
+	 */
+	public boolean isDocumentoValido() {
+		return documentoValido;
+	}
+	/**
+	 * @param documentoValido the documentoValido to set
+	 */
+	public void setDocumentoValido(boolean documentoValido) {
+		this.documentoValido = documentoValido;
+	}
+	
+	/**
+	 * @return the observacion
+	 */
+	public String getObservacion() {
+		return observacion;
+	}
+	/**
+	 * @param observacion the observacion to set
+	 */
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+	/**
+	 * @return the documentoRechazado
+	 */
+	public boolean isDocumentoRechazado() {
+		return documentoRechazado;
+	}
+	/**
+	 * @param documentoRechazado the documentoRechazado to set
+	 */
+	public void setDocumentoRechazado(boolean documentoRechazado) {
+		this.documentoRechazado = documentoRechazado;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "PersonaHistoriaLaboral [codigo=" + codigo  + ", fechaInicio=" + fechaInicio
+				+ ", fechaFin=" + fechaFin + ", empresa=" + empresa + ", empresaDireccion=" + empresaDireccion
+				+ ", empresaTelefono=" + empresaTelefono + ", municipio=" + municipio + ", historiaLaboralTipo="
+				+ historiaLaboralTipo + ", dedicacion=" + dedicacion + ", vinculacion=" + vinculacion + ", cargo="
+				+ cargo + ", descripcion=" + descripcion + ", puntos=" + puntos + ", puntosFecha=" + puntosFecha
+				+ ", valido=" + valido + ", grupo=" + grupo + ", CvLac=" + CvLac + ", GrupLac=" + GrupLac
+				+ ", documento=" + documento + ", documentoValido=" + documentoValido + ", documentoRechazado="
+				+ documentoRechazado + ", observacion=" + observacion + "]";
+	}
+	
+	
 	
 	
 	

@@ -11,14 +11,14 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
 import co.edu.usco.modulo.personal.mvc.control.controlDB.Conexion;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
-import co.edu.usco.modulo.personal.mvc.modelo.LNX_naturalezaOb;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
+import co.edu.usco.modulo.personal.mvc.modelo.LNXNaturaleza;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class LNX_naturalezaDB implements conexion {
+public class LNX_naturalezaDB implements ConexionDB {
 	private Logger imp ;
 	/* (non-Javadoc)
 	 * @see co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion#getAll(java.lang.Object)
@@ -29,7 +29,7 @@ public class LNX_naturalezaDB implements conexion {
 		Statement sentencia=null;
 		ResultSet resul=null;
 		imp =Logger.getLogger(getClass().getName());
-		 LinkedList<LNX_naturalezaOb> lista = new LinkedList<LNX_naturalezaOb>();
+		 LinkedList<LNXNaturaleza> lista = new LinkedList<LNXNaturaleza>();
 			Conexion consegura = new Conexion();
 		 try {
 			 Object param[]=(Object[]) obj;
@@ -41,15 +41,15 @@ public class LNX_naturalezaDB implements conexion {
 //			sql.append("where cert_estado=1  ");
 
 
-			conn = consegura.conexion_segura();
+			conn = consegura.conexionConsulta();
 			imp.info("valida el usuario "+sql.toString());
 			sentencia = conn.createStatement();
 			resul = sentencia.executeQuery(sql.toString());
 			while(resul.next()){
-				LNX_naturalezaOb elemento= new LNX_naturalezaOb();
-				elemento.setNat_codigo(resul.getInt(1));
-				elemento.setNat_nombre(resul.getString(2));
-				elemento.setNat_acronimo(resul.getString(3));
+				LNXNaturaleza elemento= new LNXNaturaleza();
+				elemento.setCodigo(resul.getInt(1));
+				elemento.setNombre(resul.getString(2));
+				elemento.setAcronimo(resul.getString(3));
 				lista.add(elemento);
 				}
 			consegura.cerrarconn(conn, resul, sentencia);

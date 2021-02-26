@@ -19,7 +19,6 @@ public class https {
 	 * @return
 	 */
 	public static boolean esseguro(HttpServletRequest request) {
-		System.out.println("entra");
 		if(request.isSecure()){
 			return true;
 		}

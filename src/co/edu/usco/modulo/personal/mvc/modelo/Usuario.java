@@ -3,7 +3,6 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 import co.edu.usco.modulo.personal.mvc.control.herramientas.Transformacion;
 
@@ -11,17 +10,19 @@ import co.edu.usco.modulo.personal.mvc.control.herramientas.Transformacion;
  * @author ING_JAVIER
  *
  */
-@SuppressWarnings("serial")
-public class Usuario extends AdminOb implements Serializable{
+public class Usuario extends Admin {
 
 	
 	private String nombre;
 	private String clave;
-	private String cod_factura;
 	private boolean https=false;
 	private Persona persona= new Persona();
-	private CalendarioOb calendario= new CalendarioOb(); 
 	private String nombreencriptado;
+	private String token;
+	private String autorizacion;
+	private boolean estado;
+	
+	
 	/**
 	 * @return the nombreencriptado
 	 */
@@ -35,7 +36,9 @@ public class Usuario extends AdminOb implements Serializable{
 	 * @param nombreencriptado the nombreencriptado to set
 	 */
 	public void setNombreencriptado(String nombreencriptado) {
-		this.nombreencriptado = nombreencriptado;
+		Transformacion hex = new Transformacion();
+		this.nombreencriptado = hex.transHexa(nombreencriptado, 1);
+		
 	}
 	//private liquidacionOb liquidacion= new liquidacionOb();
 	//private facturaOb factura= new facturaOb();
@@ -77,18 +80,7 @@ public class Usuario extends AdminOb implements Serializable{
 		Transformacion hex = new Transformacion();
 		this.clave = hex.transHexa(clave, 1);
 	}
-	/**
-	 * @return the cod_factura
-	 */
-	public String getCod_factura() {
-		return cod_factura;
-	}
-	/**
-	 * @param cod_factura the cod_factura to set
-	 */
-	public void setCod_factura(String cod_factura) {
-		this.cod_factura = cod_factura;
-	}
+	
 	/**
 	 * @return the https
 	 */
@@ -117,19 +109,79 @@ public class Usuario extends AdminOb implements Serializable{
 	}
 
 
-	/**
-	 * @return the calendario
-	 */
-	public CalendarioOb getCalendario() {
-		return calendario;
-	}
 
 
 	/**
-	 * @param calendario the calendario to set
+	 * @return the estado
 	 */
-	public void setCalendario(CalendarioOb calendario) {
-		this.calendario = calendario;
+	public boolean isEstado() {
+		return estado;
 	}
+
+
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+
+
+	/**
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+
+
+	/**
+	 * @param token the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+
+
+	/**
+	 * @return the autorizacion
+	 */
+	public String getAutorizacion() {
+		return autorizacion;
+	}
+
+
+
+	/**
+	 * @param autorizacion the autorizacion to set
+	 */
+	public void setAutorizacion(String autorizacion) {
+		this.autorizacion = autorizacion;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Usuario [nombre=" + nombre + ", clave=" + clave + ", https=" + https + ", persona=" + persona
+				+ ", nombreencriptado=" + nombreencriptado + ", token=" + token + ", autorizacion=" + autorizacion
+				+ ", estado=" + estado + "]";
+	}
+
+
+
+
+
+
+
+
+	
 
 }

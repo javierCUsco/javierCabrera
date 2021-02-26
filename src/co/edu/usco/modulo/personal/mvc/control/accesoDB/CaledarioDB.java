@@ -11,14 +11,14 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
 import co.edu.usco.modulo.personal.mvc.control.controlDB.Conexion;
-import co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion;
-import co.edu.usco.modulo.personal.mvc.modelo.publicacion_tipoOb;
+import co.edu.usco.modulo.personal.mvc.control.interfaceDB.ConexionDB;
+import co.edu.usco.modulo.personal.mvc.modelo.PublicacionTipo;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class CaledarioDB implements conexion {
+public class CaledarioDB implements ConexionDB {
 	private Logger imp ;
 	/* (non-Javadoc)
 	 * @see co.edu.usco.modulo.personal.mvc.control.interfaceDB.conexion#getAll(java.lang.Object)
@@ -29,7 +29,7 @@ public class CaledarioDB implements conexion {
 		Statement sentencia=null;
 		ResultSet resul=null;
 		imp =Logger.getLogger(getClass().getName());
-		 LinkedList<publicacion_tipoOb> lista = new LinkedList<publicacion_tipoOb>();
+		 LinkedList<PublicacionTipo> lista = new LinkedList<PublicacionTipo>();
 			Conexion consegura = new Conexion();
 		 try {
 			 Object param[]=(Object[]) obj;
@@ -46,7 +46,7 @@ public class CaledarioDB implements conexion {
 			sentencia = conn.createStatement();
 			resul = sentencia.executeQuery(sql.toString());
 			while(resul.next()){
-				publicacion_tipoOb elemento= new publicacion_tipoOb();
+				PublicacionTipo elemento= new PublicacionTipo();
 				elemento.setPut_codigo(resul.getInt(1));
 				elemento.setPut_nombre(resul.getString(2));
 				elemento.setSippa_tipcodigo(resul.getString(3));

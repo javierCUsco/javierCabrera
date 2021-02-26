@@ -3,51 +3,75 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class LNX_regimenOb implements Serializable {
-	private int reg_codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-	private String reg_nombre;//char](30) NULL,
-	private String reg_acronimo;//char](1) NULL,
+public class LNX_regimenOb {
+	private int codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	private String nombre;//char](30) NULL,
+	private String acronimo;//char](1) NULL,
+	
+	
+	
 	/**
-	 * @return the reg_codigo
+	 * 
 	 */
-	public int getReg_codigo() {
-		return reg_codigo;
+	public LNX_regimenOb() {
 	}
 	/**
-	 * @param reg_codigo the reg_codigo to set
+	 * @param codigo
+	 * @param nombre
+	 * @param acronimo
 	 */
-	public void setReg_codigo(int reg_codigo) {
-		this.reg_codigo = reg_codigo;
+	public LNX_regimenOb(int codigo, String nombre, String acronimo) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.acronimo = acronimo;
 	}
 	/**
-	 * @return the reg_nombre
+	 * @return the codigo
 	 */
-	public String getReg_nombre() {
-		return reg_nombre;
+	public int getCodigo() {
+		return codigo;
 	}
 	/**
-	 * @param reg_nombre the reg_nombre to set
+	 * @param codigo the codigo to set
 	 */
-	public void setReg_nombre(String reg_nombre) {
-		this.reg_nombre = reg_nombre;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	/**
-	 * @return the reg_acronimo
+	 * @return the nombre
 	 */
-	public String getReg_acronimo() {
-		return reg_acronimo;
+	public String getNombre() {
+		return nombre;
 	}
 	/**
-	 * @param reg_acronimo the reg_acronimo to set
+	 * @param nombre the nombre to set
 	 */
-	public void setReg_acronimo(String reg_acronimo) {
-		this.reg_acronimo = reg_acronimo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	/**
+	 * @return the acronimo
+	 */
+	public String getAcronimo() {
+		return acronimo;
+	}
+	/**
+	 * @param acronimo the acronimo to set
+	 */
+	public void setAcronimo(String acronimo) {
+		this.acronimo = acronimo;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LNX_regimenOb [codigo=" + codigo + ", nombre=" + nombre + ", acronimo=" + acronimo + "]";
 	}
 	
 	

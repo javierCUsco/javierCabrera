@@ -12,114 +12,222 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Uaa implements Serializable{
 
-	private int  uaa_codigo;//int] IDENTITY(1,1) NOT NULL,
-//	private  uat_codigo;//int] NOT NULL,
-	private String uaa_nombre;//varchar](200) NOT NULL,
-//	private  uaa_dependencia;//int] NULL,
-	private String uaa_nombre_corto;//varchar](100) NULL,
-//	private  uaa_nombre_impresion;//varchar](20) NULL,
-//	private  uaa_email;//varchar](50) NULL,
-//	private  uaa_email_pqr;//varchar](50) NULL,
-//	private  uaa_pagina;//varchar](50) NULL,
-//	private  uaa_jefe;//varchar](50) NULL,
-//	private  mun_codigo;//int] NULL,
-//	private  uaa_telefono;//varchar](50) NULL,
-//	private  uaa_fax;//varchar](50) NULL,
-//	private  uaa_direccion;//varchar](50) NULL,
+	private int  codigo;//int] IDENTITY(1,1) NOT NULL,
+	private   UaaTipo uaaTipo= new UaaTipo();//int] NOT NULL,
+	private String nombre;//varchar](200) NOT NULL,
+	private  int dependencia;//int] NULL,
+	private String nombreCorto;//varchar](100) NULL,
+	private String uaa_nombre_impresion;//varchar](20) NULL,
+	private  String email;//varchar](50) NULL,
+	private  String emailPqr;//varchar](50) NULL,
+	private  String uaa_pagina;//varchar](50) NULL,
+	private  String uaa_jefe;//varchar](50) NULL,
+	private  Municipio municipio = new Municipio();//int] NULL,
+	private  String uaa_telefono;//varchar](50) NULL,
+	private  String uaa_fax;//varchar](50) NULL,
+	private  String uaa_direccion;//varchar](50) NULL,
 //	private  sippa_uaa_codigo;//int] NULL,
-	private int sed_codigo;//int] NULL,
-	private sedeOb sede= new sedeOb();
-//	private  uaa_centro_costos;//char](3) NULL,
+	private Sede sede= new Sede();
+	private  String centroCostos;//char](3) NULL,
 //	private  uaa_acronimo;//char](2) NULL,
-//	private  uaa_estado;//int] NULL,
+	private  int estado;//int] NULL,
+	
+	
 	
 	/**
-	 * 
-	 */
-	public Uaa() {
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	public Uaa(int uaa_codigo, String uaa_nombre, String uaa_nombre_corto,  sedeOb sede) {
-
-	this.uaa_codigo = uaa_codigo;
-	this.uaa_nombre = uaa_nombre;
-	this.uaa_nombre_corto = uaa_nombre_corto;
-	this.sede = sede;
+ * 
+ */
+public Uaa() {
 }
 
 
 	/**
-	 * @return the uaa_codigo
+	 * @param codigo
 	 */
-	public int getUaa_codigo() {
-		return uaa_codigo;
+	public Uaa(int codigo) {
+		this.codigo = codigo;
+	}
+
+
+	/**
+	 * @param sede 
+	 * @param nombreCorto 
+	 * @param nombre 
+	 * @param codigo 
+	 * 
+	 */
+	public Uaa(int codigo, String nombre, String nombreCorto, Sede sede) {
+		this.codigo=codigo;
+		this.nombre=nombre;
+		this.nombreCorto=nombreCorto;
+		this.sede=sede;
 	}
 
 	/**
-	 * @param uaa_codigo the uaa_codigo to set
+	 * @return the codigo
 	 */
-	public void setUaa_codigo(int uaa_codigo) {
-		this.uaa_codigo = uaa_codigo;
+	public int getCodigo() {
+		return codigo;
 	}
 
 	/**
-	 * @return the uaa_nombre
+	 * @param codigo the codigo to set
 	 */
-	public String getUaa_nombre() {
-		return uaa_nombre;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 	/**
-	 * @param uaa_nombre the uaa_nombre to set
+	 * @return the uaaTipo
 	 */
-	public void setUaa_nombre(String uaa_nombre) {
-		this.uaa_nombre = uaa_nombre;
+	public UaaTipo getUaaTipo() {
+		return uaaTipo;
 	}
 
 	/**
-	 * @return the uaa_nombre_corto
+	 * @param uaaTipo the uaaTipo to set
 	 */
-	public String getUaa_nombre_corto() {
-		return uaa_nombre_corto;
+	public void setUaaTipo(UaaTipo uaaTipo) {
+		this.uaaTipo = uaaTipo;
 	}
 
 	/**
-	 * @param uaa_nombre_corto the uaa_nombre_corto to set
+	 * @return the nombre
 	 */
-	public void setUaa_nombre_corto(String uaa_nombre_corto) {
-		this.uaa_nombre_corto = uaa_nombre_corto;
+	public String getNombre() {
+		return nombre;
 	}
 
 	/**
-	 * @return the sed_codigo
+	 * @param nombre the nombre to set
 	 */
-	public int getSed_codigo() {
-		return sed_codigo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	/**
-	 * @param sed_codigo the sed_codigo to set
+	 * @return the dependencia
 	 */
-	public void setSed_codigo(int sed_codigo) {
-		this.sed_codigo = sed_codigo;
+	public int getDependencia() {
+		return dependencia;
+	}
+
+	/**
+	 * @param dependencia the dependencia to set
+	 */
+	public void setDependencia(int dependencia) {
+		this.dependencia = dependencia;
+	}
+
+	/**
+	 * @return the nombreCorto
+	 */
+	public String getNombreCorto() {
+		return nombreCorto;
+	}
+
+	/**
+	 * @param nombreCorto the nombreCorto to set
+	 */
+	public void setNombreCorto(String nombreCorto) {
+		this.nombreCorto = nombreCorto;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the emailPqr
+	 */
+	public String getEmailPqr() {
+		return emailPqr;
+	}
+
+	/**
+	 * @param emailPqr the emailPqr to set
+	 */
+	public void setEmailPqr(String emailPqr) {
+		this.emailPqr = emailPqr;
+	}
+
+	/**
+	 * @return the municipio
+	 */
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	/**
+	 * @param municipio the municipio to set
+	 */
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
 	}
 
 	/**
 	 * @return the sede
 	 */
-	public sedeOb getSede() {
+	public Sede getSede() {
 		return sede;
 	}
 
 	/**
 	 * @param sede the sede to set
 	 */
-	public void setSede(sedeOb sede) {
+	public void setSede(Sede sede) {
 		this.sede = sede;
 	}
 
+	/**
+	 * @return the centroCostos
+	 */
+	public String getCentroCostos() {
+		return centroCostos;
+	}
+
+	/**
+	 * @param centroCostos the centroCostos to set
+	 */
+	public void setCentroCostos(String centroCostos) {
+		this.centroCostos = centroCostos;
+	}
+
+	/**
+	 * @return the estado
+	 */
+	public int getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Uaa [codigo=" + codigo + ", uaaTipo=" + uaaTipo + ", nombre=" + nombre + ", dependencia=" + dependencia
+				+ ", nombreCorto=" + nombreCorto + ", email=" + email + ", emailPqr=" + emailPqr + ", municipio="
+				+ municipio + ", sede=" + sede + ", centroCostos=" + centroCostos + ", estado=" + estado + "]";
+	}
+
+	
 	
 	
 }

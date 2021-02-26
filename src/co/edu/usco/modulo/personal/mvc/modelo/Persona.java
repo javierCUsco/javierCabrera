@@ -3,7 +3,6 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,744 +12,1124 @@ import java.util.List;
  * 
  */
 
-@SuppressWarnings("serial")
-public class Persona implements Serializable {
-//	private int usu_id;
-//	private int per_codigo; // int] IDENTITY(1,1) NOT NULL,
-//	private String per_identificacion; // varchar](15) NULL,
-//	private String tii_codigo; // int] NOT NULL,
-//	private String mun_nombre;//
-//	private String per_apellido; // varchar](40) NULL,
-//	private String per_nombre; // varchar](40) NULL,
-//	private String programa;
+public class Persona {
+
+
+	private int codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	private String identificacion;//varchar](15) NOT NULL,
+	private TipoId tipoId= new TipoId();
+	private String libretaMilitar;//varchar](15) NULL,
+	private String apellido;//varchar](40) NULL,
+	private String nombre;//varchar](40) NULL,
+	private String apellido2;//varchar](40) NULL,
+	private String nombre2;//varchar](40) NULL,
+	private Genero genero= new Genero();
+	private Municipio lugarExpedicion= new Municipio();
+	private Date fechaExpedicion;//datetime] NULL,
+	private Date fechaNacimiento;//datetime] NULL,
+	private String direccionResidencia;//varchar](255) NULL,
+	private String telefonoMovil;//varchar](50) NULL,
+	private String telefonoFijo;//varchar](30) NULL,
+	private EstadoCivil estadoCivil= new EstadoCivil();
+	private Municipio lugarNacimiento= new Municipio();
+	private Municipio lugarResidencia= new Municipio();
+//	private int departamentoResidencia;//int] NULL,
+//	private int paisResidencia;//int] NULL,
+	private String barrio;//varchar](50) NULL,
+	private Estrato estrato= new Estrato();
+	private Eps eps= new Eps();
+	private int etaCodigo;//int] NULL,
+	private String numeroAfiliacionEps;//varchar](20) NULL,
+	private String ipsSisben;//varchar](200) NULL,
+	private String idCotizante;//varchar](15) NULL,
+	private String beneficiarioLey1081;//char](1) NULL,
+	private String familiarDireccion;//varchar](255) NULL,
+	private String familiarNombre;//varchar](60) NULL,
+	private String familiarTelefono;//varchar](30) NULL,
+	private Municipio familiarLugarResidencia= new Municipio();
+	private String email;//varchar](100) NULL,
+	private String emailInterno;//varchar](100) NULL,
+	private int enviarCorreo;//tinyint] NULL,
+	private String paginaPersonal;//varchar](100) NULL,
+	private GrupoSanguineo grupoSanguineo= new GrupoSanguineo();
+	private boolean estado;//tinyint] NULL,
+//	private LNXNaturaleza naturaleza= new LNXNaturaleza();
+//	private LNX_regimenOb regimen= new LNX_regimenOb();
+	private String razonSocial;//varchar](200) NULL,
+	private String identificacionDup;//varchar](15) NULL,
+	private String cedula;//varchar](15) NULL,
+	private String tarjeta;//varchar](15) NULL,
+	private String codigoPostal;//varchar](10) NULL,
+	private String pasaporte;//varchar](10) NULL,
+	private String huella;//varbinary](3000) NULL,
+	private String fechaRegistro;//datetime] NULL,
+	private int codigoPaisHecaa;//int] NULL,
+	private String fechaActualizacion;//datetime] NULL,
+//	private Archivo archivo= new Archivo();
+	private DocentePuntos docentePuntos= new DocentePuntos();
+	
+	private Usco usco;
+	private PersonaHistoriaAcademica historiaAcademica;
+	private PersonaHistoriaLaboral historiaLaboral;
+	
+	
+	
+	
+	/**
+	 * @param codigo
+	 */
+	public Persona(int codigo) {
+		this.codigo = codigo;
+	}
+
+	
+
 
 	/**
-	 * @return the historia_academica
+	 * @param codigo
+	 * @param archivo
 	 */
-	public List<PersonaHistoriaAcademica> getHistoria_academica() {
-		return historia_academica;
-	}
-	/**
-	 * @param historia_academica the historia_academica to set
-	 */
-	public void setHistoria_academica(List<PersonaHistoriaAcademica> historia_academica) {
-		this.historia_academica = historia_academica;
-	}
-	/**
-	 * @return the historia_laboral
-	 */
-	public List<PersonaHistoriaLaboral> getHistoria_laboral() {
-		return historia_laboral;
-	}
-	/**
-	 * @param historia_laboral the historia_laboral to set
-	 */
-	public void setHistoria_laboral(List<PersonaHistoriaLaboral> historia_laboral) {
-		this.historia_laboral = historia_laboral;
-	}
-	private int per_codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-	private String per_identificacion;//varchar](15) NOT NULL,
-//	private int tii_codigo;//int] NOT NULL,
-	private Tipo_idOb tii_codigo= new Tipo_idOb();
-	private String per_libreta_militar;//varchar](15) NULL,
-	private String per_apellido;//varchar](40) NULL,
-	private String per_nombre;//varchar](40) NULL,
-//	private String per_genero;//char](1) NULL,
-	private GeneroOb genero= new GeneroOb();
-//	private int per_lugar_expedicion;//int] NULL,
-	private MunicipioOb per_lugar_expedicion= new MunicipioOb();
-	private Date per_fecha_expedicion;//datetime] NULL,
-	private Date per_fecha_nacimiento;//datetime] NULL,
-	private String per_direccion_residencia;//varchar](255) NULL,
-	private String per_telefono_movil;//varchar](50) NULL,
-	private String per_telefono_fijo;//varchar](30) NULL,
-//	private String per_estado_civil;//char](1) NULL,
-	private Estado_civilOb estado_civil= new Estado_civilOb();
-//	private int per_lugar_nacimiento;//int] NULL,
-	private MunicipioOb per_lugar_nacimiento= new MunicipioOb();
-//	private int per_lugar_residencia;//int] NULL,
-	private MunicipioOb per_lugar_residencia= new MunicipioOb();
-	private int per_departamento_residencia;//int] NULL,
-	private int per_pais_residencia;//int] NULL,
-	private String per_barrio;//varchar](50) NULL,
-//	private int per_estrato;//tinyint] NULL,
-	private EstratoOb estrato= new EstratoOb();
-//	private int eps_codigo;//int] NULL,
-	private Eps eps= new Eps();
-	private int eta_codigo;//int] NULL,
-	private String per_numero_afiliacion_eps;//varchar](20) NULL,
-	private String per_ips_sisben;//varchar](200) NULL,
-	private String per_id_cotizante;//varchar](15) NULL,
-	private String per_beneficiario_ley1081;//char](1) NULL,
-	private String per_familiar_direccion;//varchar](255) NULL,
-	private String per_familiar_nombre;//varchar](60) NULL,
-	private String per_familiar_telefono;//varchar](30) NULL,
-//	private int per_familiar_lugar_residencia;//int] NULL,
-	private MunicipioOb familiar_lugar_residencia= new MunicipioOb();
-	private String per_email;//varchar](100) NULL,
-	private String per_email_interno;//varchar](100) NULL,
-	private int enviar_correo;//tinyint] NULL,
-	private String per_pagina_personal;//varchar](100) NULL,
-//	private int grs_codigo;//int] NULL,
-	private Grupo_sangineoOb grs= new Grupo_sangineoOb();
-	private int per_estado;//tinyint] NULL,
-//	private int nat_codigo;//int] NULL,
-	private LNX_naturalezaOb naturaleza= new LNX_naturalezaOb();
-//	private int reg_codigo;//int] NULL,
-	private LNX_regimenOb regimen= new LNX_regimenOb();
-	private String per_razon_social;//varchar](200) NULL,
-	private String per_identificacion_dup;//varchar](15) NULL,
-	private String per_cedula;//varchar](15) NULL,
-	private String per_tarjeta;//varchar](15) NULL,
-	private String per_codigo_postal;//varchar](10) NULL,
-	private String per_pasaporte;//varchar](10) NULL,
-	private String per_huella;//varbinary](3000) NULL,
-	private String per_fecha_registro;//datetime] NULL,
-	private int per_codigo_pais_hecaa;//int] NULL,
-	private String per_fecha_actualizacion;//datetime] NULL,
-	private Archivo archivo= new Archivo();
-	
-	
-	private List<PersonaHistoriaAcademica> historia_academica;
-	private List<PersonaHistoriaLaboral> historia_laboral;
-	
-	
-	
+//	public Persona(int codigo, Archivo archivo) {
+//		this.codigo = codigo;
+//		this.archivo = archivo;
+//	}
+
+
+
+
 	/**
 	 * @param historia_academica
 	 * @param historia_laboral
 	 */
 	public Persona() {
-		this.historia_academica =new  LinkedList<PersonaHistoriaAcademica>();
-		this.historia_laboral =new LinkedList<PersonaHistoriaLaboral>();
+		this.historiaAcademica =new  PersonaHistoriaAcademica();
+		this.historiaLaboral =new PersonaHistoriaLaboral();
 	}
+
+
+
 	/**
-	 * @return the per_codigo
+	 * @return the codigo
 	 */
-	public int getPer_codigo() {
-		return per_codigo;
+	public int getCodigo() {
+		return codigo;
 	}
+
+
+
 	/**
-	 * @param per_codigo the per_codigo to set
+	 * @param codigo the codigo to set
 	 */
-	public void setPer_codigo(int per_codigo) {
-		this.per_codigo = per_codigo;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
+
+
+
 	/**
-	 * @return the per_identificacion
+	 * @return the identificacion
 	 */
-	public String getPer_identificacion() {
-		return per_identificacion;
+	public String getIdentificacion() {
+		return identificacion;
 	}
+
+
+
 	/**
-	 * @param per_identificacion the per_identificacion to set
+	 * @param identificacion the identificacion to set
 	 */
-	public void setPer_identificacion(String per_identificacion) {
-		this.per_identificacion = per_identificacion;
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
 	}
+
+
+
 	/**
-	 * @return the tii_codigo
+	 * @return the tii
 	 */
-	public Tipo_idOb getTii_codigo() {
-		return tii_codigo;
+	public TipoId getTipoId() {
+		return tipoId;
 	}
+
+
+
 	/**
-	 * @param tii_codigo the tii_codigo to set
+	 * @param tii the tii to set
 	 */
-	public void setTii_codigo(Tipo_idOb tii_codigo) {
-		this.tii_codigo = tii_codigo;
+	public void setTipoId(TipoId tii) {
+		this.tipoId = tii;
 	}
+
+
+
 	/**
-	 * @return the per_libreta_militar
+	 * @return the libretaMilitar
 	 */
-	public String getPer_libreta_militar() {
-		return per_libreta_militar;
+	public String getLibretaMilitar() {
+		return libretaMilitar;
 	}
+
+
+
 	/**
-	 * @param per_libreta_militar the per_libreta_militar to set
+	 * @param libretaMilitar the libretaMilitar to set
 	 */
-	public void setPer_libreta_militar(String per_libreta_militar) {
-		this.per_libreta_militar = per_libreta_militar;
+	public void setLibretaMilitar(String libretaMilitar) {
+		this.libretaMilitar = libretaMilitar;
 	}
+
+
+
 	/**
-	 * @return the per_apellido
+	 * @return the apellido
 	 */
-	public String getPer_apellido() {
-		return per_apellido;
+	public String getApellido() {
+		return apellido;
 	}
+
+
+
 	/**
-	 * @param per_apellido the per_apellido to set
+	 * @param apellido the apellido to set
 	 */
-	public void setPer_apellido(String per_apellido) {
-		this.per_apellido = per_apellido;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
+
+
+
 	/**
-	 * @return the per_nombre
+	 * @return the nombre
 	 */
-	public String getPer_nombre() {
-		return per_nombre;
+	public String getNombre() {
+		return nombre;
 	}
+
+
+
 	/**
-	 * @param per_nombre the per_nombre to set
+	 * @param nombre the nombre to set
 	 */
-	public void setPer_nombre(String per_nombre) {
-		this.per_nombre = per_nombre;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
+
+
+	/**
+	 * @return the apellido2
+	 */
+	public String getApellido2() {
+		return apellido2;
+	}
+
+
+
+	/**
+	 * @param apellido2 
+	 */
+	public void setApellido2(String apellido2) {
+		this.apellido2 = apellido2;
+	}
+
+
+
+	/**
+	 * @return the nombre2
+	 */
+	public String getNombre2() {
+		return nombre2;
+	}
+
+
+
+	/**
+	 * @param nombre2 the nombre2 to set
+	 */
+	public void setNombre2(String nombre2) {
+		this.nombre2 = nombre2;
+	}
+
+
+
 	/**
 	 * @return the genero
 	 */
-	public GeneroOb getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
+
+
+
 	/**
 	 * @param genero the genero to set
 	 */
-	public void setGenero(GeneroOb genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
+
+
+
 	/**
-	 * @return the per_lugar_expedicion
+	 * @return the lugarExpedicion
 	 */
-	public MunicipioOb getPer_lugar_expedicion() {
-		return per_lugar_expedicion;
+	public Municipio getLugarExpedicion() {
+		return lugarExpedicion;
 	}
+
+
+
 	/**
-	 * @param per_lugar_expedicion the per_lugar_expedicion to set
+	 * @param lugarExpedicion the lugarExpedicion to set
 	 */
-	public void setPer_lugar_expedicion(MunicipioOb per_lugar_expedicion) {
-		this.per_lugar_expedicion = per_lugar_expedicion;
+	public void setLugarExpedicion(Municipio lugarExpedicion) {
+		this.lugarExpedicion = lugarExpedicion;
 	}
+
+
+
 	/**
-	 * @return the per_fecha_expedicion
+	 * @return the fechaExpedicion
 	 */
-	public Date getPer_fecha_expedicion() {
-		return per_fecha_expedicion;
+	public Date getFechaExpedicion() {
+		return fechaExpedicion;
 	}
+
+
+
 	/**
-	 * @param per_fecha_expedicion the per_fecha_expedicion to set
+	 * @param fechaExpedicion the fechaExpedicion to set
 	 */
-	public void setPer_fecha_expedicion(Date per_fecha_expedicion) {
-		if(per_fecha_expedicion!=null){
-			this.per_fecha_expedicion = per_fecha_expedicion;
-		}
+	public void setFechaExpedicion(Date fechaExpedicion) {
+		this.fechaExpedicion = fechaExpedicion;
 	}
+
+
+
 	/**
-	 * @return the per_fecha_nacimiento
+	 * @return the fechaNacimiento
 	 */
-	public Date getPer_fecha_nacimiento() {
-		return per_fecha_nacimiento;
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
 	}
+
+
+
 	/**
-	 * @param per_fecha_nacimiento the per_fecha_nacimiento to set
+	 * @param fechaNacimiento the fechaNacimiento to set
 	 */
-	public void setPer_fecha_nacimiento(Date per_fecha_nacimiento) {
-		if(per_fecha_nacimiento!=null){
-			this.per_fecha_nacimiento = per_fecha_nacimiento;
-		}
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
+
+
+
 	/**
-	 * @return the per_direccion_residencia
+	 * @return the direccionResidencia
 	 */
-	public String getPer_direccion_residencia() {
-		return per_direccion_residencia;
+	public String getDireccionResidencia() {
+		return direccionResidencia;
 	}
+
+
+
 	/**
-	 * @param per_direccion_residencia the per_direccion_residencia to set
+	 * @param direccionResidencia the direccionResidencia to set
 	 */
-	public void setPer_direccion_residencia(String per_direccion_residencia) {
-		this.per_direccion_residencia = per_direccion_residencia;
+	public void setDireccionResidencia(String direccionResidencia) {
+		this.direccionResidencia = direccionResidencia;
 	}
+
+
+
 	/**
-	 * @return the per_telefono_movil
+	 * @return the telefonoMovil
 	 */
-	public String getPer_telefono_movil() {
-		return per_telefono_movil;
+	public String getTelefonoMovil() {
+		return telefonoMovil;
 	}
+
+
+
 	/**
-	 * @param per_telefono_movil the per_telefono_movil to set
+	 * @param telefonoMovil the telefonoMovil to set
 	 */
-	public void setPer_telefono_movil(String per_telefono_movil) {
-		this.per_telefono_movil = per_telefono_movil;
+	public void setTelefonoMovil(String telefonoMovil) {
+		this.telefonoMovil = telefonoMovil;
 	}
+
+
+
 	/**
-	 * @return the per_telefono_fijo
+	 * @return the telefonoFijo
 	 */
-	public String getPer_telefono_fijo() {
-		return per_telefono_fijo;
+	public String getTelefonoFijo() {
+		return telefonoFijo;
 	}
+
+
+
 	/**
-	 * @param per_telefono_fijo the per_telefono_fijo to set
+	 * @param telefonoFijo the telefonoFijo to set
 	 */
-	public void setPer_telefono_fijo(String per_telefono_fijo) {
-		this.per_telefono_fijo = per_telefono_fijo;
+	public void setTelefonoFijo(String telefonoFijo) {
+		this.telefonoFijo = telefonoFijo;
 	}
+
+
+
 	/**
-	 * @return the estado_civil
+	 * @return the estadoCivil
 	 */
-	public Estado_civilOb getEstado_civil() {
-		return estado_civil;
+	public EstadoCivil getEstadoCivil() {
+		return estadoCivil;
 	}
+
+
+
 	/**
-	 * @param estado_civil the estado_civil to set
+	 * @param estadoCivil the estadoCivil to set
 	 */
-	public void setEstado_civil(Estado_civilOb estado_civil) {
-		this.estado_civil = estado_civil;
+	public void setEstadoCivil(EstadoCivil estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
+
+
+
 	/**
-	 * @return the per_lugar_nacimiento
+	 * @return the lugarNacimiento
 	 */
-	public MunicipioOb getPer_lugar_nacimiento() {
-		return per_lugar_nacimiento;
+	public Municipio getLugarNacimiento() {
+		return lugarNacimiento;
 	}
+
+
+
 	/**
-	 * @param per_lugar_nacimiento the per_lugar_nacimiento to set
+	 * @param lugarNacimiento the lugarNacimiento to set
 	 */
-	public void setPer_lugar_nacimiento(MunicipioOb per_lugar_nacimiento) {
-		this.per_lugar_nacimiento = per_lugar_nacimiento;
+	public void setLugarNacimiento(Municipio lugarNacimiento) {
+		this.lugarNacimiento = lugarNacimiento;
 	}
+
+
+
 	/**
-	 * @return the per_lugar_residencia
+	 * @return the lugarResidencia
 	 */
-	public MunicipioOb getPer_lugar_residencia() {
-		return per_lugar_residencia;
+	public Municipio getLugarResidencia() {
+		return lugarResidencia;
 	}
+
+
+
 	/**
-	 * @param per_lugar_residencia the per_lugar_residencia to set
+	 * @param lugarResidencia the lugarResidencia to set
 	 */
-	public void setPer_lugar_residencia(MunicipioOb per_lugar_residencia) {
-		this.per_lugar_residencia = per_lugar_residencia;
+	public void setLugarResidencia(Municipio lugarResidencia) {
+		this.lugarResidencia = lugarResidencia;
 	}
+
+
+
 	/**
-	 * @return the per_departamento_residencia
+	 * @return the departamentoResidencia
 	 */
-	public int getPer_departamento_residencia() {
-		return per_departamento_residencia;
-	}
+//	public int getDepartamentoResidencia() {
+//		return departamentoResidencia;
+//	}
+
+
+
 	/**
-	 * @param per_departamento_residencia the per_departamento_residencia to set
+	 * @param departamentoResidencia the departamentoResidencia to set
 	 */
-	public void setPer_departamento_residencia(int per_departamento_residencia) {
-		this.per_departamento_residencia = per_departamento_residencia;
-	}
+//	public void setDepartamentoResidencia(int departamentoResidencia) {
+//		this.departamentoResidencia = departamentoResidencia;
+//	}
+
+
+
 	/**
-	 * @return the per_pais_residencia
+	 * @return the paisResidencia
 	 */
-	public int getPer_pais_residencia() {
-		return per_pais_residencia;
-	}
+//	public int getPaisResidencia() {
+//		return paisResidencia;
+//	}
+
+
+
 	/**
-	 * @param per_pais_residencia the per_pais_residencia to set
+	 * @param paisResidencia the paisResidencia to set
 	 */
-	public void setPer_pais_residencia(int per_pais_residencia) {
-		this.per_pais_residencia = per_pais_residencia;
-	}
+//	public void setPaisResidencia(int paisResidencia) {
+//		this.paisResidencia = paisResidencia;
+//	}
+
+
+
 	/**
-	 * @return the per_barrio
+	 * @return the barrio
 	 */
-	public String getPer_barrio() {
-		return per_barrio;
+	public String getBarrio() {
+		return barrio;
 	}
+
+
+
 	/**
-	 * @param per_barrio the per_barrio to set
+	 * @param barrio the barrio to set
 	 */
-	public void setPer_barrio(String per_barrio) {
-		this.per_barrio = per_barrio;
+	public void setBarrio(String barrio) {
+		this.barrio = barrio;
 	}
+
+
+
 	/**
 	 * @return the estrato
 	 */
-	public EstratoOb getEstrato() {
+	public Estrato getEstrato() {
 		return estrato;
 	}
+
+
+
 	/**
 	 * @param estrato the estrato to set
 	 */
-	public void setEstrato(EstratoOb estrato) {
+	public void setEstrato(Estrato estrato) {
 		this.estrato = estrato;
 	}
+
+
+
 	/**
 	 * @return the eps
 	 */
 	public Eps getEps() {
 		return eps;
 	}
+
+
+
 	/**
 	 * @param eps the eps to set
 	 */
 	public void setEps(Eps eps) {
 		this.eps = eps;
 	}
+
+
+
 	/**
-	 * @return the eta_codigo
+	 * @return the etaCodigo
 	 */
-	public int getEta_codigo() {
-		return eta_codigo;
+	public int getEtaCodigo() {
+		return etaCodigo;
 	}
+
+
+
 	/**
-	 * @param eta_codigo the eta_codigo to set
+	 * @param etaCodigo the etaCodigo to set
 	 */
-	public void setEta_codigo(int eta_codigo) {
-		this.eta_codigo = eta_codigo;
+	public void setEtaCodigo(int etaCodigo) {
+		this.etaCodigo = etaCodigo;
 	}
+
+
+
 	/**
-	 * @return the per_numero_afiliacion_eps
+	 * @return the numeroAfiliacionEps
 	 */
-	public String getPer_numero_afiliacion_eps() {
-		return per_numero_afiliacion_eps;
+	public String getNumeroAfiliacionEps() {
+		return numeroAfiliacionEps;
 	}
+
+
+
 	/**
-	 * @param per_numero_afiliacion_eps the per_numero_afiliacion_eps to set
+	 * @param numeroAfiliacionEps the numeroAfiliacionEps to set
 	 */
-	public void setPer_numero_afiliacion_eps(String per_numero_afiliacion_eps) {
-		this.per_numero_afiliacion_eps = per_numero_afiliacion_eps;
+	public void setNumeroAfiliacionEps(String numeroAfiliacionEps) {
+		this.numeroAfiliacionEps = numeroAfiliacionEps;
 	}
+
+
+
 	/**
-	 * @return the per_ips_sisben
+	 * @return the ipsSisben
 	 */
-	public String getPer_ips_sisben() {
-		return per_ips_sisben;
+	public String getIpsSisben() {
+		return ipsSisben;
 	}
+
+
+
 	/**
-	 * @param per_ips_sisben the per_ips_sisben to set
+	 * @param ipsSisben the ipsSisben to set
 	 */
-	public void setPer_ips_sisben(String per_ips_sisben) {
-		this.per_ips_sisben = per_ips_sisben;
+	public void setIpsSisben(String ipsSisben) {
+		this.ipsSisben = ipsSisben;
 	}
+
+
+
 	/**
-	 * @return the per_id_cotizante
+	 * @return the idCotizante
 	 */
-	public String getPer_id_cotizante() {
-		return per_id_cotizante;
+	public String getIdCotizante() {
+		return idCotizante;
 	}
+
+
+
 	/**
-	 * @param per_id_cotizante the per_id_cotizante to set
+	 * @param idCotizante the idCotizante to set
 	 */
-	public void setPer_id_cotizante(String per_id_cotizante) {
-		this.per_id_cotizante = per_id_cotizante;
+	public void setIdCotizante(String idCotizante) {
+		this.idCotizante = idCotizante;
 	}
+
+
+
 	/**
-	 * @return the per_beneficiario_ley1081
+	 * @return the beneficiarioLey1081
 	 */
-	public String getPer_beneficiario_ley1081() {
-		return per_beneficiario_ley1081;
+	public String getBeneficiarioLey1081() {
+		return beneficiarioLey1081;
 	}
+
+
+
 	/**
-	 * @param per_beneficiario_ley1081 the per_beneficiario_ley1081 to set
+	 * @param beneficiarioLey1081 the beneficiarioLey1081 to set
 	 */
-	public void setPer_beneficiario_ley1081(String per_beneficiario_ley1081) {
-		this.per_beneficiario_ley1081 = per_beneficiario_ley1081;
+	public void setBeneficiarioLey1081(String beneficiarioLey1081) {
+		this.beneficiarioLey1081 = beneficiarioLey1081;
 	}
+
+
+
 	/**
-	 * @return the per_familiar_direccion
+	 * @return the familiarDireccion
 	 */
-	public String getPer_familiar_direccion() {
-		return per_familiar_direccion;
+	public String getFamiliarDireccion() {
+		return familiarDireccion;
 	}
+
+
+
 	/**
-	 * @param per_familiar_direccion the per_familiar_direccion to set
+	 * @param familiarDireccion the familiarDireccion to set
 	 */
-	public void setPer_familiar_direccion(String per_familiar_direccion) {
-		this.per_familiar_direccion = per_familiar_direccion;
+	public void setFamiliarDireccion(String familiarDireccion) {
+		this.familiarDireccion = familiarDireccion;
 	}
+
+
+
 	/**
-	 * @return the per_familiar_nombre
+	 * @return the familiarNombre
 	 */
-	public String getPer_familiar_nombre() {
-		return per_familiar_nombre;
+	public String getFamiliarNombre() {
+		return familiarNombre;
 	}
+
+
+
 	/**
-	 * @param per_familiar_nombre the per_familiar_nombre to set
+	 * @param familiarNombre the familiarNombre to set
 	 */
-	public void setPer_familiar_nombre(String per_familiar_nombre) {
-		this.per_familiar_nombre = per_familiar_nombre;
+	public void setFamiliarNombre(String familiarNombre) {
+		this.familiarNombre = familiarNombre;
 	}
+
+
+
 	/**
-	 * @return the per_familiar_telefono
+	 * @return the familiarTelefono
 	 */
-	public String getPer_familiar_telefono() {
-		return per_familiar_telefono;
+	public String getFamiliarTelefono() {
+		return familiarTelefono;
 	}
+
+
+
 	/**
-	 * @param per_familiar_telefono the per_familiar_telefono to set
+	 * @param familiarTelefono the familiarTelefono to set
 	 */
-	public void setPer_familiar_telefono(String per_familiar_telefono) {
-		this.per_familiar_telefono = per_familiar_telefono;
+	public void setFamiliarTelefono(String familiarTelefono) {
+		this.familiarTelefono = familiarTelefono;
 	}
-	
+
+
+
 	/**
-	 * @return the familiar_lugar_residencia
+	 * @return the familiarLugarResidencia
 	 */
-	public MunicipioOb getFamiliar_lugar_residencia() {
-		return familiar_lugar_residencia;
+	public Municipio getFamiliarLugarResidencia() {
+		return familiarLugarResidencia;
 	}
+
+
+
 	/**
-	 * @param familiar_lugar_residencia the familiar_lugar_residencia to set
+	 * @param familiarLugarResidencia the familiarLugarResidencia to set
 	 */
-	public void setFamiliar_lugar_residencia(MunicipioOb familiar_lugar_residencia) {
-		this.familiar_lugar_residencia = familiar_lugar_residencia;
+	public void setFamiliarLugarResidencia(Municipio familiarLugarResidencia) {
+		this.familiarLugarResidencia = familiarLugarResidencia;
 	}
+
+
+
 	/**
-	 * @return the per_email
+	 * @return the email
 	 */
-	public String getPer_email() {
-		return per_email;
+	public String getEmail() {
+		return email;
 	}
+
+
+
 	/**
-	 * @param per_email the per_email to set
+	 * @param email the email to set
 	 */
-	public void setPer_email(String per_email) {
-		this.per_email = per_email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
+
+
 	/**
-	 * @return the per_email_interno
+	 * @return the emailInterno
 	 */
-	public String getPer_email_interno() {
-		return per_email_interno;
+	public String getEmailInterno() {
+		return emailInterno;
 	}
+
+
+
 	/**
-	 * @param per_email_interno the per_email_interno to set
+	 * @param emailInterno the emailInterno to set
 	 */
-	public void setPer_email_interno(String per_email_interno) {
-		this.per_email_interno = per_email_interno;
+	public void setEmailInterno(String emailInterno) {
+		this.emailInterno = emailInterno;
 	}
+
+
+
 	/**
-	 * @return the enviar_correo
+	 * @return the enviarCorreo
 	 */
-	public int getEnviar_correo() {
-		return enviar_correo;
+	public int getEnviarCorreo() {
+		return enviarCorreo;
 	}
+
+
+
 	/**
-	 * @param enviar_correo the enviar_correo to set
+	 * @param enviarCorreo the enviarCorreo to set
 	 */
-	public void setEnviar_correo(int enviar_correo) {
-		this.enviar_correo = enviar_correo;
+	public void setEnviarCorreo(int enviarCorreo) {
+		this.enviarCorreo = enviarCorreo;
 	}
+
+
+
 	/**
-	 * @return the per_pagina_personal
+	 * @return the paginaPersonal
 	 */
-	public String getPer_pagina_personal() {
-		return per_pagina_personal;
+	public String getPaginaPersonal() {
+		return paginaPersonal;
 	}
+
+
+
 	/**
-	 * @param per_pagina_personal the per_pagina_personal to set
+	 * @param paginaPersonal the paginaPersonal to set
 	 */
-	public void setPer_pagina_personal(String per_pagina_personal) {
-		this.per_pagina_personal = per_pagina_personal;
+	public void setPaginaPersonal(String paginaPersonal) {
+		this.paginaPersonal = paginaPersonal;
 	}
+
+
+
 	/**
 	 * @return the grs
 	 */
-	public Grupo_sangineoOb getGrs() {
-		return grs;
+	public GrupoSanguineo getGrupoSanguineo() {
+		return grupoSanguineo;
 	}
+
+
+
 	/**
 	 * @param grs the grs to set
 	 */
-	public void setGrs(Grupo_sangineoOb grs) {
-		this.grs = grs;
+	public void setGrupoSanguineo(GrupoSanguineo grupoSanguineo) {
+		this.grupoSanguineo = grupoSanguineo;
 	}
+
+
+
 	/**
-	 * @return the per_estado
+	 * @return the estado
 	 */
-	public int getPer_estado() {
-		return per_estado;
+	public boolean getEstado() {
+		return estado;
 	}
+
+
+
 	/**
-	 * @param per_estado the per_estado to set
+	 * @param estado the estado to set
 	 */
-	public void setPer_estado(int per_estado) {
-		this.per_estado = per_estado;
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
+
+
+
 	/**
 	 * @return the naturaleza
 	 */
-	public LNX_naturalezaOb getNaturaleza() {
-		return naturaleza;
-	}
+//	public LNXNaturaleza getNaturaleza() {
+//		return naturaleza;
+//	}
+
+
+
 	/**
 	 * @param naturaleza the naturaleza to set
 	 */
-	public void setNaturaleza(LNX_naturalezaOb naturaleza) {
-		this.naturaleza = naturaleza;
+	public void setNaturaleza(LNXNaturaleza naturaleza) {
+//		this.naturaleza = naturaleza;
 	}
+
+
+
 	/**
 	 * @return the regimen
 	 */
-	public LNX_regimenOb getRegimen() {
-		return regimen;
-	}
+//	public LNX_regimenOb getRegimen() {
+//		return regimen;
+//	}
+
+
+
 	/**
 	 * @param regimen the regimen to set
 	 */
-	public void setRegimen(LNX_regimenOb regimen) {
-		this.regimen = regimen;
-	}
+//	public void setRegimen(LNX_regimenOb regimen) {
+//		this.regimen = regimen;
+//	}
+
+
+
 	/**
-	 * @return the per_razon_social
+	 * @return the razonSocial
 	 */
-	public String getPer_razon_social() {
-		return per_razon_social;
+	public String getRazonSocial() {
+		return razonSocial;
 	}
+
+
+
 	/**
-	 * @param per_razon_social the per_razon_social to set
+	 * @param razonSocial the razonSocial to set
 	 */
-	public void setPer_razon_social(String per_razon_social) {
-		this.per_razon_social = per_razon_social;
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
 	}
+
+
+
 	/**
-	 * @return the per_identificacion_dup
+	 * @return the identificacionDup
 	 */
-	public String getPer_identificacion_dup() {
-		return per_identificacion_dup;
+	public String getIdentificacionDup() {
+		return identificacionDup;
 	}
+
+
+
 	/**
-	 * @param per_identificacion_dup the per_identificacion_dup to set
+	 * @param identificacionDup the identificacionDup to set
 	 */
-	public void setPer_identificacion_dup(String per_identificacion_dup) {
-		this.per_identificacion_dup = per_identificacion_dup;
+	public void setIdentificacionDup(String identificacionDup) {
+		this.identificacionDup = identificacionDup;
 	}
+
+
+
 	/**
-	 * @return the per_cedula
+	 * @return the cedula
 	 */
-	public String getPer_cedula() {
-		return per_cedula;
+	public String getCedula() {
+		return cedula;
 	}
+
+
+
 	/**
-	 * @param per_cedula the per_cedula to set
+	 * @param cedula the cedula to set
 	 */
-	public void setPer_cedula(String per_cedula) {
-		this.per_cedula = per_cedula;
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
+
+
+
 	/**
-	 * @return the per_tarjeta
+	 * @return the tarjeta
 	 */
-	public String getPer_tarjeta() {
-		return per_tarjeta;
+	public String getTarjeta() {
+		return tarjeta;
 	}
+
+
+
 	/**
-	 * @param per_tarjeta the per_tarjeta to set
+	 * @param tarjeta the tarjeta to set
 	 */
-	public void setPer_tarjeta(String per_tarjeta) {
-		this.per_tarjeta = per_tarjeta;
+	public void setTarjeta(String tarjeta) {
+		this.tarjeta = tarjeta;
 	}
+
+
+
 	/**
-	 * @return the per_codigo_postal
+	 * @return the codigoPostal
 	 */
-	public String getPer_codigo_postal() {
-		return per_codigo_postal;
+	public String getCodigoPostal() {
+		return codigoPostal;
 	}
+
+
+
 	/**
-	 * @param per_codigo_postal the per_codigo_postal to set
+	 * @param codigoPostal the codigoPostal to set
 	 */
-	public void setPer_codigo_postal(String per_codigo_postal) {
-		this.per_codigo_postal = per_codigo_postal;
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
 	}
+
+
+
 	/**
-	 * @return the per_pasaporte
+	 * @return the pasaporte
 	 */
-	public String getPer_pasaporte() {
-		return per_pasaporte;
+	public String getPasaporte() {
+		return pasaporte;
 	}
+
+
+
 	/**
-	 * @param per_pasaporte the per_pasaporte to set
+	 * @param pasaporte the pasaporte to set
 	 */
-	public void setPer_pasaporte(String per_pasaporte) {
-		this.per_pasaporte = per_pasaporte;
+	public void setPasaporte(String pasaporte) {
+		this.pasaporte = pasaporte;
 	}
+
+
+
 	/**
-	 * @return the per_huella
+	 * @return the huella
 	 */
-	public String getPer_huella() {
-		return per_huella;
+	public String getHuella() {
+		return huella;
 	}
+
+
+
 	/**
-	 * @param per_huella the per_huella to set
+	 * @param huella the huella to set
 	 */
-	public void setPer_huella(String per_huella) {
-		this.per_huella = per_huella;
+	public void setHuella(String huella) {
+		this.huella = huella;
 	}
+
+
+
 	/**
-	 * @return the per_fecha_registro
+	 * @return the fechaRegistro
 	 */
-	public String getPer_fecha_registro() {
-		return per_fecha_registro;
+	public String getFechaRegistro() {
+		return fechaRegistro;
 	}
+
+
+
 	/**
-	 * @param per_fecha_registro the per_fecha_registro to set
+	 * @param fechaRegistro the fechaRegistro to set
 	 */
-	public void setPer_fecha_registro(String per_fecha_registro) {
-		this.per_fecha_registro = per_fecha_registro;
+	public void setFechaRegistro(String fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}
+
+
+
 	/**
-	 * @return the per_codigo_pais_hecaa
+	 * @return the codigoPaisHecaa
 	 */
-	public int getPer_codigo_pais_hecaa() {
-		return per_codigo_pais_hecaa;
+	public int getCodigoPaisHecaa() {
+		return codigoPaisHecaa;
 	}
+
+
+
 	/**
-	 * @param per_codigo_pais_hecaa the per_codigo_pais_hecaa to set
+	 * @param codigoPaisHecaa the codigoPaisHecaa to set
 	 */
-	public void setPer_codigo_pais_hecaa(int per_codigo_pais_hecaa) {
-		this.per_codigo_pais_hecaa = per_codigo_pais_hecaa;
+	public void setCodigoPaisHecaa(int codigoPaisHecaa) {
+		this.codigoPaisHecaa = codigoPaisHecaa;
 	}
+
+
+
 	/**
-	 * @return the per_fecha_actualizacion
+	 * @return the fechaActualizacion
 	 */
-	public String getPer_fecha_actualizacion() {
-		return per_fecha_actualizacion;
+	public String getFechaActualizacion() {
+		return fechaActualizacion;
 	}
+
+
+
 	/**
-	 * @param per_fecha_actualizacion the per_fecha_actualizacion to set
+	 * @param fechaActualizacion the fechaActualizacion to set
 	 */
-	public void setPer_fecha_actualizacion(String per_fecha_actualizacion) {
-		this.per_fecha_actualizacion = per_fecha_actualizacion;
+	public void setFechaActualizacion(String fechaActualizacion) {
+		this.fechaActualizacion = fechaActualizacion;
 	}
+
+
+
 	/**
 	 * @return the archivo
 	 */
-	public Archivo getArchivo() {
-		return archivo;
-	}
+//	public Archivo getArchivo() {
+//		return archivo;
+//	}
+
+
+
 	/**
 	 * @param archivo the archivo to set
 	 */
-	public void setArchivo(Archivo archivo) {
-		this.archivo = archivo;
+//	public void setArchivo(Archivo archivo) {
+//		this.archivo = archivo;
+//	}
+
+
+
+	/**
+	 * @return the historiaAcademica
+	 */
+	public PersonaHistoriaAcademica getHistoriaAcademica() {
+		return historiaAcademica;
 	}
+
+
+
+	/**
+	 * @param historiaAcademica the historiaAcademica to set
+	 */
+	public void setHistoriaAcademica(PersonaHistoriaAcademica historiaAcademica) {
+		this.historiaAcademica = historiaAcademica;
+	}
+
+
+
+	/**
+	 * @return the historiaLaboral
+	 */
+	public PersonaHistoriaLaboral getHistoriaLaboral() {
+		return historiaLaboral;
+	}
+
+
+
+	/**
+	 * @param historiaLaboral the historiaLaboral to set
+	 */
+	public void setHistoriaLaboral(PersonaHistoriaLaboral historiaLaboral) {
+		this.historiaLaboral = historiaLaboral;
+	}
+
+
+
+
+
+
+	/**
+	 * @return the usco
+	 */
+	public Usco getUsco() {
+		return usco;
+	}
+
+
+
+
+	/**
+	 * @param usco the usco to set
+	 */
+	public void setUsco(Usco usco) {
+		this.usco = usco;
+	}
+
+
+
+
+	/**
+	 * @return the docentePuntos
+	 */
+	public DocentePuntos getDocentePuntos() {
+		return docentePuntos;
+	}
+
+
+
+
+	/**
+	 * @param docentePuntos the docentePuntos to set
+	 */
+	public void setDocentePuntos(DocentePuntos docentePuntos) {
+		this.docentePuntos = docentePuntos;
+	}
+
+
+
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Persona [per_codigo=" + per_codigo + ", per_identificacion=" + per_identificacion + ", tii_codigo="
-				+ tii_codigo + ", per_libreta_militar=" + per_libreta_militar + ", per_apellido=" + per_apellido
-				+ ", per_nombre=" + per_nombre + ", genero=" + genero + ", per_lugar_expedicion=" + per_lugar_expedicion
-				+ ", per_fecha_expedicion=" + per_fecha_expedicion + ", per_fecha_nacimiento=" + per_fecha_nacimiento
-				+ ", per_direccion_residencia=" + per_direccion_residencia + ", per_telefono_movil="
-				+ per_telefono_movil + ", per_telefono_fijo=" + per_telefono_fijo + ", estado_civil=" + estado_civil
-				+ ", per_lugar_nacimiento=" + per_lugar_nacimiento + ", per_lugar_residencia=" + per_lugar_residencia
-				+ ", per_departamento_residencia=" + per_departamento_residencia + ", per_pais_residencia="
-				+ per_pais_residencia + ", per_barrio=" + per_barrio + ", estrato=" + estrato + ", eps=" + eps
-				+ ", eta_codigo=" + eta_codigo + ", per_numero_afiliacion_eps=" + per_numero_afiliacion_eps
-				+ ", per_ips_sisben=" + per_ips_sisben + ", per_id_cotizante=" + per_id_cotizante
-				+ ", per_beneficiario_ley1081=" + per_beneficiario_ley1081 + ", per_familiar_direccion="
-				+ per_familiar_direccion + ", per_familiar_nombre=" + per_familiar_nombre + ", per_familiar_telefono="
-				+ per_familiar_telefono + ", familiar_lugar_residencia=" + familiar_lugar_residencia + ", per_email="
-				+ per_email + ", per_email_interno=" + per_email_interno + ", enviar_correo=" + enviar_correo
-				+ ", per_pagina_personal=" + per_pagina_personal + ", grs=" + grs + ", per_estado=" + per_estado
-				+ ", naturaleza=" + naturaleza + ", regimen=" + regimen + ", per_razon_social=" + per_razon_social
-				+ ", per_identificacion_dup=" + per_identificacion_dup + ", per_cedula=" + per_cedula + ", per_tarjeta="
-				+ per_tarjeta + ", per_codigo_postal=" + per_codigo_postal + ", per_pasaporte=" + per_pasaporte
-				+ ", per_huella=" + per_huella + ", per_fecha_registro=" + per_fecha_registro
-				+ ", per_codigo_pais_hecaa=" + per_codigo_pais_hecaa + ", per_fecha_actualizacion="
-				+ per_fecha_actualizacion + ", archivo=" + archivo + ", historia_academica=" + historia_academica
-				+ ", historia_laboral=" + historia_laboral + "]";
+		return "Persona [codigo=" + codigo + ", identificacion=" + identificacion + ", tipoId=" + tipoId
+				+ ", libretaMilitar=" + libretaMilitar + ", apellido=" + apellido + ", nombre=" + nombre
+				+ ", apellido2=" + apellido2 + ", nombre2=" + nombre2 + ", genero=" + genero + ", lugarExpedicion="
+				+ lugarExpedicion + ", fechaExpedicion=" + fechaExpedicion + ", fechaNacimiento=" + fechaNacimiento
+				+ ", direccionResidencia=" + direccionResidencia + ", telefonoMovil=" + telefonoMovil
+				+ ", telefonoFijo=" + telefonoFijo + ", estadoCivil=" + estadoCivil + ", lugarNacimiento="
+				+ lugarNacimiento + ", lugarResidencia=" + lugarResidencia + ", barrio=" + barrio + ", estrato="
+				+ estrato + ", eps=" + eps + ", etaCodigo=" + etaCodigo + ", numeroAfiliacionEps=" + numeroAfiliacionEps
+				+ ", ipsSisben=" + ipsSisben + ", idCotizante=" + idCotizante + ", beneficiarioLey1081="
+				+ beneficiarioLey1081 + ", familiarDireccion=" + familiarDireccion + ", familiarNombre="
+				+ familiarNombre + ", familiarTelefono=" + familiarTelefono + ", familiarLugarResidencia="
+				+ familiarLugarResidencia + ", email=" + email + ", emailInterno=" + emailInterno + ", enviarCorreo="
+				+ enviarCorreo + ", paginaPersonal=" + paginaPersonal + ", grupoSanguineo=" + grupoSanguineo
+				+ ", estado=" + estado + ", razonSocial=" + razonSocial + ", identificacionDup=" + identificacionDup
+				+ ", cedula=" + cedula + ", tarjeta=" + tarjeta + ", codigoPostal=" + codigoPostal + ", pasaporte="
+				+ pasaporte + ", huella=" + huella + ", fechaRegistro=" + fechaRegistro + ", codigoPaisHecaa="
+				+ codigoPaisHecaa + ", fechaActualizacion=" + fechaActualizacion + ", docentePuntos=" + docentePuntos
+				+ ", usco=" + usco + ", historiaAcademica=" + historiaAcademica + ", historiaLaboral=" + historiaLaboral
+				+ "]";
 	}
-	
-	
-	
-	
-	
-	
 
+	
 }

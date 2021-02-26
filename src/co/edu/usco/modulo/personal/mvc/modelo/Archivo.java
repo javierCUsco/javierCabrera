@@ -3,14 +3,88 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author Maritza
  *
  */
-public class Archivo implements Serializable {
+public class Archivo {
 
+	private String repositorio="";
+	private String archivo="";//varchar](255) NULL,
+	private String archivoMd5="";//varchar](255) NULL,
+	private String contentType="";//varchar](255) NULL,
+	private boolean cambio=false;
+	
+	
+	
+	/**
+	 * 
+	 */
+	public Archivo() {
+	}
+	/**
+	 * @param repositorio
+	 * @param archivo
+	 * @param archivoMd5
+	 * @param contentType
+	 * @param cambio
+	 */
+	public Archivo(String repositorio, String archivo, String archivoMd5, String contentType, boolean cambio) {
+		this.repositorio = repositorio;
+		this.archivo = archivo;
+		this.archivoMd5 = archivoMd5;
+		this.contentType = contentType;
+		this.cambio = cambio;
+	}
+	/**
+	 * @return the repositorio
+	 */
+	public String getRepositorio() {
+		return repositorio;
+	}
+	/**
+	 * @param repositorio the repositorio to set
+	 */
+	public void setRepositorio(String repositorio) {
+		this.repositorio = repositorio;
+	}
+	/**
+	 * @return the archivo
+	 */
+	public String getArchivo() {
+		return archivo;
+	}
+	/**
+	 * @param archivo the archivo to set
+	 */
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
+	}
+	/**
+	 * @return the archivoMd5
+	 */
+	public String getArchivoMd5() {
+		return archivoMd5;
+	}
+	/**
+	 * @param archivoMd5 the archivoMd5 to set
+	 */
+	public void setArchivoMd5(String archivoMd5) {
+		this.archivoMd5 = archivoMd5;
+	}
+	/**
+	 * @return the contentType
+	 */
+	public String getContentType() {
+		return contentType;
+	}
+	/**
+	 * @param contentType the contentType to set
+	 */
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
 	/**
 	 * @return the cambio
 	 */
@@ -23,59 +97,16 @@ public class Archivo implements Serializable {
 	public void setCambio(boolean cambio) {
 		this.cambio = cambio;
 	}
-	private String url_repositorio="";
-	private String ph_archivo="";//varchar](255) NULL,
-	private String ph_archivo_md5="";//varchar](255) NULL,
-	private String ph_content_type="";//varchar](255) NULL,
-	private boolean cambio=false;
-	/**
-	 * @return the url_repositorio
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public String getUrl_repositorio() {
-		return url_repositorio;
+	@Override
+	public String toString() {
+		return "Archivo [repositorio=" + repositorio + ", archivo=" + archivo + ", archivoMd5=" + archivoMd5
+				+ ", contentType=" + contentType + ", cambio=" + cambio + "]";
 	}
-	/**
-	 * @param url_repositorio the url_repositorio to set
-	 */
-	public void setUrl_repositorio(String url_repositorio) {
-		this.url_repositorio = url_repositorio;
-	}
-	/**
-	 * @return the pha_archivo
-	 */
-	public String getPh_archivo() {
-		return ph_archivo;
-	}
-	/**
-	 * @param pha_archivo the pha_archivo to set
-	 */
-	public void setPh_archivo(String pha_archivo) {
-		this.ph_archivo = pha_archivo;
-	}
-	/**
-	 * @return the pha_archivo_md5
-	 */
-	public String getPh_archivo_md5() {
-		return ph_archivo_md5;
-	}
-	/**
-	 * @param pha_archivo_md5 the pha_archivo_md5 to set
-	 */
-	public void setPh_archivo_md5(String pha_archivo_md5) {
-		this.ph_archivo_md5 = pha_archivo_md5;
-	}
-	/**
-	 * @return the pha_content_type
-	 */
-	public String getPh_content_type() {
-		return ph_content_type;
-	}
-	/**
-	 * @param pha_content_type the pha_content_type to set
-	 */
-	public void setPh_content_type(String pha_content_type) {
-		this.ph_content_type = pha_content_type;
-	}
+	
+	
 	
 	
 	

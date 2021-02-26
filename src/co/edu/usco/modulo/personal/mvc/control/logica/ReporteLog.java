@@ -23,16 +23,16 @@ public class ReporteLog {
 		carreraAdministrativa= (CarreraAdministrativa) CarreraAdministrativaLog.getObject(param);
 		
 		CarreraAdministrativaActualizacion carreraAdministrativaActualizacion = new CarreraAdministrativaActualizacion();
-		carreraAdministrativaActualizacion.getCaa().getPersona().setPer_codigo(carreraAdministrativa.getPersona().getPer_codigo());
-		carreraAdministrativaActualizacion.getCaa().setCaa_codigo(carreraAdministrativa.getCaa_codigo());
+		carreraAdministrativaActualizacion.getCaa().getPersona().setCodigo(carreraAdministrativa.getPersona().getCodigo());
+		carreraAdministrativaActualizacion.getCaa().setCodigo(carreraAdministrativa.getCodigo());
 
 		 param[0] =  carreraAdministrativaActualizacion;
 		 
 		 carreraAdministrativa.setCarreraAdministrativaActualizaciones((List<CarreraAdministrativaActualizacion>)CarreraAdministrativaAtualizacionLog.getLista(param));
-		 PersonaHistoriaAcademica pha= new PersonaHistoriaAcademica();
-		 pha.setPersona(carreraAdministrativa.getPersona());
-		 param[0] =  pha;
-		 carreraAdministrativa.getPersona().setHistoria_academica((List<PersonaHistoriaAcademica>) Persona_historia_academicaLog.getLista(param));
+//		 PersonaHistoriaAcademica pha= new PersonaHistoriaAcademica();
+//		 pha.setPersona(carreraAdministrativa.getPersona());
+//		 param[0] =  pha;
+		// carreraAdministrativa.getPersona().setHistoriaAcademica((List<PersonaHistoriaAcademica>) PersonaHistoriaAcademicaLog.getLista(param));
 		return carreraAdministrativa;
 	}
 	

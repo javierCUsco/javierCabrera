@@ -3,17 +3,17 @@
  */
 package co.edu.usco.modulo.personal.mvc.modelo;
 
-import java.io.Serializable;
 
 /**
  * @author INGENIERO JAVIER CABRERA
  *
  */
-public class WebParametro implements Serializable {
-	private int wep_codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
-	private String wep_nombre;//varchar](100) NOT NULL,
-	private String wep_valor;//varchar](500) NOT NULL,
-	private String wep_descripcion;//varchar](500) NULL,
+public class WebParametro  {
+	private int codigo;//int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,
+	private String nombre;//varchar](100) NOT NULL,
+	private String valor;//varchar](500) NOT NULL,
+	private String descripcion;//varchar](500) NULL,
+	
 	
 	
 	/**
@@ -21,69 +21,85 @@ public class WebParametro implements Serializable {
 	 */
 	public WebParametro() {
 	}
-
-	/**
-	 * 
-	 */
-	public WebParametro(String wep_nombre) {
-		this.wep_nombre=wep_nombre;
-	}
-
-	public WebParametro(int wep_codigo,String wep_nombre,String wep_valor,String wep_descripcion) {
-		this.wep_codigo=wep_codigo;
-		this.wep_nombre=wep_nombre;
-		this.wep_valor=wep_valor;
-		this.wep_descripcion=wep_descripcion;
-	}
+	
+	
 	
 	/**
-	 * @return the wep_codigo
+	 * @param nombre
 	 */
-	public int getWep_codigo() {
-		return wep_codigo;
+	public WebParametro(String nombre) {
+		this.nombre = nombre;
 	}
-	
+
+
+
 	/**
-	 * @param wep_codigo the wep_codigo to set
+	 * @param codigo
+	 * @param nombre
+	 * @param valor
+	 * @param descripcion
 	 */
-	public void setWep_codigo(int wep_codigo) {
-		this.wep_codigo = wep_codigo;
-	}
-	/**
-	 * @return the wep_nombre
-	 */
-	public String getWep_nombre() {
-		return wep_nombre;
-	}
-	/**
-	 * @param wep_nombre the wep_nombre to set
-	 */
-	public void setWep_nombre(String wep_nombre) {
-		this.wep_nombre = wep_nombre;
+	public WebParametro(int codigo, String nombre, String valor, String descripcion) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.valor = valor;
+		this.descripcion = descripcion;
 	}
 	/**
-	 * @return the wep_valor
+	 * @return the codigo
 	 */
-	public String getWep_valor() {
-		return wep_valor;
+	public int getCodigo() {
+		return codigo;
 	}
 	/**
-	 * @param wep_valor the wep_valor to set
+	 * @param codigo the codigo to set
 	 */
-	public void setWep_valor(String wep_valor) {
-		this.wep_valor = wep_valor;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	/**
-	 * @return the wep_descripcion
+	 * @return the nombre
 	 */
-	public String getWep_descripcion() {
-		return wep_descripcion;
+	public String getNombre() {
+		return nombre;
 	}
 	/**
-	 * @param wep_descripcion the wep_descripcion to set
+	 * @param nombre the nombre to set
 	 */
-	public void setWep_descripcion(String wep_descripcion) {
-		this.wep_descripcion = wep_descripcion;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	/**
+	 * @return the valor
+	 */
+	public String getValor() {
+		return valor;
+	}
+	/**
+	 * @param valor the valor to set
+	 */
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	/**
+	 * @return the descripcion
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
+	/**
+	 * @param descripcion the descripcion to set
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "WebParametro [codigo=" + codigo + ", nombre=" + nombre + ", valor=" + valor + ", descripcion="
+				+ descripcion + "]";
 	}
 	
 	

@@ -51,8 +51,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.TipoProceso" project="personalv2" 
-    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/TipoProceso.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.carreraAdministrativa.TipoProceso" 
+    project="personalv2" 
+    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/carreraAdministrativa/TipoProceso.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1328" y="-316"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -60,9 +62,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.Tipo_actualizacionOb" project="personalv2" 
-    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/Tipo_actualizacionOb.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.carreraAdministrativa.TipoActualizacion" 
+    project="personalv2" 
+    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/carreraAdministrativa/TipoActualizacion.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1744" y="-272"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -81,9 +84,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.TipoTerminacion" project="personalv2" 
-    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/TipoTerminacion.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.carreraAdministrativa.TipoTerminacion" 
+    project="personalv2" 
+    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/carreraAdministrativa/TipoTerminacion.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1727" y="84"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -91,9 +95,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.TerminacionOb" project="personalv2" 
-    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/TerminacionOb.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="co.edu.usco.modulo.personal.mvc.modelo.Terminacion" project="personalv2" 
+    file="/personalv2/src/co/edu/usco/modulo/personal/mvc/modelo/Terminacion.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1431" y="135"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -122,35 +125,36 @@
     </display>  
   </class>  
   <association id="13">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="14" name="carreraAdministrativa">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <bendpoint x="472" y="-864"/>    
+    <bendpoint x="389" y="-763"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="14" name="persona">        
+        <position height="18" width="48" x="432" y="-817"/>      
       </attribute>      
       <multiplicity id="15" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="16">    
-    <bendpoint x="1237" y="-838"/>    
+    <bendpoint x="1548" y="-146"/>    
+    <bendpoint x="1213" y="-85"/>    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="17" name="caa">        
-        <position height="18" width="26" x="1219" y="-817"/>      
+      <attribute id="17" name="uaa_cargo">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="18" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="19">    
-    <bendpoint x="1548" y="-146"/>    
-    <bendpoint x="1213" y="-85"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="20" name="uaa_cargo">        
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="20" name="uaaCargo">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="21" minimum="0" maximum="1">        
@@ -161,70 +165,66 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="22">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="23" name="persona">        
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="23" name="tipoActualizacion">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="24" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="25">    
-    <bendpoint x="791" y="1246"/>    
-    <bendpoint x="797" y="1472"/>    
-    <bendpoint x="438" y="1461"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="26" name="persona">        
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="26" name="tipoPorceso">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="27" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="28">    
-    <bendpoint x="425" y="1466"/>    
-    <bendpoint x="1460" y="1627"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="29" name="historia_academica">        
+    <bendpoint x="779" y="827"/>    
+    <bendpoint x="770" y="1417"/>    
+    <bendpoint x="472" y="1418"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="29" name="persona">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="30" minimum="0" maximum="2147483647">        
+      <multiplicity id="30" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="31">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="32" name="uaaCargo">        
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="32" name="carreraAdministrativa">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="33" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="34">    
-    <bendpoint x="1466" y="1652"/>    
-    <bendpoint x="401" y="1528"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="35" name="persona">        
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="35" name="uaaCargo">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="36" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="37">    
@@ -240,11 +240,9 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="40">    
-    <bendpoint x="472" y="-864"/>    
-    <bendpoint x="389" y="-763"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
+    <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="41" name="persona">        
-        <position height="18" width="48" x="432" y="-817"/>      
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="42" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
@@ -254,43 +252,45 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="43">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="44" name="uaaCargo">        
+    <bendpoint x="791" y="1246"/>    
+    <bendpoint x="797" y="1472"/>    
+    <bendpoint x="438" y="1461"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="44" name="persona">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="45" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="46">    
-    <bendpoint x="779" y="827"/>    
-    <bendpoint x="770" y="1417"/>    
-    <bendpoint x="472" y="1418"/>    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="47" name="persona">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <bendpoint x="1237" y="-838"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="47" name="caa">        
+        <position height="18" width="26" x="1219" y="-817"/>      
       </attribute>      
       <multiplicity id="48" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="49">    
-    <bendpoint x="1214" y="-858"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="50" name="CarreraAdministrativaActualizaciones">        
-        <position height="18" width="190" x="1174" y="-882"/>      
+    <bendpoint x="1466" y="1652"/>    
+    <bendpoint x="401" y="1528"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="50" name="persona">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="51" minimum="0" maximum="2147483647">        
+      <multiplicity id="51" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="52">    
@@ -303,45 +303,6 @@
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="55">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="56" name="tipoActualizacion">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="57" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="58">    
-    <bendpoint x="404" y="1486"/>    
-    <bendpoint x="815" y="1490"/>    
-    <bendpoint x="821" y="1262"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="59" name="historia_laboral">        
-        <position height="18" width="81" x="1190" y="824"/>      
-      </attribute>      
-      <multiplicity id="60" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="61">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="62" name="tipoPorceso">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="63" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
